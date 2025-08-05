@@ -2,7 +2,7 @@
 
 namespace Senac.SiegGestaoEscolar.Api.Http.Controllers
 {
-    public class SiegGestaoEscolarController : Controller
+    public class ProfessorController : Controller
     {
         public IActionResult Index()
         {
