@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Senac.SiegGestaoEscolar.Models.Models
+namespace Senac.SiegGestaoEscolar
 {
-    internal class Curso
+    internal class Aluno
     {
     }
 }
