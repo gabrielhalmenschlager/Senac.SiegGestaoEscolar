@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="xcw3315b.ia2~" />
+  </ItemGroup>
+
 </Project>
