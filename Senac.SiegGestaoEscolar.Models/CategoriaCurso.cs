@@ -1,6 +1,6 @@
 ﻿namespace Senac.SiegGestaoEscolar;
 
-public enum Categoria
+public enum CategoriaCurso
 {
     Basico,
     Medio,

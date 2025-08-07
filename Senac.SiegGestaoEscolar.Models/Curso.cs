@@ -10,7 +10,7 @@ public class Curso
 
     public DateTime DataCriacao { get; set; }
 
-    public Categoria Categoria { get; set; }
+    public CategoriaCurso CategoriaCurso { get; set; }
 
     public decimal Valor { get; set; }
 

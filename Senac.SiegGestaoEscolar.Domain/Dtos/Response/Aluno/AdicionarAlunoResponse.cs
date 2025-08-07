@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Aluno;
 
-namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Aluno
+public class AdicionarAlunoResponse
 {
-    internal class AdicionarAlunoResponse
-    {
-    }
+    public long Id { get; set; }
+
+    public string Nome { get; set; }
 }

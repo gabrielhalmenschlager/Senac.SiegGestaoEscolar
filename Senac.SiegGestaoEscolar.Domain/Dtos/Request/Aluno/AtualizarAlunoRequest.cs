@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Request.Aluno;
 
-namespace Senac.SiegGestaoEscolar.Domain.Dtos.Request.Aluno
+public class AtualizarAlunoRequest
 {
-    internal class AtualizarAlunoRequest
-    {
-    }
+    public string Email { get; set; }
+
+    public string Telefone { get; set; }
+
+    public bool Ativo { get; set; }
 }
