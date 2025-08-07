@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
-namespace Senac.SiegGestaoEscolar.Domain.Dtos.Erro
+namespace Senac.SiegGestaoEscolar.Domain.Dtos.Erro;
+
+public class ErroResponse
 {
-    internal class ErroResponse
-    {
-    }
+    public string Mensagem { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+
+    public string Codigo { get; set; }
 }
