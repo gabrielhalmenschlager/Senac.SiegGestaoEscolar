@@ -2,7 +2,7 @@
 
 namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professor;
 
-internal class AdicionarProfessorResponse
+public class AdicionarProfessorResponse
 {
     public long Id { get; set; }
 
