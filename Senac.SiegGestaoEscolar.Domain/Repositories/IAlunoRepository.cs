@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Repositories;
 
-namespace Senac.SiegGestaoEscolar.Domain.Repositories
+public interface IAlunoRepository
 {
-    internal class IAlunoRepository
-    {
-    }
+    Task<IEnumerable<Aluno>> ObterTodosAlunos();
+
+    Task<Aluno> ObterAlunoDetalhado(long id);
+
+    Task<long> AdicionarAluno(Aluno aluno);
+
+    Task AtualizarAluno(long id, Aluno aluno);
+
+    Task DeletarAluno(long id);
 }

@@ -1,6 +1,6 @@
 ﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Curso;
 
-public class ObterCursosDetalhado
+public class ObterCursosDetalhadoResponse
 {
     public long Id { get; set; }
 

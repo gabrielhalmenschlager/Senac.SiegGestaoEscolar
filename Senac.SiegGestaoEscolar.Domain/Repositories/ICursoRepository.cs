@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Repositories;
 
-namespace Senac.SiegGestaoEscolar.Domain.Repositories
+public interface ICursoRepository
 {
-    internal class ICursoRepository
-    {
-    }
+    Task<IEnumerable<Curso>> ObterTodosCursos();
+
+    Task<Curso> ObterCursoDetalhado(long id);
+
+    Task<long> AdicionarCurso(Curso curso);
+
+    Task AtualizarCurso(long id, Curso curso);
+
+    Task DeletarCurso(long id);
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Repositories;
 
-namespace Senac.SiegGestaoEscolar.Domain.Repositories
+internal interface IProfessorRepository
 {
-    internal class IProfessorRepository
-    {
-    }
+    Task<IEnumerable<Professor>> ObterTodosProfessores();
+
+    Task<Professor> ObterProfessoroDetalhado(long id);
+
+    Task<long> AdicionarProfessor(Professor professor);
+
+    Task AtualizarProfessor(long id, Professor professor);
+
+    Task DeletarProfessor(long id);
 }
