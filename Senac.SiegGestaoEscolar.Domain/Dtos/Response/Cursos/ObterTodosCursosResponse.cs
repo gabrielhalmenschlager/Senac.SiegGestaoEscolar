@@ -6,7 +6,7 @@ public class ObterTodosCursosResponse
 
     public string Nome { get; set; }
 
-    public CategoriaCurso Categoria { get; set; }
+    public string CategoriaCurso { get; set; }
 
     public decimal Valor { get; set; }
 

@@ -8,11 +8,13 @@ public class AdicionarCursoRequest
 
     public DateTime DataCriacao { get; set; }
 
-    public CategoriaCurso CategoriaCurso { get; set; }
+    public string CategoriaCurso { get; set; }
 
     public decimal Valor { get; set; }
 
     public int CargaHoraria { get; set; }
 
     public bool Ativo { get; set; }
+    public long? ProfessorId { get; set; }
+
 }
