@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Senac.SiegGestaoEscolar.Domain\Senac.SiegGestaoEscolar.Domain.csproj" />
+    <ProjectReference Include="..\Senac.SiegGestaoEscolar.Infra.Data\Senac.SiegGestaoEscolar.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

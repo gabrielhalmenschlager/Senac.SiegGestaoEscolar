@@ -1,6 +1,6 @@
 ﻿namespace Senac.SiegGestaoEscolar.Domain.Repositories;
 
-internal interface IProfessorRepository
+public interface IProfessorRepository
 {
     Task<IEnumerable<Professor>> ObterTodosProfessores();
 
