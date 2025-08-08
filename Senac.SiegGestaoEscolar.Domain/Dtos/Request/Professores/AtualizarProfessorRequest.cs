@@ -6,7 +6,7 @@ public class AtualizarProfessorRequest
 
     public string Telefone { get; set; }
     
-    public Formacao Formacao { get; set; }
+    public string Formacao { get; set; }
 
     public bool Ativo { get; set; }
 }

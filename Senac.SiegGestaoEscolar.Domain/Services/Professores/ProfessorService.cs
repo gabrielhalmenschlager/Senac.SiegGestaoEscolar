@@ -47,19 +47,55 @@ public class ProfessorService : IProfessorService
         };
     }
 
-    public Task<AdicionarProfessorResponse> AdicionarProfessor(AdicionarProfessorRequest adicionarProfessorRequest)
+    public async Task<AdicionarProfessorResponse> AdicionarProfessor(AdicionarProfessorRequest adicionarProfessorRequest)
     {
-        throw new NotImplementedException();
+        bool formacaoValida = Enum.TryParse(adicionarProfessorRequest.Formacao, ignoreCase: true, out Formacao formacao);
+        ValidarSeFormacaoExiste(formacaoValida, adicionarProfessorRequest.Formacao);
+        
+        var professor = new Professor
+        {
+            Nome = adicionarProfessorRequest.Nome,
+            Sobrenome = adicionarProfessorRequest.Sobrenome,
+            DataDeNascimento = adicionarProfessorRequest.DataDeNascimento,
+            Email = adicionarProfessorRequest.Email,
+            Telefone = adicionarProfessorRequest.Telefone,
+            Formacao = formacao,
+            DataContratacao = adicionarProfessorRequest.DataContratacao,
+            Ativo = true
+        };
+
+        long idProfessorResponse = await _professorRepository.AdicionarProfessor(professor);
+
+        var professorResponse = new AdicionarProfessorResponse
+        {
+            Id = idProfessorResponse,
+        };
+
+        return professorResponse;
     }
 
-    public Task AtualizarProfessor(long id, AtualizarProfessorRequest atualizarProfessorRequest)
+    public async Task AtualizarProfessor(long id, AtualizarProfessorRequest atualizarProfessorRequest)
     {
-        throw new NotImplementedException();
+        bool formacaoValida = Enum.TryParse(atualizarProfessorRequest.Formacao, ignoreCase: true, out Formacao formacao);
+        ValidarSeFormacaoExiste(formacaoValida, atualizarProfessorRequest.Formacao);
+
+        var professor = await _professorRepository.ObterProfessorDetalhado(id);
+        ValidarSeProfessorExiste(professor, id);
+
+        professor.Email = atualizarProfessorRequest.Email;
+        professor.Telefone = atualizarProfessorRequest.Telefone;
+        professor.Formacao = formacao;
+        professor.Ativo = atualizarProfessorRequest.Ativo;
+
+        await _professorRepository.AtualizarProfessor(id, professor);
     }
 
-    public Task DeletarProfessor(long id)
+    public async Task DeletarProfessor(long id)
     {
-        throw new NotImplementedException();
+        var professor = await _professorRepository.ObterProfessorDetalhado(id);
+        ValidarSeProfessorExiste(professor, id);
+
+        await _professorRepository.DeletarProfessor(id);
     }
 
     private void ValidarSeProfessorExiste(Professor professor, long id)
