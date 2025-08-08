@@ -30,6 +30,7 @@ public class CursoController : Controller
         try
         {
             var cursoResponse = await _cursoService.ObterCursoDetalhado(id);
+            
             return Ok(cursoResponse);
         }
         catch (Exception ex)
@@ -48,6 +49,7 @@ public class CursoController : Controller
         try
         {
             var adicionarCursoResponse = await _cursoService.AdicionarCurso(adicionarCursoRequest);
+            
             return Ok(adicionarCursoResponse);
         }
         catch (Exception ex)
@@ -66,6 +68,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.AtualizarCurso(id, atualizarCursoRequest);
+            
             return Ok();
         }
         catch (Exception ex)
@@ -84,6 +87,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.DeletarCurso(id);
+            
             return Ok();
         }
         catch (Exception ex)

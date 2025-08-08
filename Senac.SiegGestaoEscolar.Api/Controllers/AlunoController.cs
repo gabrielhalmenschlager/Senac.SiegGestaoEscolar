@@ -49,6 +49,7 @@ public class AlunoController : Controller
         try
         {
             var adicionarAlunoResponse = await _alunoService.AdicionarAluno(adicionarAlunoRequest);
+            
             return Ok(adicionarAlunoResponse);
         }
         catch (Exception ex)
@@ -67,6 +68,7 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.AtualizarAluno(id, atualizarAlunoRequest);
+            
             return Ok();
         }
         catch (Exception ex)
@@ -85,6 +87,7 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.DeletarAluno(id);
+            
             return Ok();
         }
         catch (Exception ex)
