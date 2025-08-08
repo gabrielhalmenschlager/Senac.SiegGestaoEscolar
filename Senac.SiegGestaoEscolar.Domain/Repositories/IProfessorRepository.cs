@@ -4,7 +4,7 @@ public interface IProfessorRepository
 {
     Task<IEnumerable<Professor>> ObterTodosProfessores();
 
-    Task<Professor> ObterProfessoroDetalhado(long id);
+    Task<Professor> ObterProfessorDetalhado(long id);
 
     Task<long> AdicionarProfessor(Professor professor);
 

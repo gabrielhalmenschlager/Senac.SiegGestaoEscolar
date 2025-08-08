@@ -1,4 +1,4 @@
-﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Aluno;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 
 public class AdicionarAlunoResponse
 {

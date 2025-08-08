@@ -1,7 +1,7 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Professor;
-using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professor;
+﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Professores;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professores;
 
-namespace Senac.SiegGestaoEscolar.Domain.Services.Professor;
+namespace Senac.SiegGestaoEscolar.Domain.Services.Professores;
 
 public interface IProfessorService
 {

@@ -1,4 +1,4 @@
-﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Request.Aluno;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
 
 public class AtualizarAlunoRequest
 {

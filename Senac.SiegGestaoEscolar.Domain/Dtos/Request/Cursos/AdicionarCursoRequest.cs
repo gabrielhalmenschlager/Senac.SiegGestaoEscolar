@@ -1,9 +1,7 @@
-﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Curso;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Request.Cursos;
 
-public class ObterCursoDetalhadoResponse
+public class AdicionarCursoRequest
 {
-    public long Id { get; set; }
-
     public string Nome { get; set; }
 
     public string Descricao { get; set; }
@@ -15,8 +13,6 @@ public class ObterCursoDetalhadoResponse
     public decimal Valor { get; set; }
 
     public int CargaHoraria { get; set; }
-
-    public long? ProfessorId { get; set; }
 
     public bool Ativo { get; set; }
 }

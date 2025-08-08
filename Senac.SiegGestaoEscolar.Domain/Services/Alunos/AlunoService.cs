@@ -1,8 +1,8 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Aluno;
-using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Aluno;
+﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 
-namespace Senac.SiegGestaoEscolar.Domain.Services.Aluno;
+namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos;
 
 public class AlunoService : IAlunoService
 {

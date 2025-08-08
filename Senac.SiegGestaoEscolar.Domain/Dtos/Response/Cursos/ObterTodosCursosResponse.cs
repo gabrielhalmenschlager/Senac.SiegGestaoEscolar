@@ -1,4 +1,4 @@
-﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Curso;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Cursos;
 
 public class ObterTodosCursosResponse
 {

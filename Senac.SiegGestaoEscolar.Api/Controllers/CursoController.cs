@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Erro;
-using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Curso;
-using Senac.SiegGestaoEscolar.Domain.Services.Curso;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Cursos;
+using Senac.SiegGestaoEscolar.Domain.Services.Cursos;
 
 namespace Senac.SiegGestaoEscolar.Api.Http.Controllers;
 

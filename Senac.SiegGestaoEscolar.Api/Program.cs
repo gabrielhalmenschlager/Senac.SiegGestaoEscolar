@@ -1,7 +1,7 @@
 using Senac.SiegGestaoEscolar.Domain.Repositories;
-using Senac.SiegGestaoEscolar.Domain.Services.Aluno;
-using Senac.SiegGestaoEscolar.Domain.Services.Curso;
-using Senac.SiegGestaoEscolar.Domain.Services.Professor;
+using Senac.SiegGestaoEscolar.Domain.Services.Alunos;
+using Senac.SiegGestaoEscolar.Domain.Services.Cursos;
+using Senac.SiegGestaoEscolar.Domain.Services.Professores;
 using Senac.SiegGestaoEscolar.Infra.Data.DataBaseConfiguration;
 using Senac.SiegGestaoEscolar.Infra.Data.Repositories;
 

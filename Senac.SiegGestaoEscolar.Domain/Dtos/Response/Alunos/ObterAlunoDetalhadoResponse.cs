@@ -1,6 +1,6 @@
-﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professor;
+﻿namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 
-public class ObterProfessorDetalhadoResponse
+public class ObterAlunoDetalhadoResponse
 {
     public long Id { get; set; }
 
@@ -14,9 +14,7 @@ public class ObterProfessorDetalhadoResponse
 
     public string Telefone { get; set; }
 
-    public Formacao Formacao { get; set; }
-
-    public DateTime DataContratacao { get; set; }
+    public DateTime DataMatricula { get; set; }
 
     public bool Ativo { get; set; }
 }

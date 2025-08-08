@@ -1,7 +1,7 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Curso;
-using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Curso;
+﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Cursos;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Cursos;
 
-namespace Senac.SiegGestaoEscolar.Domain.Services.Curso;
+namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos;
 
 public interface ICursoService
 {

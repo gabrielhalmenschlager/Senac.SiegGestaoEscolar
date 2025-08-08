@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professor;
+namespace Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professores;
 
 public class AdicionarProfessorResponse
 {
