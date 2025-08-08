@@ -2,39 +2,95 @@
 using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 
-namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos;
-
-public class AlunoService : IAlunoService
+namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
 {
-    private readonly IAlunoRepository _alunoRepository;
-
-    public AlunoService(IAlunoRepository alunoRepository)
+    public class AlunoService : IAlunoService
     {
-        _alunoRepository = alunoRepository;
-    }
+        private readonly IAlunoRepository _alunoRepository;
 
-    public Task<AdicionarAlunoResponse> AdicionarAluno(AdicionarAlunoRequest adicionarAlunoRequest)
-    {
-        throw new NotImplementedException();
-    }
+        public AlunoService(IAlunoRepository alunoRepository)
+        {
+            _alunoRepository = alunoRepository;
+        }
 
-    public Task AtualizarAluno(long id, AtualizarAlunoRequest atualizarAlunoRequest)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<IEnumerable<ObterTodosAlunosResponse>> ObterTodosAlunos()
+        {
+            var alunos = await _alunoRepository.ObterTodosAlunos();
 
-    public Task DeletarAluno(long id)
-    {
-        throw new NotImplementedException();
-    }
+            return alunos.Select(a => new ObterTodosAlunosResponse
+            {
+                Id = a.Id,
+                Nome = a.Nome,
+                Sobrenome = a.Sobrenome,
+                Email = a.Email,
+                Telefone = a.Telefone,
+                Ativo = a.Ativo
+            });
+        }
 
-    public Task<ObterAlunoDetalhadoResponse> ObterAlunoDetalhado(long id)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<ObterAlunoDetalhadoResponse> ObterAlunoDetalhado(long id)
+        {
+            var aluno = await _alunoRepository.ObterAlunoDetalhado(id);
+            ValidarSeAlunoExiste(aluno, id);
 
-    public Task<IEnumerable<ObterTodosAlunosResponse>> ObterTodosAlunos()
-    {
-        throw new NotImplementedException();
+            return new ObterAlunoDetalhadoResponse
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Sobrenome = aluno.Sobrenome,
+                DataDeNascimento = aluno.DataDeNascimento,
+                Email = aluno.Email,
+                Telefone = aluno.Telefone,
+                DataMatricula = aluno.DataMatricula,
+                Ativo = aluno.Ativo
+            };
+        }
+
+        public async Task<AdicionarAlunoResponse> AdicionarAluno(AdicionarAlunoRequest adicionarAlunoRequest)
+        {
+            var aluno = new Aluno
+            {
+                Nome = adicionarAlunoRequest.Nome,
+                Sobrenome = adicionarAlunoRequest.Sobrenome,
+                DataDeNascimento = adicionarAlunoRequest.DataDeNascimento,
+                Email = adicionarAlunoRequest.Email,
+                Telefone = adicionarAlunoRequest.Telefone,
+                DataMatricula = adicionarAlunoRequest.DataMatricula,
+                Ativo = true
+            };
+
+            long idAlunoResponse = await _alunoRepository.AdicionarAluno(aluno);
+
+            return new AdicionarAlunoResponse
+            {
+                Id = idAlunoResponse
+            };
+        }
+
+        public async Task AtualizarAluno(long id, AtualizarAlunoRequest atualizarAlunoRequest)
+        {
+            var aluno = await _alunoRepository.ObterAlunoDetalhado(id);
+            ValidarSeAlunoExiste(aluno, id);
+
+            aluno.Email = atualizarAlunoRequest.Email;
+            aluno.Telefone = atualizarAlunoRequest.Telefone;
+            aluno.Ativo = atualizarAlunoRequest.Ativo;
+
+            await _alunoRepository.AtualizarAluno(id, aluno);
+        }
+
+        public async Task DeletarAluno(long id)
+        {
+            var aluno = await _alunoRepository.ObterAlunoDetalhado(id);
+            ValidarSeAlunoExiste(aluno, id);
+
+            await _alunoRepository.DeletarAluno(id);
+        }
+
+        private void ValidarSeAlunoExiste(Aluno aluno, long id)
+        {
+            if (aluno == null)
+                throw new Exception($"Aluno com ID {id} não encontrado.");
+        }
     }
 }
