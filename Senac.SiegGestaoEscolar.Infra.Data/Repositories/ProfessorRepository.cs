@@ -33,7 +33,25 @@ public class ProfessorRepository : IProfessorRepository
 
     public async Task<Professor> ObterProfessorDetalhado(long id)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync<Professor>(
+            @"
+            SELECT
+                  p.id
+                , p.nome
+                , p.sobrenome                        
+                , p.dataDeNascimento
+                , p.email                
+                , p.telefone                
+                , f.Id AS Formacao
+                , p.dataContratacao
+                , p.ativo
+            FROM
+                professor p
+            INNER JOIN
+                Formacao f ON f.id = p.FormacaoId
+            "
+            );
     }
 
     public async Task<long> AdicionarProfessor(Professor professor)
