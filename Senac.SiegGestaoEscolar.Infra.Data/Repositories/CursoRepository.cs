@@ -88,7 +88,7 @@ public class CursoRepository : ICursoRepository
                 curso
             SET 
                   descricao = @Descricao
-                , categoriaCurso = @CategoriaCurso
+                , categoriaCursoId = @CategoriaCurso
                 , valor = @Valor
                 , cargaHoraria = @CargaHoraria
                 , professorId = @ProfessorId

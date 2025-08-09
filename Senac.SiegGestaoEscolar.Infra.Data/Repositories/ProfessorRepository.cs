@@ -69,7 +69,7 @@ public class ProfessorRepository : IProfessorRepository
                 , dataDeNascimento
                 , email
                 , telefone
-                , formacao
+                , formacaoId
                 , dataContratacao
                 , ativo
                 )
@@ -88,7 +88,7 @@ public class ProfessorRepository : IProfessorRepository
             SET 
                   email = @Email
                 , telefone = @Telefone
-                , formacao = @Formacao
+                , formacaoId = @Formacao
                 , ativo = @Ativo
             WHERE
                 id = @Id
