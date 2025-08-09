@@ -56,7 +56,23 @@ public class ProfessorRepository : IProfessorRepository
 
     public async Task<long> AdicionarProfessor(Professor professor)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync<long>(
+            @"
+            INSERT INTO professor 
+                (   
+                  nome    
+                , sobrenome
+                , dataDeNascimento
+                , email
+                , telefone
+                , formacaoId
+                , dataContratacao
+                , ativo
+                )
+            ",
+            professor
+            );
     }
 
     public async Task AtualizarProfessor(long id, Professor professor)
