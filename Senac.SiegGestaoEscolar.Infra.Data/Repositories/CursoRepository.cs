@@ -34,7 +34,25 @@ public class CursoRepository : ICursoRepository
 
     public async Task<Curso> ObterCursoDetalhado(long id)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+             .QueryFirstOrDefaultAsync<Curso>(
+            @"  
+            SELECT
+                  c.id
+                , c.professorId
+                , c.nome
+                , c.descricao
+                , c.dataCriacao
+                , c.Id AS categoriaCurso
+                , c.valor
+                , c.cargaHoraria
+                , c.ativo
+            FROM 
+                curso c
+            INNER JOIN 
+                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
+            "
+            );
     }
 
     public async Task<long> AdicionarCurso(Curso curso)

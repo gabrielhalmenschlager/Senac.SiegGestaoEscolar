@@ -22,6 +22,7 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
                 Id = c.Id,
                 Nome = c.Nome,
                 CategoriaCurso = c.CategoriaCurso.ToString(),
+                Valor = c.Valor,
                 Ativo = c.Ativo
             });
         }
