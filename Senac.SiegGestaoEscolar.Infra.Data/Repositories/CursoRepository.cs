@@ -57,16 +57,54 @@ public class CursoRepository : ICursoRepository
 
     public async Task<long> AdicionarCurso(Curso curso)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync<long>(
+            @"
+            INSERT INTO curso 
+                (   
+                  nome    
+                , descricao
+                , dataCriacao
+                , CategoriaCursoId
+                , valor
+                , cargaHoraria
+                , professorId
+                , ativo
+                )
+            "
+            );
     }
 
     public async Task AtualizarCurso(long id, Curso curso)
     {
-        throw new NotImplementedException();
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            UPDATE 
+                curso
+            SET 
+                  descricao = @Descricao
+                , categoriaCurso = @CategoriaCurso
+                , valor = @Valor
+                , cargaHoraria = @CargaHoraria
+                , professorId = @ProfessorId
+                , ativo = @Ativo
+            WHERE
+                id = @Id
+            ",
+            curso
+            );
     }
 
     public async Task DeletarCurso(long id)
     {
-        throw new NotImplementedException();
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            DELETE FROM aluno
+            WHERE id = @Id
+            ",
+            new { Id = id }
+            );
     }
 }
