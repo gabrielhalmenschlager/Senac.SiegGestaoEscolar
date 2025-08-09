@@ -19,7 +19,7 @@ public class ProfessorRepository : IProfessorRepository
         throw new NotImplementedException();
     }
 
-    public Task<Professor> ObterProfessoroDetalhado(long id)
+    public Task<Professor> ObterProfessorDetalhado(long id)
     {
         throw new NotImplementedException();
     }

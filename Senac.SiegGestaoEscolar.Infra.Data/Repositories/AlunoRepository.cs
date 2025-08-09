@@ -1,31 +1,102 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Repositories;
+﻿using Dapper;
+using Senac.SiegGestaoEscolar.Domain.Repositories;
+using Senac.SiegGestaoEscolar.Infra.Data.DataBaseConfiguration;
 
 namespace Senac.SiegGestaoEscolar.Infra.Data.Repositories;
 
 public class AlunoRepository : IAlunoRepository
 {
-    public Task<long> AdicionarAluno(Aluno aluno)
+    private readonly IDbConnectionFactory _connectionFactory;
+
+    public AlunoRepository(IDbConnectionFactory connectionFactory)
     {
-        throw new NotImplementedException();
+        _connectionFactory = connectionFactory;
     }
 
-    public Task AtualizarAluno(long id, Aluno aluno)
+    public async Task<IEnumerable<Aluno>> ObterTodosAlunos()
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+             .QueryAsync<Aluno>(
+            @"
+            SELECT
+                  id
+                , nome
+                , sobrenome
+                , email
+                , telefone
+                , ativo
+            FROM
+                aluno
+            "
+            );
     }
 
-    public Task DeletarAluno(long id)
+    public async Task<Aluno> ObterAlunoDetalhado(long id)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+             .QueryFirstOrDefaultAsync<Aluno>(
+            @"
+            SELECT
+                  id
+                , nome
+                , sobrenome
+                , dataDeNascimento
+                , email
+                , telefone
+                , dataMatricula
+                , ativo
+            FROM
+                aluno
+            "
+            );
     }
 
-    public Task<Aluno> ObterAlunoDetalhado(long id)
+    public async Task<long> AdicionarAluno(Aluno aluno)
     {
-        throw new NotImplementedException();
+        return await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync<long>(
+            @"
+            INSERT INTO aluno 
+                (
+                  nome
+                , sobrenome
+                , dataDeNascimento
+                , email
+                , telefone
+                , dataMatricula
+                , ativo
+                )   
+            "
+            );
     }
 
-    public Task<IEnumerable<Aluno>> ObterTodosAlunos()
+    public async Task AtualizarAluno(Aluno aluno)
     {
-        throw new NotImplementedException();
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            UPDATE 
+                aluno       
+            SET
+                  email = @Email
+                , telefone = @Telefone
+                , ativo = @Ativo
+            WHERE 
+                id = @Id
+            ",
+            aluno
+            );
+    }
+
+    public async Task DeletarAluno(long id)
+    {
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            DELETE FROM aluno
+            WHERE id = @Id
+            ",
+            new { Id = id }
+            );
     }
 }

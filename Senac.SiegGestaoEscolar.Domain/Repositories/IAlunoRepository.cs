@@ -8,7 +8,7 @@ public interface IAlunoRepository
 
     Task<long> AdicionarAluno(Aluno aluno);
 
-    Task AtualizarAluno(long id, Aluno aluno);
+    Task AtualizarAluno(Aluno aluno);
 
     Task DeletarAluno(long id);
 }

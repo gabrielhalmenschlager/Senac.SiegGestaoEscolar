@@ -76,7 +76,7 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
             aluno.Telefone = atualizarAlunoRequest.Telefone;
             aluno.Ativo = atualizarAlunoRequest.Ativo;
 
-            await _alunoRepository.AtualizarAluno(id, aluno);
+            await _alunoRepository.AtualizarAluno(aluno);
         }
 
         public async Task DeletarAluno(long id)
