@@ -66,7 +66,8 @@ public class AlunoRepository : IAlunoRepository
                 , dataMatricula
                 , ativo
                 )   
-            "
+            ",
+            aluno
             );
     }
 

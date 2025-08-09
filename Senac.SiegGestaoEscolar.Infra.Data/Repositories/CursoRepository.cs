@@ -71,7 +71,8 @@ public class CursoRepository : ICursoRepository
                 , professorId
                 , ativo
                 )
-            "
+            ",
+            curso
             );
     }
 
