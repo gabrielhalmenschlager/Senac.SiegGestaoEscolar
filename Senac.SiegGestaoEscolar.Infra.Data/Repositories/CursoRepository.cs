@@ -22,11 +22,12 @@ public class CursoRepository : ICursoRepository
                   c.id
                 , c.nome
                 , c.Id AS categoriaCurso
+                , c.valor                
                 , c.ativo
             FROM 
                 curso c
             INNER JOIN 
-                CategoriaCurso cc ON cc.id = c.categoriaCurso 
+                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
             "
             );
     }
