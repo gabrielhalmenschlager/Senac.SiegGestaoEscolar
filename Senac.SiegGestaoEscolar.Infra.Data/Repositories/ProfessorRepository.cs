@@ -50,7 +50,10 @@ public class ProfessorRepository : IProfessorRepository
                 professor p
             INNER JOIN
                 Formacao f ON f.id = p.FormacaoId
-            "
+            WHERE 
+                p.Id = @Id
+            ",
+            new { Id = id }
             );
     }
 
@@ -77,7 +80,21 @@ public class ProfessorRepository : IProfessorRepository
 
     public async Task AtualizarProfessor(long id, Professor professor)
     {
-        throw new NotImplementedException();
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            UPDATE 
+                professor
+            SET 
+                  email = @Email
+                , telefone = @Telefone
+                , formacao = @Formacao
+                , ativo = @Ativo
+            WHERE
+                id = @Id
+            ",
+            professor
+            );
     }
 
     public async Task DeletarProfessor(long id)
