@@ -66,7 +66,7 @@ public class ProfessorRepository : IProfessorRepository
                 , dataDeNascimento
                 , email
                 , telefone
-                , formacaoId
+                , formacao
                 , dataContratacao
                 , ativo
                 )
@@ -82,10 +82,13 @@ public class ProfessorRepository : IProfessorRepository
 
     public async Task DeletarProfessor(long id)
     {
-        throw new NotImplementedException();
+        await _connectionFactory.CreateConnection()
+            .QueryFirstOrDefaultAsync(
+            @"
+            DELETE FROM professor
+            WHERE id = @Id
+            ",
+            new { Id = id }
+            );
     }
-
-
-
-
 }
