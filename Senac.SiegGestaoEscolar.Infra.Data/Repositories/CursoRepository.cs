@@ -43,15 +43,18 @@ public class CursoRepository : ICursoRepository
                 , c.nome
                 , c.descricao
                 , c.dataCriacao
-                , c.Id AS categoriaCurso
+                , cc.Id AS categoriaCurso
                 , c.valor
                 , c.cargaHoraria
                 , c.ativo
             FROM 
                 curso c
             INNER JOIN 
-                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
-            "
+                CategoriaCurso cc ON cc.Id = c.CategoriaCursoId
+            WHERE
+                c.Id = @Id
+            ",
+            new { Id = id }
             );
     }
 
