@@ -65,7 +65,18 @@ public class AlunoRepository : IAlunoRepository
                 , telefone
                 , dataMatricula
                 , ativo
-                )   
+                )
+            OUTPUT INSERTED.id
+            VALUES
+                (  
+                  @Nome 
+                , @Sobrenome
+                , @DataDeNascimento
+                , @Email
+                , @Telefone
+                , @DataMatricula               
+                , @Ativo
+                )
             ",
             aluno
             );

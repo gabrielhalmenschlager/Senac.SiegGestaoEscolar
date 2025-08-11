@@ -74,6 +74,18 @@ public class CursoRepository : ICursoRepository
                 , professorId
                 , ativo
                 )
+            OUTPUT INSERTED.id
+            VALUES
+                (  
+                  @Nome 
+                , @Descricao
+                , @DataCriacao
+                , @CategoriaCurso
+                , @Valor
+                , @CargaHoraria
+                , @ProfessorId                
+                , @Ativo
+                )
             ",
             curso
             );

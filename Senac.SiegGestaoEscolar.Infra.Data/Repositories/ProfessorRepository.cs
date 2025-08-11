@@ -73,6 +73,18 @@ public class ProfessorRepository : IProfessorRepository
                 , dataContratacao
                 , ativo
                 )
+            OUTPUT INSERTED.id
+            VALUES
+                (  
+                  @Nome 
+                , @Sobrenome
+                , @DataDeNascimento
+                , @Email
+                , @Telefone
+                , @Formacao
+                , @DataContratacao                
+                , @Ativo
+                )
             ",
             professor
             );
