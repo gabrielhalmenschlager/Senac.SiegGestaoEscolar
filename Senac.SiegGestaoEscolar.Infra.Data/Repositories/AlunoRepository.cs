@@ -47,7 +47,9 @@ public class AlunoRepository : IAlunoRepository
                 , ativo
             FROM
                 aluno
-            "
+            WHERE g.id = @Id
+            ",
+            new { Id = id }
             );
     }
 
