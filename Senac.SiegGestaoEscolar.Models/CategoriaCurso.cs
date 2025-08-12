@@ -2,7 +2,7 @@
 
 public enum CategoriaCurso
 {
-    Basico,
-    Medio,
-    Avancado
+    Basico = 1,
+    Medio = 2,
+    Avancado = 3
 }

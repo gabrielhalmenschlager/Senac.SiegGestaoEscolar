@@ -117,7 +117,7 @@ public class CursoRepository : ICursoRepository
         await _connectionFactory.CreateConnection()
             .QueryFirstOrDefaultAsync(
             @"
-            DELETE FROM aluno
+            DELETE FROM curso
             WHERE id = @Id
             ",
             new { Id = id }

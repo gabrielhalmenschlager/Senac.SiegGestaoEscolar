@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Erro;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Services.Alunos;
@@ -7,6 +8,7 @@ namespace Senac.SiegGestaoEscolar.Api.Http.Controllers;
 
 [ApiController]
 [Route("aluno")]
+[Authorize]
 public class AlunoController : Controller
 {
     private readonly IAlunoService _alunoService;

@@ -2,10 +2,10 @@
 
 public enum Formacao
 {
-    EnsinoMedio,
+    EnsinoMedio = 5,
     EnsinoTecnico,
-    Graduado,
-    PosGraduado,
-    Mestrado,
-    Doutorado
+    Graduacao = 1,
+    PosGraduado = 2,
+    Mestrado = 3,
+    Doutorado = 4
 }
