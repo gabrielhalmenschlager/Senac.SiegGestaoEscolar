@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../assets/logo.png'; 
-import casinha from '../assets/house.svg'; 
+
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function Navbar() {
   return (
@@ -13,22 +14,25 @@ export default function Navbar() {
       <ul>
         <li>
           <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>
-            <i class="bi bi-house"></i>
+            <i className="bi bi-house"></i>
             Inicio
           </NavLink>
         </li>
         <li>
           <NavLink to="/professores" className={({ isActive }) => isActive ? "active-link" : ""}>
+            <i class="bi bi-book"></i>
             Professores
           </NavLink>
         </li>
         <li>
           <NavLink to="/alunos" className={({ isActive }) => isActive ? "active-link" : ""}>
+            <i class="bi bi-backpack2"></i>            
             Alunos
           </NavLink>
         </li>
         <li>
           <NavLink to="/cursos" className={({ isActive }) => isActive ? "active-link" : ""}>
+            <i class="bi bi-mortarboard"></i>
             Cursos
           </NavLink>
         </li>

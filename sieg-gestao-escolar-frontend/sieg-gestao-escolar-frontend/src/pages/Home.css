@@ -1,0 +1,153 @@
+.dashboard-container {
+  display: flex;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #152259;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #0E1E4D;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  color: white;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.logo h2 {
+  font-size: 1rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 15px;
+}
+
+.menu button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background-color: #509CDB;
+}
+
+.user-info {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 30px;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.cards {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: linear-gradient(145deg, #ffffff, #f0f4ff);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.05);
+  padding: 25px 20px;
+  flex: 1 1 280px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.12), 0 10px 10px rgba(0,0,0,0.06);
+}
+
+.card h3 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #152259;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.card svg {
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card:hover svg {
+  transform: scale(1.2);
+  color: #2a76f4;
+}
+
+
+
+.center-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.main-logo {
+  width: 130px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.center-header h1 {
+  font-size: 36px;
+  color: #4F4F4F;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 50px;       /* afasta do topo */
+  right: 100px;     /* afasta da direita */
+  background-color: #509CDB;
+  color: white;
+  border: none;
+  padding: 12px 50px;  /* aumenta o tamanho do botão */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;     /* aumenta o texto */
+}
