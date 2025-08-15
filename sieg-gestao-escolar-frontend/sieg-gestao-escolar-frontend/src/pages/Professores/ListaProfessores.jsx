@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { obterTodosProfessores } from '../../services/professores';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/NavBar';
+import Footer from '../../components/Footer';
+import './ListaProfessores.css';
 
 export default function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -18,7 +20,7 @@ export default function ListaProfessores() {
         setProfessores(dados);
       } catch (e) {
         setErro('Erro ao carregar professores');
-        console.log(e)
+        console.log(e);
       }
       setCarregando(false);
     }
@@ -27,29 +29,44 @@ export default function ListaProfessores() {
   }, []);
 
   return (
-    <div>
+    <div className="page-container">
       <Navbar />
-    <div style={{ maxWidth: 800, margin: '20px auto', padding: 20 }}>
-      <h1>Professores</h1>
+      <main className="main-content">
+        <div className="page-header">
+          <h1>Professores</h1>
+          <button className="btn-primary" onClick={() => navigate('/professores/novo')}>
+            <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
+            Adicionar Professor
+          </button>
+        </div>
 
-      <button 
-        onClick={() => navigate('/professores/novo')} 
-        style={{ marginBottom: 20 }}
-      >
-        Adicionar Professor
-      </button>
+        {carregando && <p>Carregando...</p>}
+        {erro && <p className="error-text">{erro}</p>}
 
-      {carregando && <p>Carregando...</p>}
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
-
-      <ul>
-        {professores.map(prof => (
-          <li key={prof.id}>
-            {prof.nome} {prof.sobrenome} — {prof.email} {prof.telefone}
-          </li>
-        ))}
-      </ul>
-    </div>
+        {professores.length > 0 && (
+          <div className="table-container">
+            <table className="professores-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                </tr>
+              </thead>
+              <tbody>
+                {professores.map(prof => (
+                  <tr key={prof.id}>
+                    <td>{prof.nome} {prof.sobrenome}</td>
+                    <td>{prof.email}</td>
+                    <td>{prof.telefone}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </main>
+      <Footer />
     </div>
   );
 }
