@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { obterTodosProfessores } from '../../services/professores';
 import { useNavigate } from 'react-router-dom';
+
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-import './ListaProfessores.css';
+
+import styled from 'styled-components';
 
 export default function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -24,28 +26,27 @@ export default function ListaProfessores() {
       }
       setCarregando(false);
     }
-
     carregarProfessores();
   }, []);
 
   return (
-    <div className="page-container">
+    <PageContainer>
       <Navbar />
-      <main className="main-content">
-        <div className="page-header">
+      <MainContent>
+        <PageHeader>
           <h1>Professores</h1>
-          <button className="btn-primary" onClick={() => navigate('/professores/novo')}>
+          <BtnPrimary onClick={() => navigate('/professores/novo')}>
             <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
             Adicionar Professor
-          </button>
-        </div>
+          </BtnPrimary>
+        </PageHeader>
 
         {carregando && <p>Carregando...</p>}
-        {erro && <p className="error-text">{erro}</p>}
+        {erro && <ErrorText>{erro}</ErrorText>}
 
         {professores.length > 0 && (
-          <div className="table-container">
-            <table className="professores-table">
+          <TableContainer>
+            <ProfessoresTable>
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -62,11 +63,104 @@ export default function ListaProfessores() {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
+            </ProfessoresTable>
+          </TableContainer>
         )}
-      </main>
+      </MainContent>
       <Footer />
-    </div>
+    </PageContainer>
   );
 }
+
+/* Styled Components */
+const PageContainer = styled.div`
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #152259;
+  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
+  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+  padding: 40px 50px;
+  margin-left: 300px; /* espaço da navbar vertical */
+`;
+
+const PageHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+
+  h1 {
+    color: #4F4F4F;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+`;
+
+const BtnPrimary = styled.button`
+  background-color: #509CDB;
+  color: white;
+  border: none;
+  padding: 14px 45px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3a83bf;
+    transform: translateY(-2px);
+  }
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  margin-bottom: 20px;
+`;
+
+const TableContainer = styled.div`
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+`;
+
+const ProfessoresTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  th {
+    background-color: #152259;
+    color: white;
+    font-weight: 600;
+  }
+
+  tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: #f1f5f9;
+    }
+  }
+
+  td {
+    color: #555;
+  }
+`;

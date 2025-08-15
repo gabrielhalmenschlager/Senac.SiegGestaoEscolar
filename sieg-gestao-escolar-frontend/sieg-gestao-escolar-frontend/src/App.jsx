@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+
 import Home from './pages/Home';
 import ListaProfessores from './pages/Professores/ListaProfessores';
 import CadastroProfessor from './pages/Professores/CadastroProfessor';
