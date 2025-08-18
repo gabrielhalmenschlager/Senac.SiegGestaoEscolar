@@ -4,6 +4,7 @@ import { FaUserGraduate, FaChalkboardTeacher, FaBook } from 'react-icons/fa';
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import logo from '../assets/logo.png';
+import somAguia from '../assets/aguia.mp3';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import styled from 'styled-components';
@@ -15,12 +16,18 @@ export default function Home() {
   const totalProfessores = 12;
   const totalCursos = 24;
 
+  const tocarSom = () => {
+    const audio = new Audio(somAguia);
+    audio.play();
+  };
+
+
   return (
     <DashboardContainer>
       <Navbar />
       <MainContent>
         <CenterHeader>
-          <Logo src={logo} alt="Logo" />
+          <Logo src={logo} alt="Logo" onClick={tocarSom} />
           <h1>Bem Vindo ao seu Painel de Controle!</h1>
         </CenterHeader>
         <LogoutWrapper>
