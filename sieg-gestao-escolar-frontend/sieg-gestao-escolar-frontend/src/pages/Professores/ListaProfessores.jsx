@@ -52,6 +52,7 @@ export default function ListaProfessores() {
                   <th>Nome</th>
                   <th>Email</th>
                   <th>Telefone</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -60,6 +61,12 @@ export default function ListaProfessores() {
                     <td>{prof.nome} {prof.sobrenome}</td>
                     <td>{prof.email}</td>
                     <td>{prof.telefone}</td>
+                    <td>
+                      <BtnDetail onClick={() => navigate(`/professores/${prof.id}`)}>
+                        <i className="bi bi-eye" style={{ marginRight: '6px' }}></i>
+                        Detalhes
+                      </BtnDetail>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -121,12 +128,30 @@ const BtnPrimary = styled.button`
   }
 `;
 
+const BtnDetail = styled.button`
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+  }
+`;
+
 const ErrorText = styled.p`
   color: red;
   margin-bottom: 20px;
 `;
 
 const TableContainer = styled.div`
+  margin-top: 100px;
   overflow-x: auto;
   background-color: #fff;
   border-radius: 15px;
