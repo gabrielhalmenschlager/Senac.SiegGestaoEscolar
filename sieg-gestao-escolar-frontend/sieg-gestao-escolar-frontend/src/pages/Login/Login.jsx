@@ -36,7 +36,6 @@ export default function Login() {
 
   return (
     <PageContainer>
-      <Navbar />
       <MainContent>
         <FormCard>
           <MainLogo src={Logo} alt="Logo" />
@@ -75,7 +74,6 @@ export default function Login() {
           </form>
         </FormCard>
       </MainContent>
-      <Footer />
     </PageContainer>
   );
 }

@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import ListaProfessores from './pages/Professores/ListaProfessores';
 import CadastroProfessor from './pages/Professores/CadastroProfessor';
 import DetalheProfessor from './pages/Professores/DetalheProfessor';
-import Login from './pages/Login/Login'; // <- Import do Login
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       {/* Home */}
-      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
 
       {/* Professores */}
       <Route path="/professores" element={<ListaProfessores />} />
@@ -21,8 +21,11 @@ function App() {
       <Route path="/professores/:id" element={<DetalheProfessor />} />
       <Route path="/professores/:id/editar" element={<CadastroProfessor />} />
 
+      {/* Rota inicial sempre vai para login */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
       {/* Rota fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
