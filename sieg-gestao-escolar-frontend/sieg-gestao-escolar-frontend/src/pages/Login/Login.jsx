@@ -27,7 +27,7 @@ export default function Login() {
     try {
       await login(form.username, form.password);
       setLoading(false);
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       setErro('Usuário ou senha inválidos');
       setLoading(false);

@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { useParams, useNavigate } from "react-router-dom";
-import { obterAlunoDetalhado } from "../../services/alunos"; // ajuste conforme o nome do arquivo
+import { obterAlunoDetalhado } from "../../services/alunos";
 
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import Logo from "../../assets/logo.png";
 import styled from "styled-components";
-import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle, BiSchool } from "react-icons/bi";
+import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle } from "react-icons/bi";
+import { MdSchool } from "react-icons/md"; // <- ícone de escola
 
 export default function DetalheAluno() {
   const { id } = useParams();
@@ -47,8 +48,8 @@ export default function DetalheAluno() {
               <InfoItem><BiUser /> <strong>Nome:</strong> {aluno.nome} {aluno.sobrenome}</InfoItem>
               <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(aluno.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
               <InfoItem><BiEnvelope /> <strong>Email:</strong> {aluno.email}</InfoItem>
+              <InfoItem><MdSchool /> <strong>Curso:</strong> {aluno.curso}</InfoItem>
               <InfoItem><BiPhone /> <strong>Telefone:</strong> {aluno.telefone}</InfoItem>
-              <InfoItem><BiSchool /> <strong>Curso:</strong> {aluno.curso}</InfoItem>
               <InfoItem>
                 {aluno.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}
                 <strong>Status:</strong> {aluno.ativo ? "Ativo" : "Inativo"}
@@ -65,6 +66,7 @@ export default function DetalheAluno() {
     </PageContainer>
   );
 }
+
 
 // Styled Components (mesmos da tela de professor)
 const PageContainer = styled.div`
