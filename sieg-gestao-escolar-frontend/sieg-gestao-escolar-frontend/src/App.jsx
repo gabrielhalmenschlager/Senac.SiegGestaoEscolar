@@ -12,6 +12,11 @@ import ListaAlunos from './pages/Alunos/ListaAlunos';
 import CadastroAluno from './pages/Alunos/CadastroAluno';
 import DetalheAluno from './pages/Alunos/DetalheAluno';
 
+// Cursos
+import ListaCursos from './pages/Cursos/ListaCursos';
+import CadastroCurso from './pages/Cursos/CadastroCurso';
+import DetalheCurso from './pages/Cursos/DetalheCurso';
+
 import Login from './pages/Login/Login';
 
 function App() {
@@ -34,6 +39,12 @@ function App() {
       <Route path="/alunos/novo" element={<CadastroAluno />} />
       <Route path="/alunos/:id" element={<DetalheAluno />} />
       <Route path="/alunos/:id/editar" element={<CadastroAluno />} />
+
+      {/* Cursos */}
+      <Route path="/cursos" element={<ListaCursos />} />
+      <Route path="/cursos/novo" element={<CadastroCurso />} />
+      <Route path="/cursos/:id" element={<DetalheCurso />} />
+      <Route path="/cursos/:id/editar" element={<CadastroCurso />} />
 
       {/* Rota inicial sempre vai para login */}
       <Route path="/" element={<Navigate to="/login" replace />} />

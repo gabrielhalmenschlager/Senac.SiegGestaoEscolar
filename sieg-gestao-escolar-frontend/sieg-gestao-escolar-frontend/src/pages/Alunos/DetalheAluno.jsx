@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import Logo from "../../assets/logo.png";
 import styled from "styled-components";
 import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle } from "react-icons/bi";
-import { MdSchool } from "react-icons/md"; // <- ícone de escola
+import { MdSchool } from "react-icons/md";
 
 export default function DetalheAluno() {
   const { id } = useParams();
@@ -68,7 +68,7 @@ export default function DetalheAluno() {
 }
 
 
-// Styled Components (mesmos da tela de professor)
+/* Styled Components */
 const PageContainer = styled.div`
   display: flex;
   min-height: 100vh;

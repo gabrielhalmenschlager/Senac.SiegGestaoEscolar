@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { adicionarAluno } from '../../services/alunos';
+import { adicionarCurso } from '../../services/cursos';
+import { obterTodosProfessores } from '../../services/professores';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -8,20 +9,34 @@ import Logo from '../../assets/logo.png';
 
 import styled from 'styled-components';
 
-export default function CadastroAluno() {
+export default function CadastroCurso() {
   const navigate = useNavigate();
 
+  const [professores, setProfessores] = useState([]);
   const [form, setForm] = useState({
     nome: '',
-    sobrenome: '',
-    dataDeNascimento: '',
-    email: '',
-    telefone: '',
-    dataMatricula: '',
+    descricao: '',
+    dataCriacao: '',
+    categoriaCurso: '',
+    valor: 0,
+    cargaHoraria: 0,
     ativo: true,
+    professorId: 0,
   });
 
   const [erro, setErro] = useState('');
+
+  useEffect(() => {
+    async function carregarProfessores() {
+      try {
+        const dados = await obterTodosProfessores(); // ou via API de professores
+        setProfessores(dados);
+      } catch (e) {
+        console.log('Erro ao carregar professores', e);
+      }
+    }
+    carregarProfessores();
+  }, []);
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -36,11 +51,10 @@ export default function CadastroAluno() {
     setErro('');
 
     try {
-      await adicionarAluno(form);
-      navigate('/alunos');
-    } catch (ex) {
-      console.log(ex)
-      setErro('Erro ao cadastrar aluno. Verifique os dados.');
+      await adicionarCurso(form);
+      navigate('/cursos');
+    } catch {
+      setErro('Erro ao cadastrar curso. Verifique os dados.');
     }
   }
 
@@ -50,7 +64,7 @@ export default function CadastroAluno() {
       <MainContent>
         <FormCard>
           <MainLogo src={Logo} alt="Logo" />
-          <h2>Cadastrar Aluno</h2>
+          <h2>Cadastrar Curso</h2>
 
           {erro && <ErrorText>{erro}</ErrorText>}
 
@@ -61,28 +75,38 @@ export default function CadastroAluno() {
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="sobrenome">Sobrenome:</label>
-              <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required />
+              <label htmlFor="descricao">Descrição:</label>
+              <textarea id="descricao" name="descricao" value={form.descricao} onChange={handleChange} rows={4} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
-              <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required />
+              <label htmlFor="dataCriacao">Data de Criação:</label>
+              <input type="date" id="dataCriacao" name="dataCriacao" value={form.dataCriacao} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
+              <label htmlFor="categoriaCurso">Categoria:</label>
+              <input type="text" id="categoriaCurso" name="categoriaCurso" value={form.categoriaCurso} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="telefone">Telefone:</label>
-              <input type="text" id="telefone" name="telefone" value={form.telefone} onChange={handleChange} required />
+              <label htmlFor="valor">Valor:</label>
+              <input type="number" id="valor" name="valor" value={form.valor} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="dataMatricula">Data de Matrícula:</label>
-              <input type="date" id="dataMatricula" name="dataMatricula" value={form.dataMatricula} onChange={handleChange} required />
+              <label htmlFor="cargaHoraria">Carga Horária (horas):</label>
+              <input type="number" id="cargaHoraria" name="cargaHoraria" value={form.cargaHoraria} onChange={handleChange} required />
+            </FormGroup>
+
+            <FormGroup>
+              <label htmlFor="professorId">Professor:</label>
+              <select name="professorId" value={form.professorId} onChange={handleChange} required>
+                <option value={0}>Selecione um professor</option>
+                {professores.map(p => (
+                  <option key={p.id} value={p.id}>{p.nome} {p.sobrenome}</option>
+                ))}
+              </select>
             </FormGroup>
 
             <CheckboxGroup>
@@ -143,7 +167,7 @@ const FormGroup = styled.div`
     font-weight: 500;
   }
 
-  input {
+  input, textarea {
     width: 100%;
     padding: 10px 10px;
     border-radius: 8px;
@@ -155,6 +179,10 @@ const FormGroup = styled.div`
     &:focus {
       border-color: #509CDB;
     }
+  }
+
+  textarea {
+    resize: none;
   }
 `;
 

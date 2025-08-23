@@ -78,7 +78,7 @@ export default function Login() {
   );
 }
 
-// Styled Components (mesmos do seu código anterior)
+/* Styled Components */
 const PageContainer = styled.div`
   display: flex;
   min-height: 100vh;

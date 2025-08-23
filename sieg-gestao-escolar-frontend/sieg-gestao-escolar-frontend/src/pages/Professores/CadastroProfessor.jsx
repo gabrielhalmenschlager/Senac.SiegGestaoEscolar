@@ -140,7 +140,7 @@ export default function CadastroProfessor() {
   );
 }
 
-// Styled Components
+/* Styled Components */
 const PageContainer = styled.div`
   display: flex;
   min-height: 100vh;

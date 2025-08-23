@@ -16,12 +16,12 @@ export async function obterAlunoDetalhado(id) {
 }
 
 export async function adicionarAluno(aluno) {
-  const response = await api.put('/adicionar/aluno', aluno, { headers: getAuthHeader() });
+  const response = await api.post('/adicionar/aluno', aluno, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function atualizarAluno(id, aluno) {
-  const response = await api.post(`/aluno/${id}/atualizar`, aluno, { headers: getAuthHeader() });
+  const response = await api.put(`/aluno/${id}/atualizar`, aluno, { headers: getAuthHeader() });
   return response.data;
 }
 
