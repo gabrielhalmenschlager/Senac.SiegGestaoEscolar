@@ -33,6 +33,25 @@ export const BtnDetail = styled.button`
   }
 `;
 
+export const BtnVoltar = styled.button`
+  display: block;
+  margin: 30px auto 0 auto;
+  background-color: #509CDB;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3a83bf;
+    transform: translateY(-2px);
+  }
+`;
+
 export const BtnEdit = styled(BtnDetail)`
   background-color: #28a745;
 

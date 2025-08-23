@@ -1,14 +1,24 @@
+// React e hooks
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
+// Serviços/API
 import { obterProfessorDetalhado } from "../../services/professores";
 
+// Componentes globais
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import { PageContainer, MainContent } from "../../components/ui/Layout";
 
+// Componentes de layout e UI reutilizáveis
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+import { Card, MainLogo, InfoList, InfoItem } from "../../components/ui/CardStyles";
+import { MainLogo } from "../../components/ui/Logo";
+import { BtnVoltar } from "../../components/ui/Buttons";
+import { ErrorText } from "../../components/ui/Text";
+
+// Carregando a logo
 import Logo from "../../assets/logo.png";
 
-import styled from "styled-components";
 import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiBook, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
 
 export default function DetalheProfessor() {
@@ -69,77 +79,3 @@ export default function DetalheProfessor() {
     </PageContainer>
   );
 }
-
-/* Styled Components */
-const Card = styled.div`
-  max-width: 650px;
-  margin: 50px auto;
-  padding: 50px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  text-align: center;
-
-  h2 {
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-`;
-
-const MainLogo = styled.img`
-  display: block;
-  margin: 0 auto 25px auto;
-  width: 120px;
-`;
-
-const InfoList = styled.div`
-  text-align: left;
-  margin-top: 20px;
-`;
-
-const InfoItem = styled.p`
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  strong {
-    color: #152259;
-    width: 150px;
-  }
-
-  svg {
-    min-width: 20px;
-    min-height: 20px;
-  }
-`;
-
-const BtnVoltar = styled.button`
-  display: block;
-  margin: 30px auto 0 auto;
-  background-color: #509CDB;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #3a83bf;
-    transform: translateY(-2px);
-  }
-`;
-
-const ErrorText = styled.p`
-  color: #dc3545;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 600;
-`;
