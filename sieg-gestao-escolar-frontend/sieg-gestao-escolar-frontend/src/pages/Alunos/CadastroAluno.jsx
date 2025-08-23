@@ -5,6 +5,7 @@ import { adicionarAluno } from '../../services/alunos';
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import Logo from '../../assets/logo.png';
+import { PageContainer, MainContent } from "../../components/ui/Layout";
 
 import styled from 'styled-components';
 
@@ -102,21 +103,6 @@ export default function CadastroAluno() {
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 40px 50px;
-  margin-left: 300px;
-`;
-
 const FormCard = styled.div`
   max-width: 600px;
   margin: 40px auto;

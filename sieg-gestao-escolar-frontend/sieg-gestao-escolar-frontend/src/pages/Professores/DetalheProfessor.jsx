@@ -4,7 +4,10 @@ import { obterProfessorDetalhado } from "../../services/professores";
 
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+
 import Logo from "../../assets/logo.png";
+
 import styled from "styled-components";
 import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiBook, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
 
@@ -68,21 +71,6 @@ export default function DetalheProfessor() {
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f4f6f8, #e0e4e9);
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 50px 20px;
-  margin-left: 300px;
-`;
-
 const Card = styled.div`
   max-width: 650px;
   margin: 50px auto;

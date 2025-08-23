@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { PageContainer, MainContent } from "../../components/ui/Layout";
 
 import styled from 'styled-components';
 
@@ -80,21 +81,6 @@ export default function ListaCursos() {
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 40px 50px;
-  margin-left: 300px;
-`;
-
 const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;

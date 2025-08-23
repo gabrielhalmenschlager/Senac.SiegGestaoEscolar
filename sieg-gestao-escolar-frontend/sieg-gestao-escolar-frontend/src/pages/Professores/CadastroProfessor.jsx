@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+
 import Logo from '../../assets/logo.png';
 
 import styled from 'styled-components';
@@ -61,10 +63,16 @@ export default function CadastroProfessor() {
   async function handleSubmit(e) {
     e.preventDefault();
     setErro('');
-
+  
     try {
       if (id) {
-        await atualizarProfessor(id, form);
+        const dadosParaAtualizar = {
+          email: form.email,
+          telefone: form.telefone,
+          formacao: form.formacao,
+          ativo: form.ativo,
+        };
+        await atualizarProfessor(id, dadosParaAtualizar);
       } else {
         await adicionarProfessor(form);
       }
@@ -87,17 +95,17 @@ export default function CadastroProfessor() {
           <form onSubmit={handleSubmit}>
             <FormGroup>
               <label htmlFor="nome">Nome:</label>
-              <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required />
+              <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required disabled={!!id} />
             </FormGroup>
 
             <FormGroup>
               <label htmlFor="sobrenome">Sobrenome:</label>
-              <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required />
+              <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required disabled={!!id} />
             </FormGroup>
 
             <FormGroup>
               <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
-              <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required />
+              <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required disabled={!!id} />
             </FormGroup>
 
             <FormGroup>
@@ -121,7 +129,7 @@ export default function CadastroProfessor() {
 
             <FormGroup>
               <label htmlFor="dataContratacao">Data de Contratação:</label>
-              <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required />
+              <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required disabled={!!id} />
             </FormGroup>
 
             <CheckboxGroup>
@@ -141,21 +149,6 @@ export default function CadastroProfessor() {
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 40px 50px;
-  margin-left: 300px; /* largura da navbar vertical */
-`;
-
 const FormCard = styled.div`
   max-width: 600px;
   margin: 40px auto;

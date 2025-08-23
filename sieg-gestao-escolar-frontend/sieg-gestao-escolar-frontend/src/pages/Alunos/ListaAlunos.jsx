@@ -1,33 +1,36 @@
-import { useState, useEffect } from 'react';
-import { obterTodosAlunos } from '../../services/alunos'; 
-import { useNavigate } from 'react-router-dom';
+"use client"
 
-import Navbar from '../../components/NavBar';
-import Footer from '../../components/Footer';
+import { useState, useEffect } from "react"
+import { obterTodosAlunos } from "../../services/alunos"
+import { useNavigate } from "react-router-dom"
 
-import styled from 'styled-components';
+import Navbar from "../../components/NavBar"
+import Footer from "../../components/Footer"
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+
+import styled from "styled-components"
 
 export default function ListaAlunos() {
-  const [alunos, setAlunos] = useState([]);
-  const [carregando, setCarregando] = useState(false);
-  const [erro, setErro] = useState('');
-  const navigate = useNavigate();
+  const [alunos, setAlunos] = useState([])
+  const [carregando, setCarregando] = useState(false)
+  const [erro, setErro] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function carregarAlunos() {
-      setCarregando(true);
-      setErro('');
+      setCarregando(true)
+      setErro("")
       try {
-        const dados = await obterTodosAlunos();
-        setAlunos(dados);
+        const dados = await obterTodosAlunos()
+        setAlunos(dados)
       } catch (e) {
-        setErro('Erro ao carregar alunos');
-        console.log(e);
+        setErro("Erro ao carregar alunos")
+        console.log(e)
       }
-      setCarregando(false);
+      setCarregando(false)
     }
-    carregarAlunos();
-  }, []);
+    carregarAlunos()
+  }, [])
 
   return (
     <PageContainer>
@@ -35,8 +38,8 @@ export default function ListaAlunos() {
       <MainContent>
         <PageHeader>
           <h1>Alunos</h1>
-          <BtnPrimary onClick={() => navigate('/alunos/novo')}>
-            <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
+          <BtnPrimary onClick={() => navigate("/alunos/novo")}>
+            <i className="bi bi-person-plus" style={{ marginRight: "8px" }}></i>
             Adicionar Aluno
           </BtnPrimary>
         </PageHeader>
@@ -56,14 +59,16 @@ export default function ListaAlunos() {
                 </tr>
               </thead>
               <tbody>
-                {alunos.map(aluno => (
+                {alunos.map((aluno) => (
                   <tr key={aluno.id}>
-                    <td>{aluno.nome} {aluno.sobrenome}</td>
+                    <td>
+                      {aluno.nome} {aluno.sobrenome}
+                    </td>
                     <td>{aluno.email}</td>
                     <td>{aluno.curso}</td>
                     <td>
                       <BtnDetail onClick={() => navigate(`/alunos/${aluno.id}`)}>
-                        <i className="bi bi-eye" style={{ marginRight: '6px' }}></i>
+                        <i className="bi bi-eye" style={{ marginRight: "6px" }}></i>
                         Detalhes
                       </BtnDetail>
                     </td>
@@ -76,25 +81,10 @@ export default function ListaAlunos() {
       </MainContent>
       <Footer />
     </PageContainer>
-  );
+  )
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 40px 50px;
-  margin-left: 300px;
-`;
-
 const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -108,7 +98,7 @@ const PageHeader = styled.div`
     font-weight: 600;
     margin: 0;
   }
-`;
+`
 
 const BtnPrimary = styled.button`
   background-color: #509CDB;
@@ -126,7 +116,7 @@ const BtnPrimary = styled.button`
     background-color: #3a83bf;
     transform: translateY(-2px);
   }
-`;
+`
 
 const BtnDetail = styled.button`
   background-color: #6c757d;
@@ -143,12 +133,12 @@ const BtnDetail = styled.button`
     background-color: #5a6268;
     transform: translateY(-2px);
   }
-`;
+`
 
 const ErrorText = styled.p`
   color: red;
   margin-bottom: 20px;
-`;
+`
 
 const TableContainer = styled.div`
   margin-top: 100px;
@@ -157,7 +147,7 @@ const TableContainer = styled.div`
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-`;
+`
 
 const AlunosTable = styled.table`
   width: 100%;
@@ -188,4 +178,4 @@ const AlunosTable = styled.table`
   td {
     color: #555;
   }
-`;
+`

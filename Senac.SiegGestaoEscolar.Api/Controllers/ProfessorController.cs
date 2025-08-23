@@ -45,7 +45,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPost("/adicionar/professor")]
+    [HttpPost("adicionar/professor")]
     public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
     {
         try
@@ -64,7 +64,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPut("professor/{id}/atualizar/")]
+    [HttpPut("/{id}/atualizar/")]
     public async Task<IActionResult> AtualizarProfessor([FromRoute] long id, [FromBody] AtualizarProfessorRequest atualizarProfessorRequest)
     {
         try
@@ -83,7 +83,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpDelete("professor/{id}/deletar/")]
+    [HttpDelete("/{id}/deletar/")]
     public async Task<IActionResult> DeletarProfessor([FromRoute] long id)
     {
         try

@@ -16,16 +16,16 @@ export async function obterProfessorDetalhado(id) {
 }
 
 export async function adicionarProfessor(professor) {
-  const response = await api.post('/adicionar/professor', professor, { headers: getAuthHeader() });
+  const response = await api.post('professor/adicionar/professor', professor, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function atualizarProfessor(id, professor) {
-  const response = await api.put(`/professor/${id}/atualizar`, professor, { headers: getAuthHeader() });
+  const response = await api.put(`/${id}/atualizar`, professor, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function deletarProfessor(id) {
-  const response = await api.delete(`/professor/${id}/deletar`, { headers: getAuthHeader() });
+  const response = await api.delete(`/${id}/deletar`, { headers: getAuthHeader() });
   return response.data;
 }

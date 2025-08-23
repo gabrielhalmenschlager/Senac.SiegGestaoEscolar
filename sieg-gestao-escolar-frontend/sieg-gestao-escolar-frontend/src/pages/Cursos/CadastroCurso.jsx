@@ -5,6 +5,8 @@ import { obterTodosProfessores } from '../../services/professores';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+
 import Logo from '../../assets/logo.png';
 
 import styled from 'styled-components';
@@ -126,21 +128,6 @@ export default function CadastroCurso() {
 }
 
 /* Styled Components */
-const PageContainer = styled.div`
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: #152259;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 40px 50px;
-  margin-left: 300px;
-`;
-
 const FormCard = styled.div`
   max-width: 600px;
   margin: 40px auto;
