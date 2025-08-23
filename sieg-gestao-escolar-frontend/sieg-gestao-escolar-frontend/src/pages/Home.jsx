@@ -21,7 +21,6 @@ export default function Home() {
     audio.play();
   };
 
-
   return (
     <DashboardContainer>
       <Navbar />
