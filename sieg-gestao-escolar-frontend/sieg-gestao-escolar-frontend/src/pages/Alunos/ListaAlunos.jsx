@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { obterTodosProfessores } from '../../services/professores';
+import { obterTodosAlunos } from '../../services/alunos'; 
 import { useNavigate } from 'react-router-dom';
 
 import Navbar from '../../components/NavBar';
@@ -7,26 +7,26 @@ import Footer from '../../components/Footer';
 
 import styled from 'styled-components';
 
-export default function ListaProfessores() {
-  const [professores, setProfessores] = useState([]);
+export default function ListaAlunos() {
+  const [alunos, setAlunos] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function carregarProfessores() {
+    async function carregarAlunos() {
       setCarregando(true);
       setErro('');
       try {
-        const dados = await obterTodosProfessores();
-        setProfessores(dados);
+        const dados = await obterTodosAlunos();
+        setAlunos(dados);
       } catch (e) {
-        setErro('Erro ao carregar professores');
+        setErro('Erro ao carregar alunos');
         console.log(e);
       }
       setCarregando(false);
     }
-    carregarProfessores();
+    carregarAlunos();
   }, []);
 
   return (
@@ -34,35 +34,35 @@ export default function ListaProfessores() {
       <Navbar />
       <MainContent>
         <PageHeader>
-          <h1>Professores</h1>
-          <BtnPrimary onClick={() => navigate('/professores/novo')}>
+          <h1>Alunos</h1>
+          <BtnPrimary onClick={() => navigate('/alunos/novo')}>
             <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
-            Adicionar Professor
+            Adicionar Aluno
           </BtnPrimary>
         </PageHeader>
 
         {carregando && <p>Carregando...</p>}
         {erro && <ErrorText>{erro}</ErrorText>}
 
-        {professores.length > 0 && (
+        {alunos.length > 0 && (
           <TableContainer>
-            <ProfessoresTable>
+            <AlunosTable>
               <thead>
                 <tr>
                   <th>Nome</th>
                   <th>Email</th>
-                  <th>Telefone</th>
+                  <th>Curso</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {professores.map(prof => (
-                  <tr key={prof.id}>
-                    <td>{prof.nome} {prof.sobrenome}</td>
-                    <td>{prof.email}</td>
-                    <td>{prof.telefone}</td>
+                {alunos.map(aluno => (
+                  <tr key={aluno.id}>
+                    <td>{aluno.nome} {aluno.sobrenome}</td>
+                    <td>{aluno.email}</td>
+                    <td>{aluno.curso}</td>
                     <td>
-                      <BtnDetail onClick={() => navigate(`/professores/${prof.id}`)}>
+                      <BtnDetail onClick={() => navigate(`/alunos/${aluno.id}`)}>
                         <i className="bi bi-eye" style={{ marginRight: '6px' }}></i>
                         Detalhes
                       </BtnDetail>
@@ -70,7 +70,7 @@ export default function ListaProfessores() {
                   </tr>
                 ))}
               </tbody>
-            </ProfessoresTable>
+            </AlunosTable>
           </TableContainer>
         )}
       </MainContent>
@@ -86,13 +86,13 @@ const PageContainer = styled.div`
   font-family: 'Kumbh Sans', sans-serif;
   color: #152259;
   background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
+  flex-direction: column;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 40px 50px;
-  margin-left: 300px; /* espaço da navbar vertical */
+  margin-left: 300px;
 `;
 
 const PageHeader = styled.div`
@@ -159,7 +159,7 @@ const TableContainer = styled.div`
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 `;
 
-const ProfessoresTable = styled.table`
+const AlunosTable = styled.table`
   width: 100%;
   border-collapse: collapse;
 

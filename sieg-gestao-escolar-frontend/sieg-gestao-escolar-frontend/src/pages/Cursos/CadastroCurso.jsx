@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from '../../services/professores';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { adicionarCurso } from '../../services/cursos';
+import { obterTodosProfessores } from '../../services/professores';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -8,47 +9,34 @@ import Logo from '../../assets/logo.png';
 
 import styled from 'styled-components';
 
-const formacaoOptions = [
-  'EnsinoMedio',
-  'EnsinoTecnico',
-  'Graduado',
-  'PosGraduado',
-  'Mestrado',
-  'Doutorado',
-];
-
-export default function CadastroProfessor() {
-  const { id } = useParams();
+export default function CadastroCurso() {
   const navigate = useNavigate();
 
+  const [professores, setProfessores] = useState([]);
   const [form, setForm] = useState({
     nome: '',
-    sobrenome: '',
-    dataDeNascimento: '',
-    email: '',
-    telefone: '',
-    formacao: formacaoOptions[0],
-    dataContratacao: '',
+    descricao: '',
+    dataCriacao: '',
+    categoriaCurso: '',
+    valor: 0,
+    cargaHoraria: 0,
     ativo: true,
+    professorId: 0,
   });
 
   const [erro, setErro] = useState('');
 
   useEffect(() => {
-    if (id) {
-      obterProfessorDetalhado(id)
-        .then(data => {
-          if (!data) throw new Error('Professor não encontrado');
-          setForm({
-            ...data,
-            dataDeNascimento: data.dataDeNascimento?.slice(0, 10) || '',
-            dataContratacao: data.dataContratacao?.slice(0, 10) || '',
-            ativo: Boolean(data.ativo),
-          });
-        })
-        .catch(() => setErro('Erro ao carregar professor'));
+    async function carregarProfessores() {
+      try {
+        const dados = await obterTodosProfessores(); // ou via API de professores
+        setProfessores(dados);
+      } catch (e) {
+        console.log('Erro ao carregar professores', e);
+      }
     }
-  }, [id]);
+    carregarProfessores();
+  }, []);
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -63,14 +51,10 @@ export default function CadastroProfessor() {
     setErro('');
 
     try {
-      if (id) {
-        await atualizarProfessor(id, form);
-      } else {
-        await adicionarProfessor(form);
-      }
-      navigate('/professores');
+      await adicionarCurso(form);
+      navigate('/cursos');
     } catch {
-      setErro('Erro ao salvar professor');
+      setErro('Erro ao cadastrar curso. Verifique os dados.');
     }
   }
 
@@ -80,7 +64,7 @@ export default function CadastroProfessor() {
       <MainContent>
         <FormCard>
           <MainLogo src={Logo} alt="Logo" />
-          <h2>{id ? 'Editar Professor' : 'Cadastrar Professor'}</h2>
+          <h2>Cadastrar Curso</h2>
 
           {erro && <ErrorText>{erro}</ErrorText>}
 
@@ -91,37 +75,38 @@ export default function CadastroProfessor() {
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="sobrenome">Sobrenome:</label>
-              <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required />
+              <label htmlFor="descricao">Descrição:</label>
+              <textarea id="descricao" name="descricao" value={form.descricao} onChange={handleChange} rows={4} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
-              <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required />
+              <label htmlFor="dataCriacao">Data de Criação:</label>
+              <input type="date" id="dataCriacao" name="dataCriacao" value={form.dataCriacao} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
+              <label htmlFor="categoriaCurso">Categoria:</label>
+              <input type="text" id="categoriaCurso" name="categoriaCurso" value={form.categoriaCurso} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="telefone">Telefone:</label>
-              <input type="text" id="telefone" name="telefone" value={form.telefone} onChange={handleChange} required />
+              <label htmlFor="valor">Valor:</label>
+              <input type="number" id="valor" name="valor" value={form.valor} onChange={handleChange} required />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="formacao">Formação:</label>
-              <select id="formacao" name="formacao" value={form.formacao} onChange={handleChange} required>
-                {formacaoOptions.map(opt => (
-                  <option key={opt} value={opt}>{opt}</option>
+              <label htmlFor="cargaHoraria">Carga Horária (horas):</label>
+              <input type="number" id="cargaHoraria" name="cargaHoraria" value={form.cargaHoraria} onChange={handleChange} required />
+            </FormGroup>
+
+            <FormGroup>
+              <label htmlFor="professorId">Professor:</label>
+              <select name="professorId" value={form.professorId} onChange={handleChange} required>
+                <option value={0}>Selecione um professor</option>
+                {professores.map(p => (
+                  <option key={p.id} value={p.id}>{p.nome} {p.sobrenome}</option>
                 ))}
               </select>
-            </FormGroup>
-
-            <FormGroup>
-              <label htmlFor="dataContratacao">Data de Contratação:</label>
-              <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required />
             </FormGroup>
 
             <CheckboxGroup>
@@ -131,7 +116,7 @@ export default function CadastroProfessor() {
               </label>
             </CheckboxGroup>
 
-            <ButtonSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</ButtonSecundary>
+            <ButtonSecundary type="submit">Cadastrar</ButtonSecundary>
           </form>
         </FormCard>
       </MainContent>
@@ -147,13 +132,13 @@ const PageContainer = styled.div`
   font-family: 'Kumbh Sans', sans-serif;
   color: #152259;
   background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
+  flex-direction: column;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 40px 50px;
-  margin-left: 300px; /* largura da navbar vertical */
+  margin-left: 300px;
 `;
 
 const FormCard = styled.div`
@@ -182,7 +167,7 @@ const FormGroup = styled.div`
     font-weight: 500;
   }
 
-  input, select {
+  input, textarea {
     width: 100%;
     padding: 10px 10px;
     border-radius: 8px;
@@ -194,6 +179,10 @@ const FormGroup = styled.div`
     &:focus {
       border-color: #509CDB;
     }
+  }
+
+  textarea {
+    resize: none;
   }
 `;
 

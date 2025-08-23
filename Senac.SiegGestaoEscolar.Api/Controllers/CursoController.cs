@@ -45,7 +45,7 @@ public class CursoController : Controller
         }
     }
 
-    [HttpPut("/adicionar/curso")]
+    [HttpPost("/adicionar/curso")]
     public async Task<IActionResult> AdicionarCurso([FromBody] AdicionarCursoRequest adicionarCursoRequest)
     {
         try
@@ -64,7 +64,7 @@ public class CursoController : Controller
         }
     }
 
-    [HttpPost("curso/{id}/atualizar/")]
+    [HttpPut("curso/{id}/atualizar/")]
     public async Task<IActionResult> AtualizarCurso([FromRoute] long id, [FromBody] AtualizarCursoRequest atualizarCursoRequest)
     {
         try

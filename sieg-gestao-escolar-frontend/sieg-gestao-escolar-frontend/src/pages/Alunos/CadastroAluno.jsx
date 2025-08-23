@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from '../../services/professores';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { adicionarAluno } from '../../services/alunos';
 
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -8,17 +8,7 @@ import Logo from '../../assets/logo.png';
 
 import styled from 'styled-components';
 
-const formacaoOptions = [
-  'EnsinoMedio',
-  'EnsinoTecnico',
-  'Graduado',
-  'PosGraduado',
-  'Mestrado',
-  'Doutorado',
-];
-
-export default function CadastroProfessor() {
-  const { id } = useParams();
+export default function CadastroAluno() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -27,28 +17,11 @@ export default function CadastroProfessor() {
     dataDeNascimento: '',
     email: '',
     telefone: '',
-    formacao: formacaoOptions[0],
-    dataContratacao: '',
+    dataMatricula: '',
     ativo: true,
   });
 
   const [erro, setErro] = useState('');
-
-  useEffect(() => {
-    if (id) {
-      obterProfessorDetalhado(id)
-        .then(data => {
-          if (!data) throw new Error('Professor não encontrado');
-          setForm({
-            ...data,
-            dataDeNascimento: data.dataDeNascimento?.slice(0, 10) || '',
-            dataContratacao: data.dataContratacao?.slice(0, 10) || '',
-            ativo: Boolean(data.ativo),
-          });
-        })
-        .catch(() => setErro('Erro ao carregar professor'));
-    }
-  }, [id]);
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -63,14 +36,11 @@ export default function CadastroProfessor() {
     setErro('');
 
     try {
-      if (id) {
-        await atualizarProfessor(id, form);
-      } else {
-        await adicionarProfessor(form);
-      }
-      navigate('/professores');
-    } catch {
-      setErro('Erro ao salvar professor');
+      await adicionarAluno(form);
+      navigate('/alunos');
+    } catch (ex) {
+      console.log(ex)
+      setErro('Erro ao cadastrar aluno. Verifique os dados.');
     }
   }
 
@@ -80,7 +50,7 @@ export default function CadastroProfessor() {
       <MainContent>
         <FormCard>
           <MainLogo src={Logo} alt="Logo" />
-          <h2>{id ? 'Editar Professor' : 'Cadastrar Professor'}</h2>
+          <h2>Cadastrar Aluno</h2>
 
           {erro && <ErrorText>{erro}</ErrorText>}
 
@@ -111,17 +81,8 @@ export default function CadastroProfessor() {
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="formacao">Formação:</label>
-              <select id="formacao" name="formacao" value={form.formacao} onChange={handleChange} required>
-                {formacaoOptions.map(opt => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </FormGroup>
-
-            <FormGroup>
-              <label htmlFor="dataContratacao">Data de Contratação:</label>
-              <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required />
+              <label htmlFor="dataMatricula">Data de Matrícula:</label>
+              <input type="date" id="dataMatricula" name="dataMatricula" value={form.dataMatricula} onChange={handleChange} required />
             </FormGroup>
 
             <CheckboxGroup>
@@ -131,7 +92,7 @@ export default function CadastroProfessor() {
               </label>
             </CheckboxGroup>
 
-            <ButtonSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</ButtonSecundary>
+            <ButtonSecundary type="submit">Cadastrar</ButtonSecundary>
           </form>
         </FormCard>
       </MainContent>
@@ -147,13 +108,13 @@ const PageContainer = styled.div`
   font-family: 'Kumbh Sans', sans-serif;
   color: #152259;
   background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
+  flex-direction: column;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 40px 50px;
-  margin-left: 300px; /* largura da navbar vertical */
+  margin-left: 300px;
 `;
 
 const FormCard = styled.div`
@@ -182,7 +143,7 @@ const FormGroup = styled.div`
     font-weight: 500;
   }
 
-  input, select {
+  input {
     width: 100%;
     padding: 10px 10px;
     border-radius: 8px;

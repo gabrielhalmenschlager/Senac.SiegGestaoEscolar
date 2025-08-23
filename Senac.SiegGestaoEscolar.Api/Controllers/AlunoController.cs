@@ -45,7 +45,7 @@ public class AlunoController : Controller
         }
     }
 
-    [HttpPut("/adicionar/aluno")]
+    [HttpPost("/adicionar/aluno")]
     public async Task<IActionResult> AdicionarAluno([FromBody] AdicionarAlunoRequest adicionarAlunoRequest)
     {
         try

@@ -14,7 +14,7 @@ export default function Navbar() {
       </NavbarHeader>
       <NavList>
         <NavItem>
-          <StyledLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>
+          <StyledLink to="/home" className={({ isActive }) => isActive ? "active-link" : ""}>
             <i className="bi bi-house"></i>
             Início
           </StyledLink>

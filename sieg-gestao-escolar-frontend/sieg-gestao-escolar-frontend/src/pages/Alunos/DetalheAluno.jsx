@@ -1,34 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { useParams, useNavigate } from "react-router-dom";
-import { obterProfessorDetalhado } from "../../services/professores";
+import { obterAlunoDetalhado } from "../../services/alunos";
 
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import Logo from "../../assets/logo.png";
 import styled from "styled-components";
-import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiBook, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
+import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle } from "react-icons/bi";
+import { MdSchool } from "react-icons/md";
 
-export default function DetalheProfessor() {
+export default function DetalheAluno() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [professor, setProfessor] = useState(null);
+  const [aluno, setAluno] = useState(null);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
   useEffect(() => {
-    async function carregarProfessor() {
+    async function carregarAluno() {
       setCarregando(true);
       setErro("");
       try {
-        const dados = await obterProfessorDetalhado(id);
-        setProfessor(dados);
+        const dados = await obterAlunoDetalhado(id);
+        setAluno(dados);
       } catch (e) {
-        setErro("Erro ao carregar detalhes do professor");
+        setErro("Erro ao carregar detalhes do aluno");
         console.log(e);
       }
       setCarregando(false);
     }
-    carregarProfessor();
+    carregarAluno();
   }, [id]);
 
   return (
@@ -37,27 +38,26 @@ export default function DetalheProfessor() {
       <MainContent>
         <Card>
           <MainLogo src={Logo} alt="Logo" />
-          <h2>Detalhes do Professor</h2>
+          <h2>Detalhes do Aluno</h2>
 
           {carregando && <p>Carregando...</p>}
           {erro && <ErrorText>{erro}</ErrorText>}
 
-          {professor && (
+          {aluno && (
             <InfoList>
-              <InfoItem><BiUser /> <strong>Nome:</strong> {professor.nome} {professor.sobrenome}</InfoItem>
-              <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(professor.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
-              <InfoItem><BiEnvelope /> <strong>Email:</strong> {professor.email}</InfoItem>
-              <InfoItem><BiPhone /> <strong>Telefone:</strong> {professor.telefone}</InfoItem>
-              <InfoItem><BiBook /> <strong>Formação:</strong> {professor.formacao}</InfoItem>
-              <InfoItem><BiBriefcase /> <strong>Data de Contratação:</strong> {new Date(professor.dataContratacao).toLocaleDateString("pt-BR")}</InfoItem>
+              <InfoItem><BiUser /> <strong>Nome:</strong> {aluno.nome} {aluno.sobrenome}</InfoItem>
+              <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(aluno.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
+              <InfoItem><BiEnvelope /> <strong>Email:</strong> {aluno.email}</InfoItem>
+              <InfoItem><MdSchool /> <strong>Curso:</strong> {aluno.curso}</InfoItem>
+              <InfoItem><BiPhone /> <strong>Telefone:</strong> {aluno.telefone}</InfoItem>
               <InfoItem>
-                {professor.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}
-                <strong>Status:</strong> {professor.ativo ? "Ativo" : "Inativo"}
+                {aluno.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}
+                <strong>Status:</strong> {aluno.ativo ? "Ativo" : "Inativo"}
               </InfoItem>
             </InfoList>
           )}
 
-          <BtnVoltar onClick={() => navigate("/professores")}>
+          <BtnVoltar onClick={() => navigate("/alunos")}>
             Voltar
           </BtnVoltar>
         </Card>
@@ -66,6 +66,7 @@ export default function DetalheProfessor() {
     </PageContainer>
   );
 }
+
 
 /* Styled Components */
 const PageContainer = styled.div`

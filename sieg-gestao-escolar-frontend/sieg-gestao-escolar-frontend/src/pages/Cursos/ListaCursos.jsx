@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { obterTodosProfessores } from '../../services/professores';
+import { obterTodosCursos } from '../../services/cursos';
 import { useNavigate } from 'react-router-dom';
 
 import Navbar from '../../components/NavBar';
@@ -7,26 +7,26 @@ import Footer from '../../components/Footer';
 
 import styled from 'styled-components';
 
-export default function ListaProfessores() {
-  const [professores, setProfessores] = useState([]);
+export default function ListaCursos() {
+  const [cursos, setCursos] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function carregarProfessores() {
+    async function carregarCursos() {
       setCarregando(true);
       setErro('');
       try {
-        const dados = await obterTodosProfessores();
-        setProfessores(dados);
+        const dados = await obterTodosCursos();
+        setCursos(dados);
       } catch (e) {
-        setErro('Erro ao carregar professores');
+        setErro('Erro ao carregar cursos');
         console.log(e);
       }
       setCarregando(false);
     }
-    carregarProfessores();
+    carregarCursos();
   }, []);
 
   return (
@@ -34,35 +34,35 @@ export default function ListaProfessores() {
       <Navbar />
       <MainContent>
         <PageHeader>
-          <h1>Professores</h1>
-          <BtnPrimary onClick={() => navigate('/professores/novo')}>
-            <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
-            Adicionar Professor
+          <h1>Cursos</h1>
+          <BtnPrimary onClick={() => navigate('/cursos/novo')}>
+            <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
+            Adicionar Curso
           </BtnPrimary>
         </PageHeader>
 
         {carregando && <p>Carregando...</p>}
         {erro && <ErrorText>{erro}</ErrorText>}
 
-        {professores.length > 0 && (
+        {cursos.length > 0 && (
           <TableContainer>
-            <ProfessoresTable>
+            <CursosTable>
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
+                  <th>Carga Horária</th>
+                  <th>Descrição</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {professores.map(prof => (
-                  <tr key={prof.id}>
-                    <td>{prof.nome} {prof.sobrenome}</td>
-                    <td>{prof.email}</td>
-                    <td>{prof.telefone}</td>
+                {cursos.map(curso => (
+                  <tr key={curso.id}>
+                    <td>{curso.nome}</td>
+                    <td>{curso.cargaHoraria} horas</td>
+                    <td>{curso.descricao}</td>
                     <td>
-                      <BtnDetail onClick={() => navigate(`/professores/${prof.id}`)}>
+                      <BtnDetail onClick={() => navigate(`/cursos/${curso.id}`)}>
                         <i className="bi bi-eye" style={{ marginRight: '6px' }}></i>
                         Detalhes
                       </BtnDetail>
@@ -70,7 +70,7 @@ export default function ListaProfessores() {
                   </tr>
                 ))}
               </tbody>
-            </ProfessoresTable>
+            </CursosTable>
           </TableContainer>
         )}
       </MainContent>
@@ -86,13 +86,13 @@ const PageContainer = styled.div`
   font-family: 'Kumbh Sans', sans-serif;
   color: #152259;
   background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
-  flex-direction: column; /* organiza Navbar, main e Footer verticalmente */
+  flex-direction: column;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 40px 50px;
-  margin-left: 300px; /* espaço da navbar vertical */
+  margin-left: 300px;
 `;
 
 const PageHeader = styled.div`
@@ -159,7 +159,7 @@ const TableContainer = styled.div`
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 `;
 
-const ProfessoresTable = styled.table`
+const CursosTable = styled.table`
   width: 100%;
   border-collapse: collapse;
 

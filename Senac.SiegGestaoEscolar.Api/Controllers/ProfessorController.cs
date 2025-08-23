@@ -45,7 +45,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPut("/adicionar/professor")]
+    [HttpPost("/adicionar/professor")]
     public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
     {
         try
@@ -64,7 +64,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPost("professor/{id}/atualizar/")]
+    [HttpPut("professor/{id}/atualizar/")]
     public async Task<IActionResult> AtualizarProfessor([FromRoute] long id, [FromBody] AtualizarProfessorRequest atualizarProfessorRequest)
     {
         try
