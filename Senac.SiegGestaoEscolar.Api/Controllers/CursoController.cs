@@ -102,5 +102,21 @@ public class CursoController : Controller
         }
     }
 
+    [HttpGet("total")]
+    public async Task<IActionResult> ObterTotalCursos()
+    {
+        try
+        {
+            var total = await _cursoService.ObterTotalCursos();
+            return Ok(new { total });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErroResponse
+            {
+                Mensagem = ex.Message
+            });
+        }
+    }
 }
 

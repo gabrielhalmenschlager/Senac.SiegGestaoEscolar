@@ -123,4 +123,13 @@ public class CursoRepository : ICursoRepository
             new { Id = id }
             );
     }
+
+    public async Task<int> ObterTotalCursos()
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        var total = await connection.ExecuteScalarAsync<int>(
+            @"SELECT COUNT(*) FROM curso"
+        );
+        return total;
+    }
 }

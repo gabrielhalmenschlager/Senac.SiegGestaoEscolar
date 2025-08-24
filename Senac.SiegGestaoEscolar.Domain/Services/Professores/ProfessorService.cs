@@ -113,4 +113,9 @@ public class ProfessorService : IProfessorService
             throw new Exception($"Formação '{formacao}' não existe.");
         }
     }
+
+    public async Task<int> ObterTotalProfessores()
+    {
+        return await _professorRepository.ObterTotalProfessores();
+    }
 }

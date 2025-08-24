@@ -108,5 +108,10 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
             if (!categoriaExiste)
                 throw new Exception($"Categoria '{categoria}' não existe.");
         }
+
+        public async Task<int> ObterTotalCursos()
+        {
+            return await _cursoRepository.ObterTotalCursos();
+        }
     }
 }

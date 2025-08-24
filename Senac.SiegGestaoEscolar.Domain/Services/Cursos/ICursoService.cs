@@ -14,4 +14,6 @@ public interface ICursoService
     Task AtualizarCurso(long id, AtualizarCursoRequest atualizarCursoRequest);
 
     Task DeletarCurso(long id);
+
+    Task<int> ObterTotalCursos();
 }

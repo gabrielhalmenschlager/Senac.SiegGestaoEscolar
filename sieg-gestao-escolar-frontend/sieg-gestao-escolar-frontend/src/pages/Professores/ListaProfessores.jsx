@@ -9,6 +9,7 @@ import { obterTodosProfessores, deletarProfessor } from '../../services/professo
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import { GlobalStyle } from '../../components/GlobalStyle';
+import SearchBar from '../../components/ui/SearchBar';
 
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -24,6 +25,7 @@ export default function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,6 +58,11 @@ export default function ListaProfessores() {
     }
   }
 
+  const professoresFiltrados = professores.filter(prof =>
+    `${prof.nome} ${prof.sobrenome}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    prof.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <GlobalStyle/>
@@ -64,16 +71,24 @@ export default function ListaProfessores() {
         <MainContent>
           <PageHeader>
             <h1>Professores</h1>
-            <BtnPrimary onClick={() => navigate('/professores/novo')}>
-              <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
-              Adicionar Professor
-            </BtnPrimary>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <SearchBar
+                placeholder="Pesquisar professores..."
+                value={searchTerm}
+                onChange={setSearchTerm}
+                style={{ width: '250px' }}
+              />
+              <BtnPrimary onClick={() => navigate('/professores/novo')}>
+                <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
+                Adicionar Professor
+              </BtnPrimary>
+            </div>
           </PageHeader>
 
           {carregando && <p>Carregando...</p>}
           {erro && <ErrorText>{erro}</ErrorText>}
 
-          {professores.length > 0 && (
+          {professoresFiltrados.length > 0 && (
             <TableContainer>
               <TableGlobal>
                 <thead>
@@ -87,7 +102,7 @@ export default function ListaProfessores() {
                   </tr>
                 </thead>
                 <tbody>
-                  {professores.map(prof => (
+                  {professoresFiltrados.map(prof => (
                     <tr key={prof.id}>
                       <td>{prof.id}</td>
                       <td>{prof.nome} {prof.sobrenome}</td>
@@ -100,27 +115,27 @@ export default function ListaProfessores() {
                         }
                       </td>
                       <td style={{ display: 'flex', gap: '15px' }}>
-                      <BiDetail 
-                        size={20} 
-                        color="#1E90FF" 
-                        style={{ cursor: 'pointer' }} 
-                        onClick={() => navigate(`/professores/${prof.id}`)}
-                        title="Detalhes"
-                      />
-                      <BiEdit 
-                        size={20} 
-                        color="#FFA500" 
-                        style={{ cursor: 'pointer' }} 
-                        onClick={() => navigate(`/professores/${prof.id}/editar`)}
-                        title="Editar"
-                      />
-                      <BiTrash 
-                        size={20} 
-                        color="#FF4C4C" 
-                        style={{ cursor: 'pointer' }} 
-                        onClick={() => handleExcluir(prof.id)}
-                        title="Excluir"
-                      />
+                        <BiDetail 
+                          size={20} 
+                          color="#1E90FF" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => navigate(`/professores/${prof.id}`)}
+                          title="Detalhes"
+                        />
+                        <BiEdit 
+                          size={20} 
+                          color="#FFA500" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => navigate(`/professores/${prof.id}/editar`)}
+                          title="Editar"
+                        />
+                        <BiTrash 
+                          size={20} 
+                          color="#FF4C4C" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => handleExcluir(prof.id)}
+                          title="Excluir"
+                        />
                       </td>
                     </tr>
                   ))}
@@ -128,6 +143,8 @@ export default function ListaProfessores() {
               </TableGlobal>
             </TableContainer>
           )}
+
+          {!carregando && professoresFiltrados.length === 0 && <p>Nenhum professor encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>

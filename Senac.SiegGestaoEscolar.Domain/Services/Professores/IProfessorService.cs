@@ -14,4 +14,6 @@ public interface IProfessorService
     Task AtualizarProfessor(long id, AtualizarProfessorRequest atualizarProfessorRequest);
 
     Task DeletarProfessor(long id);
+
+    Task<int> ObterTotalProfessores();
 }

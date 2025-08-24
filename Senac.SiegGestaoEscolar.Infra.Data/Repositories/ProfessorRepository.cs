@@ -120,4 +120,13 @@ public class ProfessorRepository : IProfessorRepository
             new { Id = id }
             );
     }
+
+    public async Task<int> ObterTotalProfessores()
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        var total = await connection.ExecuteScalarAsync<int>(
+            @"SELECT COUNT(*) FROM professor"
+        );
+        return total;
+    }
 }

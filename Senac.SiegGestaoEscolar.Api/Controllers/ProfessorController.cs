@@ -101,4 +101,21 @@ public class ProfessorController : Controller
             return NotFound(erroResponse);
         }
     }
+
+    [HttpGet("total")]
+    public async Task<IActionResult> ObterTotalProfessores()
+    {
+        try
+        {
+            var total = await _professorService.ObterTotalProfessores();
+            return Ok(new { total });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErroResponse
+            {
+                Mensagem = ex.Message
+            });
+        }
+    }
 }

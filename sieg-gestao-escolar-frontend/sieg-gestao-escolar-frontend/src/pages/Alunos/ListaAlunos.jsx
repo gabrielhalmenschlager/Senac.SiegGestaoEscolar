@@ -9,6 +9,7 @@ import { obterTodosAlunos, deletarAluno } from "../../services/alunos"
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { GlobalStyle } from '../../components/GlobalStyle';
+import SearchBar from '../../components/ui/SearchBar';
 
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -24,6 +25,7 @@ export default function ListaAlunos() {
   const [alunos, setAlunos] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,6 +58,10 @@ export default function ListaAlunos() {
     }
   }
 
+  const alunosFiltrados = alunos.filter(aluno =>
+    `${aluno.nome} ${aluno.sobrenome}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <GlobalStyle />
@@ -64,16 +70,24 @@ export default function ListaAlunos() {
         <MainContent>
           <PageHeader>
             <h1>Alunos</h1>
-            <BtnPrimary onClick={() => navigate("/alunos/novo")}>
-              <i className="bi bi-person-plus" style={{ marginRight: "8px" }}></i>
-              Adicionar Aluno
-            </BtnPrimary>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <SearchBar
+                placeholder="Pesquisar alunos..."
+                value={searchTerm}
+                onChange={setSearchTerm}
+                style={{ width: '250px' }}
+              />
+              <BtnPrimary onClick={() => navigate("/alunos/novo")}>
+                <i className="bi bi-person-plus" style={{ marginRight: "8px" }}></i>
+                Adicionar Aluno
+              </BtnPrimary>
+            </div>
           </PageHeader>
 
           {carregando && <p>Carregando...</p>}
           {erro && <ErrorText>{erro}</ErrorText>}
 
-          {alunos.length > 0 && (
+          {alunosFiltrados.length > 0 && (
             <TableContainer>
               <TableGlobal>
                 <thead>
@@ -87,7 +101,7 @@ export default function ListaAlunos() {
                   </tr>
                 </thead>
                 <tbody>
-                  {alunos.map(aluno => (
+                  {alunosFiltrados.map(aluno => (
                     <tr key={aluno.id}>
                       <td>{aluno.id}</td>
                       <td>{aluno.nome} {aluno.sobrenome}</td>
@@ -128,6 +142,8 @@ export default function ListaAlunos() {
               </TableGlobal>
             </TableContainer>
           )}
+
+          {!carregando && alunosFiltrados.length === 0 && <p>Nenhum aluno encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>

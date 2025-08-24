@@ -9,6 +9,7 @@ import { obterTodosCursos, deletarCurso } from '../../services/cursos';
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import { GlobalStyle } from '../../components/GlobalStyle';
+import SearchBar from '../../components/ui/SearchBar';
 
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -24,7 +25,14 @@ export default function ListaCursos() {
   const [cursos, setCursos] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+
+  const categoriasMap = {
+    Basico: "Básico",
+    Medio: "Médio",
+    Avancado: "Avançado"
+  };
 
   useEffect(() => {
     carregarCursos();
@@ -56,6 +64,11 @@ export default function ListaCursos() {
     }
   }
 
+  const cursosFiltrados = cursos.filter(curso =>
+    curso.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (categoriasMap[curso.categoriaCurso] || curso.categoriaCurso).toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   return (
     <>
       <GlobalStyle />
@@ -64,16 +77,24 @@ export default function ListaCursos() {
         <MainContent>
           <PageHeader>
             <h1>Cursos</h1>
-            <BtnPrimary onClick={() => navigate('/cursos/novo')}>
-              <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
-              Adicionar Curso
-            </BtnPrimary>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <SearchBar
+                placeholder="Pesquisar cursos..."
+                value={searchTerm}
+                onChange={setSearchTerm}
+                style={{ width: '250px' }}
+              />
+              <BtnPrimary onClick={() => navigate('/cursos/novo')}>
+                <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
+                Adicionar Curso
+              </BtnPrimary>
+            </div>
           </PageHeader>
 
           {carregando && <p>Carregando...</p>}
           {erro && <ErrorText>{erro}</ErrorText>}
 
-          {cursos.length > 0 && (
+          {cursosFiltrados.length > 0 && (
             <TableContainer>
               <TableGlobal>
                 <thead>
@@ -87,11 +108,11 @@ export default function ListaCursos() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cursos.map(curso => (
+                  {cursosFiltrados.map(curso => (
                     <tr key={curso.id}>
                       <td>{curso.id}</td>
                       <td>{curso.nome}</td>
-                      <td>{curso.categoriaCurso}</td>
+                      <td>{categoriasMap[curso.categoriaCurso] || curso.categoriaCurso}</td>
                       <td>R$ {curso.valor}</td>
                       <td>
                         {curso.ativo 
@@ -128,6 +149,8 @@ export default function ListaCursos() {
               </TableGlobal>
             </TableContainer>
           )}
+
+          {!carregando && cursosFiltrados.length === 0 && <p>Nenhum curso encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>

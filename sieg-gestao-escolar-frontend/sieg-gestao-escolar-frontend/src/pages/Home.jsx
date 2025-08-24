@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUserGraduate, FaChalkboardTeacher, FaBook } from 'react-icons/fa';
+
+import { getTotalProfessores, getTotalAlunos, getTotalCursos } from '../services/dashboard';
 
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
@@ -9,18 +12,39 @@ import somAguia from '../assets/aguia.mp3';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import styled from 'styled-components';
 import { GlobalStyle } from '../components/GlobalStyle';
+import { BtnPrimary } from '../components/ui/Buttons';
 
 export default function Home() {
   const navigate = useNavigate();
 
-  const totalAlunos = 67;
-  const totalProfessores = 12;
-  const totalCursos = 24;
+  const [totalAlunos, setTotalAlunos] = useState(0);
+  const [totalProfessores, setTotalProfessores] = useState(0);
+  const [totalCursos, setTotalCursos] = useState(0);
 
   const tocarSom = () => {
     const audio = new Audio(somAguia);
     audio.play();
   };
+
+  useEffect(() => {
+    const carregarTotais = async () => {
+      try {
+        const [alunos, professores, cursos] = await Promise.all([
+          getTotalAlunos(),
+          getTotalProfessores(),
+          getTotalCursos()
+        ]);
+
+        setTotalAlunos(alunos);
+        setTotalProfessores(professores);
+        setTotalCursos(cursos);
+      } catch (error) {
+        console.error('Erro ao carregar totais:', error);
+      }
+    };
+
+    carregarTotais();
+  }, []);
 
   return (
     <>
@@ -28,81 +52,159 @@ export default function Home() {
       <DashboardContainer>
         <Navbar />
         <MainContent>
-          <CenterHeader>
-            <Logo src={logo} alt="Logo" onClick={tocarSom} />
-            <h1>Bem Vindo ao seu Painel de Controle!</h1>
-          </CenterHeader>
-          <LogoutWrapper>
-            <LogoutBtn>
-              <i className="bi bi-box-arrow-right" style={{ marginRight: '8px' }}></i>
-              Log out
-            </LogoutBtn>
-          </LogoutWrapper>
+          <HeaderSection>
+            <WelcomeSection>
+              <WelcomeTitle>Painel de Controle</WelcomeTitle>
+              <WelcomeSubtitle>Gerencie sua plataforma educacional de forma eficiente</WelcomeSubtitle>
+            </WelcomeSection>
+            <BtnPrimary onClick={tocarSom}>
+              <i className="bi bi-box-arrow-right"></i>
+              Sair
+            </BtnPrimary>
+          </HeaderSection>
 
-          <DashboardSections>
+          <QuickActionsSection>
+            <SectionTitle>Ações Rápidas</SectionTitle>
+            <QuickActions>
+              <QuickActionCard onClick={() => navigate('/alunos/novo')}>
+                <ActionIcon className="students">
+                  <FaUserGraduate size={28} />
+                </ActionIcon>
+                <ActionLabel>Adicionar Aluno</ActionLabel>
+              </QuickActionCard>
+              <QuickActionCard onClick={() => navigate('/professores/novo')}>
+                <ActionIcon className="teachers">
+                  <FaChalkboardTeacher size={28} />
+                </ActionIcon>
+                <ActionLabel>Adicionar Professor</ActionLabel>
+              </QuickActionCard>
+              <QuickActionCard onClick={() => navigate('/cursos/novo')}>
+                <ActionIcon className="courses">
+                  <FaBook size={28} />
+                </ActionIcon>
+                <ActionLabel>Adicionar Curso</ActionLabel>
+              </QuickActionCard>
+            </QuickActions>
+          </QuickActionsSection>
+
+          <DashboardGrid>
             {/* Alunos */}
-            <DashboardBlock>
-              <StatCard>
-                <FaUserGraduate size={35} color="#509CDB" />
-                <div>
-                  <h1>Total de Alunos</h1>
-                  <h2>{totalAlunos}</h2>
-                  <p>Ativos</p>
-                </div>
-              </StatCard>
-              <Card onClick={() => navigate('/alunos')}>
-                <CardIcon>
-                  <FaUserGraduate size={20} color="#152259" />
-                </CardIcon>
-                <div>
-                  <h3>Adicione outros Alunos</h3>
-                  <p>Cadastre novos alunos e gerencie suas informações para que possam acessar seus cursos.</p>
-                </div>
-              </Card>
-            </DashboardBlock>
+            <DashboardSection>
+              <StatsCard>
+                <StatsHeader>
+                  <StatsIcon>
+                    <FaUserGraduate size={24} />
+                  </StatsIcon>
+                  <StatsContent>
+                    <StatsNumber>{totalAlunos}</StatsNumber>
+                    <StatsLabel>Alunos Ativos</StatsLabel>
+                  </StatsContent>
+                </StatsHeader>
+                <StatsFooter>
+                  <GrowthIndicator>
+                    <i className="bi bi-arrow-up"></i>
+                    <span>+12% este mês</span>
+                  </GrowthIndicator>
+                </StatsFooter>
+              </StatsCard>
+
+              <ManagementCard onClick={() => navigate('/alunos')}>
+                <CardHeader>
+                  <CardIcon>
+                    <FaUserGraduate size={20} />
+                  </CardIcon>
+                  <CardTitle>Gerenciar Alunos</CardTitle>
+                </CardHeader>
+                <CardDescription>
+                  Cadastre novos alunos, gerencie perfis e controle o acesso aos cursos da plataforma.
+                </CardDescription>
+                <CardFooter>
+                  <ViewAllLink>
+                    Ver todos os alunos
+                    <i className="bi bi-arrow-right"></i>
+                  </ViewAllLink>
+                </CardFooter>
+              </ManagementCard>
+            </DashboardSection>
 
             {/* Professores */}
-            <DashboardBlock>
-              <StatCard>
-                <FaChalkboardTeacher size={35} color="#509CDB" />
-                <div>
-                  <h1>Total de Professores</h1>
-                  <h2>{totalProfessores}</h2>
-                  <p>Professores cadastrados</p>
-                </div>
-              </StatCard>
-              <Card onClick={() => navigate('/professores')}>
-                <CardIcon>
-                  <FaChalkboardTeacher size={20} color="#152259" />
-                </CardIcon>
-                <div>
-                  <h3>Adicione Professores</h3>
-                  <p>Inclua professores e atribua-os aos cursos para facilitar o ensino e a gestão.</p>
-                </div>
-              </Card>
-            </DashboardBlock>
+            <DashboardSection>
+              <StatsCard>
+                <StatsHeader>
+                  <StatsIcon>
+                    <FaChalkboardTeacher size={24} />
+                  </StatsIcon>
+                  <StatsContent>
+                    <StatsNumber>{totalProfessores}</StatsNumber>
+                    <StatsLabel>Professores</StatsLabel>
+                  </StatsContent>
+                </StatsHeader>
+                <StatsFooter>
+                  <GrowthIndicator>
+                    <i className="bi bi-arrow-up"></i>
+                    <span>+3 novos</span>
+                  </GrowthIndicator>
+                </StatsFooter>
+              </StatsCard>
+
+              <ManagementCard onClick={() => navigate('/professores')}>
+                <CardHeader>
+                  <CardIcon>
+                    <FaChalkboardTeacher size={20} />
+                  </CardIcon>
+                  <CardTitle>Gerenciar Professores</CardTitle>
+                </CardHeader>
+                <CardDescription>
+                  Adicione professores qualificados e atribua-os aos cursos para otimizar o ensino.
+                </CardDescription>
+                <CardFooter>
+                  <ViewAllLink>
+                    Ver todos os professores
+                    <i className="bi bi-arrow-right"></i>
+                  </ViewAllLink>
+                </CardFooter>
+              </ManagementCard>
+            </DashboardSection>
 
             {/* Cursos */}
-            <DashboardBlock>
-              <StatCard>
-                <FaBook size={35} color="#509CDB" />
-                <div>
-                  <h1>Total de Cursos</h1>
-                  <h2>{totalCursos}</h2>
-                  <p>Cursos disponíveis</p>
-                </div>
-              </StatCard>
-              <Card onClick={() => navigate('/cursos')}>
-                <CardIcon>
-                  <FaBook size={20} color="#152259" />
-                </CardIcon>
-                <div>
-                  <h3>Adicione Cursos</h3>
-                  <p>Crie e organize cursos para oferecer aos seus alunos de forma simples e rápida.</p>
-                </div>
-              </Card>
-            </DashboardBlock>
-          </DashboardSections>
+            <DashboardSection>
+              <StatsCard>
+                <StatsHeader>
+                  <StatsIcon>
+                    <FaBook size={24} />
+                  </StatsIcon>
+                  <StatsContent>
+                    <StatsNumber>{totalCursos}</StatsNumber>
+                    <StatsLabel>Cursos Ativos</StatsLabel>
+                  </StatsContent>
+                </StatsHeader>
+                <StatsFooter>
+                  <GrowthIndicator>
+                    <i className="bi bi-arrow-up"></i>
+                    <span>+5 este mês</span>
+                  </GrowthIndicator>
+                </StatsFooter>
+              </StatsCard>
+
+              <ManagementCard onClick={() => navigate('/cursos')}>
+                <CardHeader>
+                  <CardIcon>
+                    <FaBook size={20} />
+                  </CardIcon>
+                  <CardTitle>Gerenciar Cursos</CardTitle>
+                </CardHeader>
+                <CardDescription>
+                  Crie, organize e publique cursos de alta qualidade para seus alunos.
+                </CardDescription>
+                <CardFooter>
+                  <ViewAllLink>
+                    Ver todos os cursos
+                    <i className="bi bi-arrow-right"></i>
+                  </ViewAllLink>
+                </CardFooter>
+              </ManagementCard>
+            </DashboardSection>
+          </DashboardGrid>
         </MainContent>
         <Footer />
       </DashboardContainer>
@@ -110,164 +212,287 @@ export default function Home() {
   );
 }
 
-/* Styled Components */
+/* Styled Components sem transições */
 const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #152259;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fb, #e6e9f0);
+  background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
 `;
 
 const MainContent = styled.main`
   flex: 1;
-  padding: 40px 50px;
-  position: relative;
-  margin-left: 300px; /* mesma largura da navbar vertical */
+  padding: 0;
+  margin-left: 320px;
+  background: #F5F5F5;
 `;
 
-
-const CenterHeader = styled.header`
+const HeaderSection = styled.div`
+  background: #808080;
+  padding: 40px 50px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  margin-bottom: 50px;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(21, 34, 89, 0.15);
+`;
 
-  h1 {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #1a202c;
-  }
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Logo = styled.img`
-  width: 150px;
-  margin-bottom: 15px;
+  width: 80px;
+  cursor: pointer;
+  filter: brightness(0) invert(1);
 `;
 
-const LogoutWrapper = styled.div``;
+const WelcomeSection = styled.div`
+  flex: 1;
+  text-align: center;
+  margin: 0 40px;
+`;
 
-const LogoutBtn = styled.button`
-  position: absolute;
-  top: 30px;
-  right: 50px;
-  background-color: #509CDB;
-  color: white;
-  border: none;
-  padding: 14px 45px;
-  border-radius: 10px;
-  font-size: 16px;
+const WelcomeTitle = styled.h1`
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+`;
+
+const WelcomeSubtitle = styled.p`
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 400;
+`;
+
+const QuickActionsSection = styled.div`
+  padding: 50px;
+  background: #FFFFFF;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.8rem;
   font-weight: 600;
+  color: #152259;
+  margin: 0 0 30px 0;
+  text-align: center;
+`;
+
+const QuickActions = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+`;
+
+const ActionIcon = styled.div`
+  color: #152259;
+  margin-bottom: 20px;
+`;
+
+const ActionLabel = styled.span`
+  font-weight: 600;
+  color: #152259;
+  font-size: 1.1rem;
+`;
+
+const QuickActionCard = styled.div`
+  background: #FFFFFF;
+  border: 2px solid #F5F5F5;
+  border-radius: 16px;
+  padding: 30px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
   transition: all 0.3s ease;
 
-  &:hover {
-    background-color: #3a83bf;
-    transform: translateY(-3px);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
   }
-`;
-
-const DashboardSections = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-`;
-
-const DashboardBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 450px;
-  width: 100%;
-`;
-
-const StatCard = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  width: 350px;
-  min-height: 150px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 20px rgba(21, 34, 89, 0.1);
   }
 
-  h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-  }
-
-  h2 {
-    margin: 5px 0;
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
-  p {
-    margin: 0;
-    font-size: 1rem;
-    color: #777;
+  &:hover::before {
+    transform: scaleX(1);
   }
 `;
 
-const Card = styled.div`
+const DashboardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  padding: 50px;
+  background: #F5F5F5;
+`;
+
+const DashboardSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const StatsCard = styled.div`
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(21, 34, 89, 0.08);
+  border: 1px solid rgba(21, 34, 89, 0.05);
+`;
+
+const StatsHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  cursor: pointer;
-  width: 350px;
-  min-height: 150px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  margin-bottom: 20px;
+`;
 
-  &:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+const StatsIcon = styled.div`
+  background: linear-gradient(135deg, #152259, #1a2a6b);
+  color: #FFFFFF;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-    svg {
-      transform: scale(1.3);
-      color: #2a76f4;
-    }
-  }
+const StatsContent = styled.div`
+  flex: 1;
+`;
 
-  h3 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: #1a202c;
-    font-weight: 600;
-  }
+const StatsNumber = styled.h3`
+  font-size: 3rem;
+  font-weight: 600;
+  color: #152259;
+  margin: 0;
+  line-height: 1;
+`;
 
-  p {
-    margin-top: 5px;
-    font-size: 1rem;
-    color: #4F4F4F;
-    line-height: 1.5;
-  }
+const StatsLabel = styled.p`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #AAAAAA;
+  margin: 5px 0 0 0;
+`;
 
-  svg {
-    transition: all 0.3s ease;
+const StatsFooter = styled.div`
+  padding-top: 20px;
+  border-top: 1px solid #F5F5F5;
+`;
+
+const GrowthIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #FFB400;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  i {
+    font-size: 14px;
   }
 `;
 
+const ViewAllLink = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #152259;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #FFB400;
+  }
+`;
+
+const ManagementCard = styled.div`
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 30px;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(21, 34, 89, 0.08);
+  border: 1px solid rgba(21, 34, 89, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: top;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(21, 34, 89, 0.1);
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+  }
+`;
+
+
+const CardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+`;
+
 const CardIcon = styled.div`
-  background-color: rgba(80, 156, 219, 0.15);
-  padding: 15px;
+  background: rgba(255, 180, 0, 0.1);
+  color: #FFB400;
+  padding: 12px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const CardTitle = styled.h3`
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #152259;
+  margin: 0;
+`;
+
+const CardDescription = styled.p`
+  font-size: 1rem;
+  color: #AAAAAA;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+`;
+
+const CardFooter = styled.div`
+  padding-top: 20px;
+  border-top: 1px solid #F5F5F5;
 `;
