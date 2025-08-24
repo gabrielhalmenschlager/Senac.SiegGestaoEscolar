@@ -18,6 +18,7 @@ import { ErrorText } from "../../components/ui/Text";
 
 // Importando ícones
 import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 export default function ListaAlunos() {
   const [alunos, setAlunos] = useState([]);
@@ -92,7 +93,12 @@ export default function ListaAlunos() {
                       <td>{aluno.nome} {aluno.sobrenome}</td>
                       <td>{aluno.email}</td>
                       <td>{aluno.telefone}</td>
-                      <td>{aluno.ativo ? "Sim" : "Não"}</td>
+                      <td>
+                        {aluno.ativo 
+                          ? <AiOutlineCheck size={20} color="green" /> 
+                          : <AiOutlineClose size={20} color="red" />
+                        }
+                      </td>
                       <td style={{ display: 'flex', gap: '15px' }}>
                         <BiDetail
                           size={20}

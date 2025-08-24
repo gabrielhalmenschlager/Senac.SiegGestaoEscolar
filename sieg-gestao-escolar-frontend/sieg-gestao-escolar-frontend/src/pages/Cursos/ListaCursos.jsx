@@ -1,12 +1,24 @@
+// React e hooks
 import { useState, useEffect } from 'react';
-import { obterTodosCursos } from '../../services/cursos';
 import { useNavigate } from 'react-router-dom';
 
+// Serviços / API
+import { obterTodosCursos, deletarCurso } from '../../services/cursos';
+
+// Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-import { PageContainer, MainContent } from "../../components/ui/Layout";
+import { GlobalStyle } from '../../components/GlobalStyle';
 
-import styled from 'styled-components';
+// Layout e UI reutilizáveis
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+import { BtnPrimary } from "../../components/ui/Buttons";
+import { ErrorText } from "../../components/ui/Text";
+import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/TableStyles";
+
+// Importando ícones
+import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 export default function ListaCursos() {
   const [cursos, setCursos] = useState([]);
@@ -15,163 +27,110 @@ export default function ListaCursos() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function carregarCursos() {
-      setCarregando(true);
-      setErro('');
-      try {
-        const dados = await obterTodosCursos();
-        setCursos(dados);
-      } catch (e) {
-        setErro('Erro ao carregar cursos');
-        console.log(e);
-      }
-      setCarregando(false);
-    }
     carregarCursos();
   }, []);
 
-  return (
-    <PageContainer>
-      <Navbar />
-      <MainContent>
-        <PageHeader>
-          <h1>Cursos</h1>
-          <BtnPrimary onClick={() => navigate('/cursos/novo')}>
-            <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
-            Adicionar Curso
-          </BtnPrimary>
-        </PageHeader>
-
-        {carregando && <p>Carregando...</p>}
-        {erro && <ErrorText>{erro}</ErrorText>}
-
-        {cursos.length > 0 && (
-          <TableContainer>
-            <CursosTable>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Carga Horária</th>
-                  <th>Descrição</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cursos.map(curso => (
-                  <tr key={curso.id}>
-                    <td>{curso.nome}</td>
-                    <td>{curso.cargaHoraria} horas</td>
-                    <td>{curso.descricao}</td>
-                    <td>
-                      <BtnDetail onClick={() => navigate(`/cursos/${curso.id}`)}>
-                        <i className="bi bi-eye" style={{ marginRight: '6px' }}></i>
-                        Detalhes
-                      </BtnDetail>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </CursosTable>
-          </TableContainer>
-        )}
-      </MainContent>
-      <Footer />
-    </PageContainer>
-  );
-}
-
-/* Styled Components */
-const PageHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-
-  h1 {
-    color: #4F4F4F;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-  }
-`;
-
-const BtnPrimary = styled.button`
-  background-color: #509CDB;
-  color: white;
-  border: none;
-  padding: 14px 45px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #3a83bf;
-    transform: translateY(-2px);
-  }
-`;
-
-const BtnDetail = styled.button`
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-  }
-`;
-
-const ErrorText = styled.p`
-  color: red;
-  margin-bottom: 20px;
-`;
-
-const TableContainer = styled.div`
-  margin-top: 100px;
-  overflow-x: auto;
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-`;
-
-const CursosTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    text-align: left;
-    padding: 15px;
-    font-size: 1rem;
+  async function carregarCursos() {
+    setCarregando(true);
+    setErro('');
+    try {
+      const dados = await obterTodosCursos();
+      setCursos(dados);
+    } catch (e) {
+      setErro('Erro ao carregar cursos');
+      console.error(e);
+    }
+    setCarregando(false);
   }
 
-  th {
-    background-color: #152259;
-    color: white;
-    font-weight: 600;
-  }
-
-  tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background 0.3s ease;
-
-    &:hover {
-      background-color: #f1f5f9;
+  async function handleExcluir(id) {
+    if (window.confirm('Deseja realmente excluir este curso?')) {
+      try {
+        await deletarCurso(id);
+        alert('Curso excluído com sucesso!');
+        carregarCursos();
+      } catch (e) {
+        console.error(e);
+        alert('Erro ao excluir curso.');
+      }
     }
   }
 
-  td {
-    color: #555;
-  }
-`;
+  return (
+    <>
+      <GlobalStyle />
+      <PageContainer>
+        <Navbar />
+        <MainContent>
+          <PageHeader>
+            <h1>Cursos</h1>
+            <BtnPrimary onClick={() => navigate('/cursos/novo')}>
+              <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
+              Adicionar Curso
+            </BtnPrimary>
+          </PageHeader>
+
+          {carregando && <p>Carregando...</p>}
+          {erro && <ErrorText>{erro}</ErrorText>}
+
+          {cursos.length > 0 && (
+            <TableContainer>
+              <TableGlobal>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Categoria Curso</th>
+                    <th>Valor</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cursos.map(curso => (
+                    <tr key={curso.id}>
+                      <td>{curso.id}</td>
+                      <td>{curso.nome}</td>
+                      <td>{curso.categoriaCurso}</td>
+                      <td>R$ {curso.valor}</td>
+                      <td>
+                        {curso.ativo 
+                          ? <AiOutlineCheck size={20} color="green" /> 
+                          : <AiOutlineClose size={20} color="red" />
+                        }
+                      </td>
+                      <td style={{ display: 'flex', gap: '15px' }}>
+                        <BiDetail
+                          size={20}
+                          color="#1E90FF"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/cursos/${curso.id}`)}
+                          title="Detalhes"
+                        />
+                        <BiEdit
+                          size={20}
+                          color="#FFA500"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/cursos/${curso.id}/editar`)}
+                          title="Editar"
+                        />
+                        <BiTrash
+                          size={20}
+                          color="#FF4C4C"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => handleExcluir(curso.id)}
+                          title="Excluir"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </TableGlobal>
+            </TableContainer>
+          )}
+        </MainContent>
+        <Footer />
+      </PageContainer>
+    </>
+  );
+}

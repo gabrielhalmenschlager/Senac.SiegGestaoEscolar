@@ -8,9 +8,9 @@ import { obterTodosProfessores, deletarProfessor } from '../../services/professo
 // Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { GlobalStyle } from '../../components/GlobalStyle';
 
 // Layout e UI reutilizáveis
-import { GlobalStyle } from '../../components/GlobalStyle';
 import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { BtnPrimary } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
@@ -18,6 +18,7 @@ import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/Tab
 
 // Importando ícones
 import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 export default function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -92,29 +93,34 @@ export default function ListaProfessores() {
                       <td>{prof.nome} {prof.sobrenome}</td>
                       <td>{prof.email}</td>
                       <td>{prof.telefone}</td>
-                      <td>{prof.ativo ? "Sim" : "Não"}</td>
+                      <td>
+                        {prof.ativo 
+                          ? <AiOutlineCheck size={20} color="green" /> 
+                          : <AiOutlineClose size={20} color="red" />
+                        }
+                      </td>
                       <td style={{ display: 'flex', gap: '15px' }}>
-                        <BiDetail 
-                          size={20} 
-                          color="#1E90FF" 
-                          style={{ cursor: 'pointer' }} 
-                          onClick={() => navigate(`/professores/${prof.id}`)}
-                          title="Detalhes"
-                        />
-                        <BiEdit 
-                          size={20} 
-                          color="#FFA500" 
-                          style={{ cursor: 'pointer' }} 
-                          onClick={() => navigate(`/professores/${prof.id}/editar`)}
-                          title="Editar"
-                        />
-                        <BiTrash 
-                          size={20} 
-                          color="#FF4C4C" 
-                          style={{ cursor: 'pointer' }} 
-                          onClick={() => handleExcluir(prof.id)}
-                          title="Excluir"
-                        />
+                      <BiDetail 
+                        size={20} 
+                        color="#1E90FF" 
+                        style={{ cursor: 'pointer' }} 
+                        onClick={() => navigate(`/professores/${prof.id}`)}
+                        title="Detalhes"
+                      />
+                      <BiEdit 
+                        size={20} 
+                        color="#FFA500" 
+                        style={{ cursor: 'pointer' }} 
+                        onClick={() => navigate(`/professores/${prof.id}/editar`)}
+                        title="Editar"
+                      />
+                      <BiTrash 
+                        size={20} 
+                        color="#FF4C4C" 
+                        style={{ cursor: 'pointer' }} 
+                        onClick={() => handleExcluir(prof.id)}
+                        title="Excluir"
+                      />
                       </td>
                     </tr>
                   ))}

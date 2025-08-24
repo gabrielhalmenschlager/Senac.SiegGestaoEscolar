@@ -13,7 +13,7 @@ import { GlobalStyle } from '../components/GlobalStyle';
 export default function Home() {
   const navigate = useNavigate();
 
-  const totalAlunos = 128;
+  const totalAlunos = 67;
   const totalProfessores = 12;
   const totalCursos = 24;
 
