@@ -11,6 +11,6 @@ export const PageContainer = styled.div`
 
 export const MainContent = styled.main`
   flex: 1;
-  padding: 50px 20px;
+  padding: 70px 70px;
   margin-left: 300px;
 `;

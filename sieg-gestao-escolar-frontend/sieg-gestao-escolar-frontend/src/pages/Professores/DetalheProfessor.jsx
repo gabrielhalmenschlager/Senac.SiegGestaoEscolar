@@ -2,23 +2,24 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// Serviços/API
+// Serviços / API
 import { obterProfessorDetalhado } from "../../services/professores";
 
 // Componentes globais
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 
-// Componentes de layout e UI reutilizáveis
+// Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
-import { Card, MainLogo, InfoList, InfoItem } from "../../components/ui/CardStyles";
+import { Card, InfoList, InfoItem } from "../../components/ui/CardStyles";
 import { MainLogo } from "../../components/ui/Logo";
 import { BtnVoltar } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
 
-// Carregando a logo
+// Assets
 import Logo from "../../assets/logo.png";
 
+// Ícones
 import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiBook, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
 
 export default function DetalheProfessor() {

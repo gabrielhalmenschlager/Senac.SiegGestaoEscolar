@@ -1,8 +1,6 @@
 import { NavLink } from 'react-router-dom';
-
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
-
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function Navbar() {
@@ -48,36 +46,47 @@ const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   height: 100vh;
-  width: 300px;
-  background-color: #152259;
+  width: 280px;
+  background: #152259; /* azul base */
   padding: 20px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: #FFFFFF;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+  transition: width 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 70px;
+  }
 `;
 
 const NavbarHeader = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid white;
-  padding-bottom: 3rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+  padding-bottom: 2.5rem;
 `;
 
 const LogoImg = styled.img`
-  width: 80px;
+  width: 90px;
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const LogoText = styled.h2`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
   margin: 0;
-  white-space: nowrap;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 `;
 
 const NavList = styled.ul`
@@ -88,26 +97,41 @@ const NavList = styled.ul`
 `;
 
 const NavItem = styled.li`
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 `;
 
 const StyledLink = styled(NavLink)`
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 10px 15px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
+  gap: 18px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background-color: transparent;
 
   i {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    transition: transform 0.2s ease, color 0.2s ease;
   }
 
-  &:hover,
+  &:hover {
+    background-color: #FFB400; /* destaque dourado */
+    transform: translateX(5px);
+    i {
+      transform: scale(1.2);
+      color: #152259; /* ícone contraste no hover */
+    }
+  }
+
   &.active-link {
-    background-color: #509CDB;
+    background-color: #509CDB; /* azul secundário para ativo */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    i {
+      color: #FFFFFF;
+    }
   }
 `;

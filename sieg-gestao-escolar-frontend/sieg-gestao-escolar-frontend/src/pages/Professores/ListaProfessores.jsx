@@ -1,19 +1,16 @@
-// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// Serviços/API
 import { obterTodosProfessores, deletarProfessor } from '../../services/professores';
-
-// Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-
-// Componentes de layout e UI reutilizáveis
+import { GlobalStyle } from '../../components/GlobalStyle';
 import { PageContainer, MainContent } from "../../components/ui/Layout";
-import { BtnPrimary, BtnDetail, BtnEdit, BtnDelete } from "../../components/ui/Buttons";
+import { BtnPrimary } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
 import { PageHeader, TableContainer, ProfessoresTable } from "../../components/ui/TableStyles";
+
+// Importando ícones
+import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
 
 export default function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -52,54 +49,75 @@ export default function ListaProfessores() {
   }
 
   return (
-    <PageContainer>
-      <Navbar />
-      <MainContent>
-        <PageHeader>
-          <h1>Professores</h1>
-          <BtnPrimary onClick={() => navigate('/professores/novo')}>
-            <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
-            Adicionar Professor
-          </BtnPrimary>
-        </PageHeader>
+    <>
+      <GlobalStyle/>
+      <PageContainer>
+        <Navbar />
+        <MainContent>
+          <PageHeader>
+            <h1>Professores</h1>
+            <BtnPrimary onClick={() => navigate('/professores/novo')}>
+              <i className="bi bi-person-plus" style={{ marginRight: '8px' }}></i>
+              Adicionar Professor
+            </BtnPrimary>
+          </PageHeader>
 
-        {carregando && <p>Carregando...</p>}
-        {erro && <ErrorText>{erro}</ErrorText>}
+          {carregando && <p>Carregando...</p>}
+          {erro && <ErrorText>{erro}</ErrorText>}
 
-        {professores.length > 0 && (
-          <TableContainer>
-            <ProfessoresTable>
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>Ativo</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {professores.map(prof => (
-                  <tr key={prof.id}>
-                    <td>{prof.id}</td>
-                    <td>{prof.nome} {prof.sobrenome}</td>
-                    <td>{prof.email}</td>
-                    <td>{prof.telefone}</td>
-                    <td>{prof.ativo ? "Sim" : "Não"}</td>
-                    <td>
-                      <BtnDetail onClick={() => navigate(`/professores/${prof.id}`)}>Detalhes</BtnDetail>
-                      <BtnEdit onClick={() => navigate(`/professores/${prof.id}/editar`)}>Editar</BtnEdit>
-                      <BtnDelete onClick={() => handleExcluir(prof.id)}>Excluir</BtnDelete>
-                    </td>
+          {professores.length > 0 && (
+            <TableContainer>
+              <ProfessoresTable>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
                   </tr>
-                ))}
-              </tbody>
-            </ProfessoresTable>
-          </TableContainer>
-        )}
-      </MainContent>
-      <Footer />
-    </PageContainer>
+                </thead>
+                <tbody>
+                  {professores.map(prof => (
+                    <tr key={prof.id}>
+                      <td>{prof.id}</td>
+                      <td>{prof.nome} {prof.sobrenome}</td>
+                      <td>{prof.email}</td>
+                      <td>{prof.telefone}</td>
+                      <td>{prof.ativo ? "Sim" : "Não"}</td>
+                      <td style={{ display: 'flex', gap: '15px' }}>
+                        <BiDetail 
+                          size={20} 
+                          color="#1E90FF" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => navigate(`/professores/${prof.id}`)}
+                          title="Detalhes"
+                        />
+                        <BiEdit 
+                          size={20} 
+                          color="#FFA500" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => navigate(`/professores/${prof.id}/editar`)}
+                          title="Editar"
+                        />
+                        <BiTrash 
+                          size={20} 
+                          color="#FF4C4C" 
+                          style={{ cursor: 'pointer' }} 
+                          onClick={() => handleExcluir(prof.id)}
+                          title="Excluir"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </ProfessoresTable>
+            </TableContainer>
+          )}
+        </MainContent>
+        <Footer />
+      </PageContainer>
+    </>
   );
 }

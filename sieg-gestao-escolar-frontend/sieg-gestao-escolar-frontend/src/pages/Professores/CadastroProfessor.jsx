@@ -1,14 +1,23 @@
+// React e hooks
 import { useState, useEffect } from 'react';
-import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from '../../services/professores';
 import { useNavigate, useParams } from 'react-router-dom';
 
+// Serviços / API
+import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from '../../services/professores';
+
+// Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+
+// Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
+import { FormCard, FormGroup, CheckboxGroup } from "../../components/ui/CardStyles";
+import { BtnSecundary } from "../../components/ui/Buttons";
+import { MainLogo } from "../../components/ui/Logo";
+import { ErrorText } from "../../components/ui/Text"; 
 
+// Assets
 import Logo from '../../assets/logo.png';
-
-import styled from 'styled-components';
 
 const formacaoOptions = [
   'EnsinoMedio',
@@ -139,7 +148,7 @@ export default function CadastroProfessor() {
               </label>
             </CheckboxGroup>
 
-            <ButtonSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</ButtonSecundary>
+            <BtnSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</BtnSecundary>
           </form>
         </FormCard>
       </MainContent>
@@ -147,95 +156,3 @@ export default function CadastroProfessor() {
     </PageContainer>
   );
 }
-
-/* Styled Components */
-const FormCard = styled.div`
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 50px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-
-  h2 {
-    color: #4F4F4F;
-    margin-bottom: 25px;
-    font-weight: 600;
-    text-align: center;
-    font-size: 2rem;
-  }
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 15px;
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 10px 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    outline: none;
-    transition: border 0.3s ease;
-
-    &:focus {
-      border-color: #509CDB;
-    }
-  }
-`;
-
-const CheckboxGroup = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 1px solid #d0d7de;
-  margin-bottom: 20px;
-
-  label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  input {
-    margin-right: 10px;
-  }
-`;
-
-const ButtonSecundary = styled.button`
-  display: block;
-  width: 100%;
-  background-color: #509CDB;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #3a83bf;
-    transform: translateY(-2px);
-  }
-`;
-
-const ErrorText = styled.p`
-  color: red;
-  margin-bottom: 15px;
-  text-align: center;
-`;
-
-const MainLogo = styled.img`
-  display: block;
-  margin: 0 auto 20px auto;
-  width: 100px;
-`;

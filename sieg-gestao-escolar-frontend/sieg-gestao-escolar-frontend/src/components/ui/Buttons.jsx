@@ -18,6 +18,25 @@ export const BtnPrimary = styled.button`
   }
 `;
 
+export const BtnSecundary = styled.button`
+  display: block;
+  width: 100%;
+  background-color: #509CDB;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3a83bf;
+    transform: translateY(-2px);
+  }
+`;
+
 export const BtnDetail = styled.button`
   background-color: #6c757d;
   color: white;

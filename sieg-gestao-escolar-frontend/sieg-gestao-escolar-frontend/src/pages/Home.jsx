@@ -8,6 +8,7 @@ import somAguia from '../assets/aguia.mp3';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import styled from 'styled-components';
+import { GlobalStyle } from '../components/GlobalStyle';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -22,87 +23,90 @@ export default function Home() {
   };
 
   return (
-    <DashboardContainer>
-      <Navbar />
-      <MainContent>
-        <CenterHeader>
-          <Logo src={logo} alt="Logo" onClick={tocarSom} />
-          <h1>Bem Vindo ao seu Painel de Controle!</h1>
-        </CenterHeader>
-        <LogoutWrapper>
-          <LogoutBtn>
-            <i className="bi bi-box-arrow-right" style={{ marginRight: '8px' }}></i>
-            Log out
-          </LogoutBtn>
-        </LogoutWrapper>
+    <>
+      <GlobalStyle/>
+      <DashboardContainer>
+        <Navbar />
+        <MainContent>
+          <CenterHeader>
+            <Logo src={logo} alt="Logo" onClick={tocarSom} />
+            <h1>Bem Vindo ao seu Painel de Controle!</h1>
+          </CenterHeader>
+          <LogoutWrapper>
+            <LogoutBtn>
+              <i className="bi bi-box-arrow-right" style={{ marginRight: '8px' }}></i>
+              Log out
+            </LogoutBtn>
+          </LogoutWrapper>
 
-        <DashboardSections>
-          {/* Alunos */}
-          <DashboardBlock>
-            <StatCard>
-              <FaUserGraduate size={35} color="#509CDB" />
-              <div>
-                <h1>Total de Alunos</h1>
-                <h2>{totalAlunos}</h2>
-                <p>Ativos</p>
-              </div>
-            </StatCard>
-            <Card onClick={() => navigate('/alunos')}>
-              <CardIcon>
-                <FaUserGraduate size={20} color="#152259" />
-              </CardIcon>
-              <div>
-                <h3>Adicione outros Alunos</h3>
-                <p>Cadastre novos alunos e gerencie suas informações para que possam acessar seus cursos.</p>
-              </div>
-            </Card>
-          </DashboardBlock>
+          <DashboardSections>
+            {/* Alunos */}
+            <DashboardBlock>
+              <StatCard>
+                <FaUserGraduate size={35} color="#509CDB" />
+                <div>
+                  <h1>Total de Alunos</h1>
+                  <h2>{totalAlunos}</h2>
+                  <p>Ativos</p>
+                </div>
+              </StatCard>
+              <Card onClick={() => navigate('/alunos')}>
+                <CardIcon>
+                  <FaUserGraduate size={20} color="#152259" />
+                </CardIcon>
+                <div>
+                  <h3>Adicione outros Alunos</h3>
+                  <p>Cadastre novos alunos e gerencie suas informações para que possam acessar seus cursos.</p>
+                </div>
+              </Card>
+            </DashboardBlock>
 
-          {/* Professores */}
-          <DashboardBlock>
-            <StatCard>
-              <FaChalkboardTeacher size={35} color="#509CDB" />
-              <div>
-                <h1>Total de Professores</h1>
-                <h2>{totalProfessores}</h2>
-                <p>Professores cadastrados</p>
-              </div>
-            </StatCard>
-            <Card onClick={() => navigate('/professores')}>
-              <CardIcon>
-                <FaChalkboardTeacher size={20} color="#152259" />
-              </CardIcon>
-              <div>
-                <h3>Adicione Professores</h3>
-                <p>Inclua professores e atribua-os aos cursos para facilitar o ensino e a gestão.</p>
-              </div>
-            </Card>
-          </DashboardBlock>
+            {/* Professores */}
+            <DashboardBlock>
+              <StatCard>
+                <FaChalkboardTeacher size={35} color="#509CDB" />
+                <div>
+                  <h1>Total de Professores</h1>
+                  <h2>{totalProfessores}</h2>
+                  <p>Professores cadastrados</p>
+                </div>
+              </StatCard>
+              <Card onClick={() => navigate('/professores')}>
+                <CardIcon>
+                  <FaChalkboardTeacher size={20} color="#152259" />
+                </CardIcon>
+                <div>
+                  <h3>Adicione Professores</h3>
+                  <p>Inclua professores e atribua-os aos cursos para facilitar o ensino e a gestão.</p>
+                </div>
+              </Card>
+            </DashboardBlock>
 
-          {/* Cursos */}
-          <DashboardBlock>
-            <StatCard>
-              <FaBook size={35} color="#509CDB" />
-              <div>
-                <h1>Total de Cursos</h1>
-                <h2>{totalCursos}</h2>
-                <p>Cursos disponíveis</p>
-              </div>
-            </StatCard>
-            <Card onClick={() => navigate('/cursos')}>
-              <CardIcon>
-                <FaBook size={20} color="#152259" />
-              </CardIcon>
-              <div>
-                <h3>Adicione Cursos</h3>
-                <p>Crie e organize cursos para oferecer aos seus alunos de forma simples e rápida.</p>
-              </div>
-            </Card>
-          </DashboardBlock>
-        </DashboardSections>
-      </MainContent>
-      <Footer />
-    </DashboardContainer>
+            {/* Cursos */}
+            <DashboardBlock>
+              <StatCard>
+                <FaBook size={35} color="#509CDB" />
+                <div>
+                  <h1>Total de Cursos</h1>
+                  <h2>{totalCursos}</h2>
+                  <p>Cursos disponíveis</p>
+                </div>
+              </StatCard>
+              <Card onClick={() => navigate('/cursos')}>
+                <CardIcon>
+                  <FaBook size={20} color="#152259" />
+                </CardIcon>
+                <div>
+                  <h3>Adicione Cursos</h3>
+                  <p>Crie e organize cursos para oferecer aos seus alunos de forma simples e rápida.</p>
+                </div>
+              </Card>
+            </DashboardBlock>
+          </DashboardSections>
+        </MainContent>
+        <Footer />
+      </DashboardContainer>
+    </>
   );
 }
 
