@@ -101,4 +101,21 @@ public class AlunoController : Controller
             return NotFound(erroResponse);
         }
     }
+
+    [HttpGet("total")]
+    public async Task<IActionResult> ObterTotalAlunos()
+    {
+        try
+        {
+            var total = await _alunoService.ObterTotalAlunos();
+            return Ok(new { total });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErroResponse
+            {
+                Mensagem = ex.Message
+            });
+        }
+    }
 }

@@ -14,4 +14,6 @@ public interface IAlunoService
     Task AtualizarAluno(long id, AtualizarAlunoRequest atualizarAlunoRequest);
 
     Task DeletarAluno(long id);
+
+    Task<int> ObterTotalAlunos();
 }

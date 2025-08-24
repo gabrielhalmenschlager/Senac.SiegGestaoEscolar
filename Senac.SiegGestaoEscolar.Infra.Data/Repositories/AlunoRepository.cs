@@ -113,4 +113,13 @@ public class AlunoRepository : IAlunoRepository
             new { Id = id }
             );
     }
+
+    public async Task<int> ObterTotalAlunos()
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        var total = await connection.ExecuteScalarAsync<int>(
+            @"SELECT COUNT(*) FROM aluno"
+        );
+        return total;
+    }
 }

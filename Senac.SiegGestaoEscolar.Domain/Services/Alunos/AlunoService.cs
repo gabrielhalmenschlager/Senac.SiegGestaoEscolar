@@ -92,5 +92,10 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
             if (aluno == null)
                 throw new Exception($"Aluno com ID {id} não encontrado.");
         }
+
+        public async Task<int> ObterTotalAlunos()
+        {
+            return await _alunoRepository.ObterTotalAlunos();
+        }
     }
 }

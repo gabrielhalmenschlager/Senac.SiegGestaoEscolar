@@ -11,4 +11,6 @@ public interface IAlunoRepository
     Task AtualizarAluno(Aluno aluno);
 
     Task DeletarAluno(long id);
+
+    Task<int> ObterTotalAlunos();
 }
