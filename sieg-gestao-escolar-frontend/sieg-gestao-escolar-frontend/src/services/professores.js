@@ -16,7 +16,7 @@ export async function obterProfessorDetalhado(id) {
 }
 
 export async function adicionarProfessor(professor) {
-  const response = await api.post('professor/adicionar/professor', professor, { headers: getAuthHeader() });
+  const response = await api.post('/adicionar/professor', professor, { headers: getAuthHeader() });
   return response.data;
 }
 

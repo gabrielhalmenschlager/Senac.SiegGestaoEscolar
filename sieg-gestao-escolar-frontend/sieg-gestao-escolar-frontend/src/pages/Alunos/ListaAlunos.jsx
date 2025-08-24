@@ -1,181 +1,130 @@
-"use client"
-
+// React e hooks
 import { useState, useEffect } from "react"
-import { obterTodosAlunos } from "../../services/alunos"
 import { useNavigate } from "react-router-dom"
 
-import Navbar from "../../components/NavBar"
-import Footer from "../../components/Footer"
-import { PageContainer, MainContent } from "../../components/ui/Layout";
+// Serviços / API
+import { obterTodosAlunos, deletarAluno } from "../../services/alunos"
 
-import styled from "styled-components"
+// Componentes globais
+import Navbar from "../../components/NavBar";
+import Footer from "../../components/Footer";
+import { GlobalStyle } from '../../components/GlobalStyle';
+
+// Layout e UI reutilizáveis
+import { PageContainer, MainContent } from "../../components/ui/Layout";
+import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/TableStyles";
+import { BtnPrimary } from "../../components/ui/Buttons";
+import { ErrorText } from "../../components/ui/Text";
+
+// Importando ícones
+import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
 
 export default function ListaAlunos() {
-  const [alunos, setAlunos] = useState([])
-  const [carregando, setCarregando] = useState(false)
-  const [erro, setErro] = useState("")
-  const navigate = useNavigate()
+  const [alunos, setAlunos] = useState([]);
+  const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    async function carregarAlunos() {
-      setCarregando(true)
-      setErro("")
-      try {
-        const dados = await obterTodosAlunos()
-        setAlunos(dados)
-      } catch (e) {
-        setErro("Erro ao carregar alunos")
-        console.log(e)
-      }
-      setCarregando(false)
+    carregarAlunos();
+  }, []);
+
+  async function carregarAlunos() {
+    setCarregando(true);
+    setErro("");
+    try {
+      const dados = await obterTodosAlunos();
+      setAlunos(dados);
+    } catch (e) {
+      setErro("Erro ao carregar alunos");
+      console.log(e);
     }
-    carregarAlunos()
-  }, [])
+    setCarregando(false);
+  }
+
+  async function handleExcluir(id) {
+    if (window.confirm("Deseja realmente excluir este aluno?")) {
+      try {
+        await deletarAluno(id);
+        alert("Aluno excluído com sucesso!");
+        carregarAlunos();
+      } catch (e) {
+        console.error(e);
+        alert("Erro ao excluir aluno.");
+      }
+    }
+  }
 
   return (
-    <PageContainer>
-      <Navbar />
-      <MainContent>
-        <PageHeader>
-          <h1>Alunos</h1>
-          <BtnPrimary onClick={() => navigate("/alunos/novo")}>
-            <i className="bi bi-person-plus" style={{ marginRight: "8px" }}></i>
-            Adicionar Aluno
-          </BtnPrimary>
-        </PageHeader>
+    <>
+      <GlobalStyle />
+      <PageContainer>
+        <Navbar />
+        <MainContent>
+          <PageHeader>
+            <h1>Alunos</h1>
+            <BtnPrimary onClick={() => navigate("/alunos/novo")}>
+              <i className="bi bi-person-plus" style={{ marginRight: "8px" }}></i>
+              Adicionar Aluno
+            </BtnPrimary>
+          </PageHeader>
 
-        {carregando && <p>Carregando...</p>}
-        {erro && <ErrorText>{erro}</ErrorText>}
+          {carregando && <p>Carregando...</p>}
+          {erro && <ErrorText>{erro}</ErrorText>}
 
-        {alunos.length > 0 && (
-          <TableContainer>
-            <AlunosTable>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Curso</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {alunos.map((aluno) => (
-                  <tr key={aluno.id}>
-                    <td>
-                      {aluno.nome} {aluno.sobrenome}
-                    </td>
-                    <td>{aluno.email}</td>
-                    <td>{aluno.curso}</td>
-                    <td>
-                      <BtnDetail onClick={() => navigate(`/alunos/${aluno.id}`)}>
-                        <i className="bi bi-eye" style={{ marginRight: "6px" }}></i>
-                        Detalhes
-                      </BtnDetail>
-                    </td>
+          {alunos.length > 0 && (
+            <TableContainer>
+              <TableGlobal>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
                   </tr>
-                ))}
-              </tbody>
-            </AlunosTable>
-          </TableContainer>
-        )}
-      </MainContent>
-      <Footer />
-    </PageContainer>
-  )
+                </thead>
+                <tbody>
+                  {alunos.map(aluno => (
+                    <tr key={aluno.id}>
+                      <td>{aluno.id}</td>
+                      <td>{aluno.nome} {aluno.sobrenome}</td>
+                      <td>{aluno.email}</td>
+                      <td>{aluno.telefone}</td>
+                      <td>{aluno.ativo ? "Sim" : "Não"}</td>
+                      <td style={{ display: 'flex', gap: '15px' }}>
+                        <BiDetail
+                          size={20}
+                          color="#1E90FF"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/alunos/${aluno.id}`)}
+                          title="Detalhes"
+                        />
+                        <BiEdit
+                          size={20}
+                          color="#FFA500"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/alunos/${aluno.id}/editar`)}
+                          title="Editar"
+                        />
+                        <BiTrash
+                          size={20}
+                          color="#FF4C4C"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => handleExcluir(aluno.id)}
+                          title="Excluir"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </TableGlobal>
+            </TableContainer>
+          )}
+        </MainContent>
+        <Footer />
+      </PageContainer>
+    </>
+  );
 }
-
-/* Styled Components */
-const PageHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-
-  h1 {
-    color: #4F4F4F;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-  }
-`
-
-const BtnPrimary = styled.button`
-  background-color: #509CDB;
-  color: white;
-  border: none;
-  padding: 14px 45px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #3a83bf;
-    transform: translateY(-2px);
-  }
-`
-
-const BtnDetail = styled.button`
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-  }
-`
-
-const ErrorText = styled.p`
-  color: red;
-  margin-bottom: 20px;
-`
-
-const TableContainer = styled.div`
-  margin-top: 100px;
-  overflow-x: auto;
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-`
-
-const AlunosTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    text-align: left;
-    padding: 15px;
-    font-size: 1rem;
-  }
-
-  th {
-    background-color: #152259;
-    color: white;
-    font-weight: 600;
-  }
-
-  tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background 0.3s ease;
-
-    &:hover {
-      background-color: #f1f5f9;
-    }
-  }
-
-  td {
-    color: #555;
-  }
-`

@@ -38,7 +38,7 @@ export const TableContainer = styled.div`
   padding: 20px;
 `;
 
-export const ProfessoresTable = styled.table`
+export const TableGlobal = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -48,7 +48,6 @@ export const ProfessoresTable = styled.table`
     text-align: left;
     padding: 15px 20px;
     font-size: 1rem;
-    
   }
 
   th {

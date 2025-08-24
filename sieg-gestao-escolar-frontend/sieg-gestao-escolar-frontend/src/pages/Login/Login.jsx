@@ -122,18 +122,20 @@ const WelcomeText = styled.div`
     font-size: 3.2rem;
     font-weight: 700;
     margin-bottom: 10px;
+    color: #FFB400; /* destaque amarelo */
   }
 
   h2 {
     font-size: 2.2rem;
     font-weight: 500;
     margin-bottom: 20px;
+    color: #FFFFFF;
   }
 
   p {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: #d1d1d1;
+    color: #AAAAAA;
   }
 `;
 
@@ -181,7 +183,7 @@ const InputWrapper = styled.div`
   .icon {
     position: absolute;
     left: 12px;
-    color: #509CDB;
+    color: #FFB400; /* ícone dourado */
     font-size: 1.1rem;
   }
 
@@ -193,24 +195,25 @@ const InputWrapper = styled.div`
     font-size: 1rem;
     outline: none;
     transition: all 0.3s ease;
-    background-color: #f8f9fa;
+    background-color: #F5F5F5;
+    color: #152259;
+
+    &::placeholder {
+      color: #AAAAAA;
+    }
 
     &:focus {
-      border-color: #509CDB;
-      box-shadow: 0 0 8px rgba(80, 156, 219, 0.4);
-      background-color: #fff;
+      border-color: #152259;
+      box-shadow: 0 0 8px rgba(21,34,89,0.4);
+      background-color: #FFFFFF;
     }
-  }
-
-  &::after {
-    content: '';
   }
 `;
 
 const ButtonPrimary = styled.button`
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #509CDB, #3a83bf);
+  background: #509CDB;
   color: #fff;
   border: none;
   border-radius: 12px;

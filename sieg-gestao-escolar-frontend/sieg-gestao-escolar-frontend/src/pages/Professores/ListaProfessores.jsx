@@ -1,13 +1,20 @@
+// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Serviços / API
 import { obterTodosProfessores, deletarProfessor } from '../../services/professores';
+
+// Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+
+// Layout e UI reutilizáveis
 import { GlobalStyle } from '../../components/GlobalStyle';
 import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { BtnPrimary } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
-import { PageHeader, TableContainer, ProfessoresTable } from "../../components/ui/TableStyles";
+import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/TableStyles";
 
 // Importando ícones
 import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
@@ -67,7 +74,7 @@ export default function ListaProfessores() {
 
           {professores.length > 0 && (
             <TableContainer>
-              <ProfessoresTable>
+              <TableGlobal>
                 <thead>
                   <tr>
                     <th>Id</th>
@@ -112,7 +119,7 @@ export default function ListaProfessores() {
                     </tr>
                   ))}
                 </tbody>
-              </ProfessoresTable>
+              </TableGlobal>
             </TableContainer>
           )}
         </MainContent>

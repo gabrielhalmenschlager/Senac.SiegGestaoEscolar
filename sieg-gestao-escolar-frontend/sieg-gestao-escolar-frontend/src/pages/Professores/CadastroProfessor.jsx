@@ -8,6 +8,7 @@ import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from 
 // Componentes globais
 import Navbar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { GlobalStyle } from '../../components/GlobalStyle';
 
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -20,12 +21,10 @@ import { ErrorText } from "../../components/ui/Text";
 import Logo from '../../assets/logo.png';
 
 const formacaoOptions = [
-  'EnsinoMedio',
-  'EnsinoTecnico',
-  'Graduado',
-  'PosGraduado',
-  'Mestrado',
-  'Doutorado',
+  { id: 1, nome: 'Graduacao' },
+  { id: 2, nome: 'PosGraduacao' },
+  { id: 3, nome: 'Mestrado' },
+  { id: 4, nome: 'Doutorado' },
 ];
 
 export default function CadastroProfessor() {
@@ -38,7 +37,7 @@ export default function CadastroProfessor() {
     dataDeNascimento: '',
     email: '',
     telefone: '',
-    formacao: formacaoOptions[0],
+    formacao: 'Graduacao',
     dataContratacao: '',
     ativo: true,
   });
@@ -54,6 +53,7 @@ export default function CadastroProfessor() {
             ...data,
             dataDeNascimento: data.dataDeNascimento?.slice(0, 10) || '',
             dataContratacao: data.dataContratacao?.slice(0, 10) || '',
+            formacao: data.formacao,
             ativo: Boolean(data.ativo),
           });
         })
@@ -72,7 +72,7 @@ export default function CadastroProfessor() {
   async function handleSubmit(e) {
     e.preventDefault();
     setErro('');
-  
+
     try {
       if (id) {
         const dadosParaAtualizar = {
@@ -92,67 +92,76 @@ export default function CadastroProfessor() {
   }
 
   return (
-    <PageContainer>
-      <Navbar />
-      <MainContent>
-        <FormCard>
-          <MainLogo src={Logo} alt="Logo" />
-          <h2>{id ? 'Editar Professor' : 'Cadastrar Professor'}</h2>
+    <>
+      <GlobalStyle />
+      <PageContainer>
+        <Navbar />
+        <MainContent>
+          <FormCard>
+            <MainLogo src={Logo} alt="Logo" />
+            <h2>{id ? 'Editar Professor' : 'Cadastrar Professor'}</h2>
 
-          {erro && <ErrorText>{erro}</ErrorText>}
+            {erro && <ErrorText>{erro}</ErrorText>}
 
-          <form onSubmit={handleSubmit}>
-            <FormGroup>
-              <label htmlFor="nome">Nome:</label>
-              <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required disabled={!!id} />
-            </FormGroup>
+            <form onSubmit={handleSubmit}>
+              <FormGroup>
+                <label htmlFor="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required disabled={!!id} />
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="sobrenome">Sobrenome:</label>
-              <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required disabled={!!id} />
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required disabled={!!id} />
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
-              <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required disabled={!!id} />
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required disabled={!!id} />
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="telefone">Telefone:</label>
-              <input type="text" id="telefone" name="telefone" value={form.telefone} onChange={handleChange} required />
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" value={form.telefone} onChange={handleChange} required />
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="formacao">Formação:</label>
-              <select id="formacao" name="formacao" value={form.formacao} onChange={handleChange} required>
-                {formacaoOptions.map(opt => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="formacao">Formação:</label>
+                <select
+                  id="formacao"
+                  name="formacao"
+                  value={form.formacao}
+                  onChange={handleChange}
+                  required
+                >
+                  {formacaoOptions.map(opt => (
+                    <option key={opt.id} value={opt.nome}>{opt.nome}</option>
+                  ))}
+                </select>
+              </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="dataContratacao">Data de Contratação:</label>
-              <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required disabled={!!id} />
-            </FormGroup>
+              <FormGroup>
+                <label htmlFor="dataContratacao">Data de Contratação:</label>
+                <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required disabled={!!id} />
+              </FormGroup>
 
-            <CheckboxGroup>
-              <label>
-                <input type="checkbox" name="ativo" checked={form.ativo} onChange={handleChange} />
-                Ativo
-              </label>
-            </CheckboxGroup>
+              <CheckboxGroup>
+                <label>
+                  <input type="checkbox" name="ativo" checked={form.ativo} onChange={handleChange} />
+                  Ativo
+                </label>
+              </CheckboxGroup>
 
-            <BtnSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</BtnSecundary>
-          </form>
-        </FormCard>
-      </MainContent>
-      <Footer />
-    </PageContainer>
+              <BtnSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</BtnSecundary>
+            </form>
+          </FormCard>
+        </MainContent>
+        <Footer />
+      </PageContainer>
+    </>
   );
 }

@@ -45,7 +45,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPost("adicionar/professor")]
+    [HttpPost("/adicionar/professor")]
     public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
     {
         try

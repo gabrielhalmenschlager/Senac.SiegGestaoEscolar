@@ -8,6 +8,7 @@ import { obterProfessorDetalhado } from "../../services/professores";
 // Componentes globais
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { GlobalStyle } from '../../components/GlobalStyle';
 
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -46,6 +47,8 @@ export default function DetalheProfessor() {
   }, [id]);
 
   return (
+    <>
+    < GlobalStyle />
     <PageContainer>
       <Navbar />
       <MainContent>
@@ -78,5 +81,6 @@ export default function DetalheProfessor() {
       </MainContent>
       <Footer />
     </PageContainer>
+    </>
   );
 }
