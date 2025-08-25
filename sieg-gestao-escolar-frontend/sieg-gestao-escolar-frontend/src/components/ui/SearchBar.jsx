@@ -1,6 +1,3 @@
-// components/ui/SearchBar.jsx
-import React from 'react';
-
 export default function SearchBar({ placeholder = "Pesquisar...", value, onChange, style }) {
   return (
     <input

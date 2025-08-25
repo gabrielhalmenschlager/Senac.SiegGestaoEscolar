@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body, #root {
     width: 100%;
     height: 100%;
-    background: transparent; /* remove contorno branco */
+    background: transparent;
   }
 
   body {

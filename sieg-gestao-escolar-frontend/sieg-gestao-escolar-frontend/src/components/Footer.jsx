@@ -37,16 +37,16 @@ export default function Footer() {
 }
 
 const FooterContainer = styled.footer`
-  margin-left: 300px; /* alinhado com main-content da navbar */
-  background-color: #152259; /* azul base */
-  color: #FFFFFF; /* texto principal */
+  margin-left: 300px;
+  background-color: #152259; 
+  color: #FFFFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 0.9rem;
-  border-top: 3px solid #FFB400; /* destaque dourado */
+  border-top: 3px solid #FFB400;
   box-sizing: border-box;
   flex-wrap: wrap;
 `;
@@ -63,7 +63,7 @@ const FooterLogo = styled.img`
 `;
 
 const FooterText = styled.p`
-  color: #AAAAAA; /* texto secundário mais suave */
+  color: #AAAAAA;
   margin: 0;
 `;
 
@@ -78,7 +78,7 @@ const SocialLink = styled.a`
   transition: color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    color: #FFB400; /* destaque dourado ao passar o mouse */
-    transform: scale(1.1); /* leve animação para interatividade */
+    color: #FFB400;
+    transform: scale(1.1);
   }
 `;

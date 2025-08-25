@@ -34,7 +34,6 @@ export default function CadastroCurso() {
   });
   const [erro, setErro] = useState('');
 
-  // Carregar professores
   useEffect(() => {
     async function carregarProfessores() {
       try {

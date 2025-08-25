@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Header estilizado
 export const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
