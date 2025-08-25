@@ -58,10 +58,10 @@ export default function CadastroCurso() {
             nome: dados.nome,
             descricao: dados.descricao,
             categoriaCurso: dados.categoriaCurso,
-            valor: dados.valor,
-            cargaHoraria: dados.cargaHoraria,
+            valor: Number(dados.valor),
+            cargaHoraria: Number(dados.cargaHoraria),
             ativo: Boolean(dados.ativo),
-            professorId: dados.professorId,
+            professorId: Number(dados.professorId),
           });
         } catch (e) {
           setErro('Erro ao carregar curso para edição');
@@ -76,7 +76,11 @@ export default function CadastroCurso() {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' 
+                ? checked 
+                : type === 'number' 
+                  ? Number(value) 
+                  : value,
     }));
   }
 
@@ -85,10 +89,17 @@ export default function CadastroCurso() {
     setErro('');
 
     try {
+      const payload = {
+        ...form,
+        valor: Number(form.valor),
+        cargaHoraria: Number(form.cargaHoraria),
+        professorId: Number(form.professorId),
+      };
+
       if (id) {
-        await atualizarCurso(id, form);
+        await atualizarCurso(id, payload);
       } else {
-        await adicionarCurso(form);
+        await adicionarCurso(payload);
       }
       navigate('/cursos');
     } catch (e) {
@@ -130,7 +141,7 @@ export default function CadastroCurso() {
                   value={form.descricao}
                   onChange={handleChange}
                   rows={4}
-                  style={{ width: '400px', height: '100px', resize: 'none' }} // tamanho fixo
+                  style={{ width: '400px', height: '100px', resize: 'none' }}
                   required
                 />
               </FormGroup>
