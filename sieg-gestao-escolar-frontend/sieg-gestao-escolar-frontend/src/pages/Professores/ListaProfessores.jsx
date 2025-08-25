@@ -14,7 +14,7 @@ import SearchBar from '../../components/ui/SearchBar';
 // Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { BtnPrimary } from "../../components/ui/Buttons";
-import { ErrorText } from "../../components/ui/Text";
+import ErrorMessage from '../../components/ui/ErrorMessage';
 import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/TableStyles";
 
 // Importando ícones
@@ -86,7 +86,7 @@ export default function ListaProfessores() {
           </PageHeader>
 
           {carregando && <p>Carregando...</p>}
-          {erro && <ErrorText>{erro}</ErrorText>}
+          {erro && <ErrorMessage title="Erro ao carregar professores" message={erro} />}
 
           {professoresFiltrados.length > 0 && (
             <TableContainer>

@@ -1,15 +1,26 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { BiLogOut } from 'react-icons/bi';
+
 import logo from '../assets/logo.png';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    // Limpeza de dados de sessão ou token
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
   return (
     <NavbarContainer>
       <NavbarHeader>
         <LogoImg src={logo} alt="Logo" />
         <LogoText>Sieg Gestão Escolar</LogoText>
       </NavbarHeader>
+
       <NavList>
         <NavItem>
           <StyledLink to="/home" className={({ isActive }) => isActive ? "active-link" : ""}>
@@ -25,7 +36,7 @@ export default function Navbar() {
         </NavItem>
         <NavItem>
           <StyledLink to="/alunos" className={({ isActive }) => isActive ? "active-link" : ""}>
-            <i className="bi bi-backpack2"></i>            
+            <i className="bi bi-backpack2"></i>
             Alunos
           </StyledLink>
         </NavItem>
@@ -36,6 +47,12 @@ export default function Navbar() {
           </StyledLink>
         </NavItem>
       </NavList>
+
+      <NavbarFooter>
+        <BtnPrimary onClick={logout}>
+          <BiLogOut size={22} />
+        </BtnPrimary>
+      </NavbarFooter>
     </NavbarContainer>
   );
 }
@@ -47,7 +64,7 @@ const NavbarContainer = styled.nav`
   left: 0;
   height: 100vh;
   width: 280px;
-  background: #152259; /* azul base */
+  background: #152259;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -111,7 +128,6 @@ const StyledLink = styled(NavLink)`
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
-  background-color: transparent;
 
   i {
     font-size: 1.4rem;
@@ -119,19 +135,49 @@ const StyledLink = styled(NavLink)`
   }
 
   &:hover {
-    background-color: #FFB400; /* destaque dourado */
+    background-color: #FFB400;
     transform: translateX(5px);
     i {
       transform: scale(1.2);
-      color: #152259; /* ícone contraste no hover */
+      color: #152259;
     }
   }
 
   &.active-link {
-    background-color: #509CDB; /* azul secundário para ativo */
+    background-color: #509CDB;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     i {
       color: #FFFFFF;
     }
+  }
+`;
+
+export const NavbarFooter = styled.div`
+  /* remove margin-top: auto */
+  padding-top: 20px;
+  margin-bottom: 40px; 
+  border-top: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  justify-content: center;
+`;
+
+export const BtnPrimary = styled.button`
+  display: flex;      
+  align-items: center;
+  justify-content: center;
+  width: 50px;  
+  height: 50px;
+  background-color: #FFB400;
+  color: #152259;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   }
 `;

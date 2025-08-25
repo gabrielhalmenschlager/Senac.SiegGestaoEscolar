@@ -15,7 +15,7 @@ import SearchBar from '../../components/ui/SearchBar';
 import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { PageHeader, TableContainer, TableGlobal } from "../../components/ui/TableStyles";
 import { BtnPrimary } from "../../components/ui/Buttons";
-import { ErrorText } from "../../components/ui/Text";
+import ErrorMessage from '../../components/ui/ErrorMessage';
 
 // Importando ícones
 import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
@@ -85,7 +85,7 @@ export default function ListaAlunos() {
           </PageHeader>
 
           {carregando && <p>Carregando...</p>}
-          {erro && <ErrorText>{erro}</ErrorText>}
+          {erro && <ErrorMessage title="Erro ao carregar cursos" message={erro} />}      
 
           {alunosFiltrados.length > 0 && (
             <TableContainer>
