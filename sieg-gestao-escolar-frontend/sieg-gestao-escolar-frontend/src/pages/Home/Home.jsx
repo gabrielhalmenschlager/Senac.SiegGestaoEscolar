@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Serviços / API
-import { getTotalProfessores, getTotalAlunos, getTotalCursos } from '../services/dashboard';
-import { logout } from '../services/login';
+import { getTotalProfessores, getTotalAlunos, getTotalCursos } from '../../services/dashboard';
+import { logout } from '../../services/login';
 
 // Componentes globais
-import Navbar from '../components/NavBar';
-import Footer from '../components/Footer';
-import { GlobalStyle } from '../components/GlobalStyle';
+import Navbar from '../../components/NavBar';
+import Footer from '../../components/Footer';
+import { GlobalStyle } from '../../components/GlobalStyle';
 
 // Layout e UI reutilizáveis
-import { BtnPrimary } from '../components/ui/Buttons';
+import { BtnPrimary } from '../../components/ui/Buttons';
 
 // Componentes de layout e estilização do Dashboard
 import {
@@ -45,10 +45,10 @@ import {
   CardDescription,
   CardFooter,
   ViewAllLink
-} from '../components/Home';
+} from '../../components/Home';
 
 // Assets
-import somAguia from '../assets/aguia.mp3';
+import somAguia from '../../assets/aguia.mp3';
 
 // Ícones
 import { FaUserGraduate, FaChalkboardTeacher, FaBook } from 'react-icons/fa';

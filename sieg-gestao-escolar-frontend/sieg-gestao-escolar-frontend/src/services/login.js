@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // agora usamos o proxy
+  baseURL: '/api',
 });
 
 export async function login(username, password) {
@@ -19,6 +19,6 @@ export async function login(username, password) {
 }
 
 export function logout(navigate) {
-  localStorage.removeItem('token'); // Remove o token
-  navigate('/login', { replace: true }); // Redireciona para login
+  localStorage.removeItem('token');
+  navigate('/login', { replace: true });
 }

@@ -1,7 +1,11 @@
+// React e hooks
 import { Routes, Route, Navigate } from 'react-router-dom';
+
+// Import da Proteção das rotas
 import ProtectedRoute from './components/ProtectedRoute';
 
-import Home from './pages/Home';
+// Import Home
+import Home from './pages/Home/Home';
 
 // Professores
 import ListaProfessores from './pages/Professores/ListaProfessores';

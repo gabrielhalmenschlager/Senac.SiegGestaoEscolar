@@ -29,5 +29,3 @@ export async function deletarProfessor(id) {
   const response = await api.delete(`/${id}/deletar`, { headers: getAuthHeader() });
   return response.data;
 }
-
-
