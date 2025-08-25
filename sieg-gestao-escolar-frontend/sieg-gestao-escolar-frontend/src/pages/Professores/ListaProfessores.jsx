@@ -144,7 +144,6 @@ export default function ListaProfessores() {
             </TableContainer>
           )}
 
-          {!carregando && professoresFiltrados.length === 0 && <p>Nenhum professor encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>

@@ -143,7 +143,6 @@ export default function ListaAlunos() {
             </TableContainer>
           )}
 
-          {!carregando && alunosFiltrados.length === 0 && <p>Nenhum aluno encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>

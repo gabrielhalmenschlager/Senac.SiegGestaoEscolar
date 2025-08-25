@@ -83,7 +83,7 @@ public class CursoController : Controller
         }
     }
 
-    [HttpDelete("curso/{id}/deletar")]
+    [HttpDelete("{id}/deletar")]
     public async Task<IActionResult> DeletarCurso([FromRoute] long id)
     {
         try

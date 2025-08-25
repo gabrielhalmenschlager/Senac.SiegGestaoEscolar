@@ -13,7 +13,7 @@ import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { FormCard, FormGroup, CheckboxGroup } from "../../components/ui/CardStyles";
 import { BtnSecundary } from "../../components/ui/Buttons";
 import { MainLogo } from "../../components/ui/Logo";
-import { ErrorText } from "../../components/ui/Text"; 
+import { ErrorText } from "../../components/ui/Text";
 
 // Assets
 import Logo from '../../assets/logo.png';
@@ -76,11 +76,12 @@ export default function CadastroCurso() {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox' 
-                ? checked 
-                : type === 'number' 
-                  ? Number(value) 
-                  : value,
+      [name]:
+        type === 'checkbox'
+          ? checked
+          : type === 'number'
+          ? Number(value)
+          : value,
     }));
   }
 
@@ -89,6 +90,7 @@ export default function CadastroCurso() {
     setErro('');
 
     try {
+      // Monta o payload básico
       const payload = {
         ...form,
         valor: Number(form.valor),
@@ -97,13 +99,17 @@ export default function CadastroCurso() {
       };
 
       if (id) {
+        // Atualização não altera a data de criação
         await atualizarCurso(id, payload);
       } else {
+        // Inclusão adiciona o campo obrigatório dataCriacao
+        payload.dataCriacao = new Date().toISOString();
         await adicionarCurso(payload);
       }
+
       navigate('/cursos');
     } catch (e) {
-      console.error(e);
+      console.error('Erro detalhado:', e.response?.data || e);
       setErro('Erro ao salvar curso. Verifique os dados.');
     }
   }
@@ -211,7 +217,9 @@ export default function CadastroCurso() {
                 </label>
               </CheckboxGroup>
 
-              <BtnSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</BtnSecundary>
+              <BtnSecundary type="submit">
+                {id ? 'Salvar' : 'Cadastrar'}
+              </BtnSecundary>
             </form>
           </FormCard>
         </MainContent>

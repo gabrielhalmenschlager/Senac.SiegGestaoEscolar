@@ -28,10 +28,11 @@ export default function ListaCursos() {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
+  // Normalizando categorias para evitar problemas de maiúsculas/minúsculas
   const categoriasMap = {
-    Basico: "Básico",
-    Medio: "Médio",
-    Avancado: "Avançado"
+    basico: "Básico",
+    medio: "Médio",
+    avancado: "Avançado"
   };
 
   useEffect(() => {
@@ -46,9 +47,10 @@ export default function ListaCursos() {
       setCursos(dados);
     } catch (e) {
       setErro('Erro ao carregar cursos');
-      console.error(e);
+      console.error('Erro ao carregar cursos:', e);
+    } finally {
+      setCarregando(false);
     }
-    setCarregando(false);
   }
 
   async function handleExcluir(id) {
@@ -58,17 +60,20 @@ export default function ListaCursos() {
         alert('Curso excluído com sucesso!');
         carregarCursos();
       } catch (e) {
-        console.error(e);
-        alert('Erro ao excluir curso.');
+        console.error('Erro ao excluir curso:', e.response || e.message || e);
+        alert(`Erro ao excluir curso: ${e.response?.data?.message || e.message}`);
       }
     }
   }
 
-  const cursosFiltrados = cursos.filter(curso =>
-    curso.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (categoriasMap[curso.categoriaCurso] || curso.categoriaCurso).toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
+  const cursosFiltrados = cursos.filter(curso => {
+    const categoriaNormalizada = categoriasMap[curso.categoriaCurso?.toLowerCase()] || curso.categoriaCurso;
+    return (
+      curso.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      categoriaNormalizada.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
   return (
     <>
       <GlobalStyle />
@@ -108,49 +113,51 @@ export default function ListaCursos() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cursosFiltrados.map(curso => (
-                    <tr key={curso.id}>
-                      <td>{curso.id}</td>
-                      <td>{curso.nome}</td>
-                      <td>{categoriasMap[curso.categoriaCurso] || curso.categoriaCurso}</td>
-                      <td>R$ {curso.valor}</td>
-                      <td>
-                        {curso.ativo 
-                          ? <AiOutlineCheck size={20} color="green" /> 
-                          : <AiOutlineClose size={20} color="red" />
-                        }
-                      </td>
-                      <td style={{ display: 'flex', gap: '15px' }}>
-                        <BiDetail
-                          size={20}
-                          color="#1E90FF"
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => navigate(`/cursos/${curso.id}`)}
-                          title="Detalhes"
-                        />
-                        <BiEdit
-                          size={20}
-                          color="#FFA500"
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => navigate(`/cursos/${curso.id}/editar`)}
-                          title="Editar"
-                        />
-                        <BiTrash
-                          size={20}
-                          color="#FF4C4C"
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => handleExcluir(curso.id)}
-                          title="Excluir"
-                        />
-                      </td>
-                    </tr>
-                  ))}
+                  {cursosFiltrados.map(curso => {
+                    const categoriaNormalizada = categoriasMap[curso.categoriaCurso?.toLowerCase()] || curso.categoriaCurso;
+                    return (
+                      <tr key={curso.id}>
+                        <td>{curso.id}</td>
+                        <td>{curso.nome}</td>
+                        <td>{categoriaNormalizada}</td>
+                        <td>R$ {curso.valor}</td>
+                        <td>
+                          {curso.ativo
+                            ? <AiOutlineCheck size={20} color="green" />
+                            : <AiOutlineClose size={20} color="red" />
+                          }
+                        </td>
+                        <td style={{ display: 'flex', gap: '15px' }}>
+                          <BiDetail
+                            size={20}
+                            color="#1E90FF"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate(`/cursos/${curso.id}`)}
+                            title="Detalhes"
+                          />
+                          <BiEdit
+                            size={20}
+                            color="#FFA500"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate(`/cursos/${curso.id}/editar`)}
+                            title="Editar"
+                          />
+                          <BiTrash
+                            size={20}
+                            color="#FF4C4C"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => handleExcluir(curso.id)}
+                            title="Excluir"
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </TableGlobal>
             </TableContainer>
           )}
 
-          {!carregando && cursosFiltrados.length === 0 && <p>Nenhum curso encontrado.</p>}
         </MainContent>
         <Footer />
       </PageContainer>
