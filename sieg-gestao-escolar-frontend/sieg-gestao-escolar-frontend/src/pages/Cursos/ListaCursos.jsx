@@ -28,7 +28,6 @@ export default function ListaCursos() {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
-  // Normalizando categorias para evitar problemas de maiúsculas/minúsculas
   const categoriasMap = {
     basico: "Básico",
     medio: "Médio",
@@ -98,7 +97,7 @@ export default function ListaCursos() {
 
           {carregando && <p>Carregando...</p>}
           {erro && <ErrorMessage title="Erro ao carregar cursos" message={erro} />}      
-              
+
           {cursosFiltrados.length > 0 && (
             <TableContainer>
               <TableGlobal>

@@ -1,12 +1,24 @@
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
+import somAguia from '../assets/aguia.mp3';
 
 export default function Footer() {
+
+    const tocarSom = () => {
+      const audio = new Audio(somAguia);
+      audio.play().catch(e => console.log("Erro ao tocar som:", e));
+    };
+
   return (
     <FooterContainer>
       <FooterLeft>
-        <FooterLogo src={logo} alt="Logo" />
+        <FooterLogo          
+          src={logo} 
+          alt="Logo" 
+          onClick={tocarSom} 
+          style={{ cursor: 'pointer' }} 
+        />
         <FooterText>© 2025 Sieg Gestão Escolar. Todos os direitos reservados.</FooterText>
       </FooterLeft>
       <FooterRight>

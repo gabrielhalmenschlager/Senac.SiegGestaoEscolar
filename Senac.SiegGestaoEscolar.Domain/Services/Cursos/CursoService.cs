@@ -78,7 +78,8 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
 
             var curso = await _cursoRepository.ObterCursoDetalhado(id);
             ValidarSeCursoExiste(curso, id);
-
+            
+            curso.Nome = atualizarCursoRequest.Nome;
             curso.Descricao = atualizarCursoRequest.Descricao;
             curso.CategoriaCurso = categoria;
             curso.Valor = atualizarCursoRequest.Valor;

@@ -47,7 +47,6 @@ export default function CadastroCurso() {
     carregarProfessores();
   }, []);
 
-  // Se id existir, carregar curso para edição
   useEffect(() => {
     if (id) {
       async function carregarCurso() {
@@ -90,7 +89,6 @@ export default function CadastroCurso() {
     setErro('');
 
     try {
-      // Monta o payload básico
       const payload = {
         ...form,
         valor: Number(form.valor),
@@ -99,10 +97,8 @@ export default function CadastroCurso() {
       };
 
       if (id) {
-        // Atualização não altera a data de criação
         await atualizarCurso(id, payload);
       } else {
-        // Inclusão adiciona o campo obrigatório dataCriacao
         payload.dataCriacao = new Date().toISOString();
         await adicionarCurso(payload);
       }

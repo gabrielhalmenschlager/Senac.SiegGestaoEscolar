@@ -21,7 +21,7 @@ public class CursoRepository : ICursoRepository
             SELECT
                   c.id
                 , c.nome
-                , c.Id AS categoriaCurso
+                , cc.Id AS categoriaCurso
                 , c.valor                
                 , c.ativo
             FROM 
@@ -50,7 +50,7 @@ public class CursoRepository : ICursoRepository
             FROM 
                 curso c
             INNER JOIN 
-                CategoriaCurso cc ON cc.Id = c.CategoriaCursoId
+                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
             WHERE
                 c.Id = @Id
             ",
@@ -99,7 +99,8 @@ public class CursoRepository : ICursoRepository
             UPDATE 
                 curso
             SET 
-                  descricao = @Descricao
+                  nome = @Nome  
+                , descricao = @Descricao
                 , categoriaCursoId = @CategoriaCurso
                 , valor = @Valor
                 , cargaHoraria = @CargaHoraria

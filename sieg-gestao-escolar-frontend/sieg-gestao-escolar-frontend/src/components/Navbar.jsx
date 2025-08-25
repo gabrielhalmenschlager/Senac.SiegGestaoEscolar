@@ -4,20 +4,30 @@ import { BiLogOut } from 'react-icons/bi';
 
 import logo from '../assets/logo.png';
 import "bootstrap-icons/font/bootstrap-icons.css";
+import somAguia from '../assets/aguia.mp3';
 
 export default function Navbar() {
   const navigate = useNavigate();
 
   const logout = () => {
-    // Limpeza de dados de sessão ou token
     localStorage.removeItem('token');
     navigate('/');
+  };
+
+  const tocarSom = () => {
+    const audio = new Audio(somAguia);
+    audio.play().catch(e => console.log("Erro ao tocar som:", e));
   };
 
   return (
     <NavbarContainer>
       <NavbarHeader>
-        <LogoImg src={logo} alt="Logo" />
+        <LogoImg 
+          src={logo} 
+          alt="Logo" 
+          onClick={tocarSom} 
+          style={{ cursor: 'pointer' }}
+        />        
         <LogoText>Sieg Gestão Escolar</LogoText>
       </NavbarHeader>
 
