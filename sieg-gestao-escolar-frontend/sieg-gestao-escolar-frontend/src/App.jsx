@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/Home';
 
@@ -25,28 +26,119 @@ function App() {
       {/* Login */}
       <Route path="/login" element={<Login />} />
 
-      {/* Home */}
-      <Route path="/home" element={<Home />} />
+      {/* Rotas protegidas */}
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Professores */}
-      <Route path="/professores" element={<ListaProfessores />} />
-      <Route path="/professores/novo" element={<CadastroProfessor />} />
-      <Route path="/professores/:id" element={<DetalheProfessor />} />
-      <Route path="/professores/:id/editar" element={<CadastroProfessor />} />
+      <Route
+        path="/professores"
+        element={
+          <ProtectedRoute>
+            <ListaProfessores />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/professores/novo"
+        element={
+          <ProtectedRoute>
+            <CadastroProfessor />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/professores/:id"
+        element={
+          <ProtectedRoute>
+            <DetalheProfessor />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/professores/:id/editar"
+        element={
+          <ProtectedRoute>
+            <CadastroProfessor />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Alunos */}
-      <Route path="/alunos" element={<ListaAlunos />} />
-      <Route path="/alunos/novo" element={<CadastroAluno />} />
-      <Route path="/alunos/:id" element={<DetalheAluno />} />
-      <Route path="/alunos/:id/editar" element={<CadastroAluno />} />
+      <Route
+        path="/alunos"
+        element={
+          <ProtectedRoute>
+            <ListaAlunos />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/alunos/novo"
+        element={
+          <ProtectedRoute>
+            <CadastroAluno />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/alunos/:id"
+        element={
+          <ProtectedRoute>
+            <DetalheAluno />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/alunos/:id/editar"
+        element={
+          <ProtectedRoute>
+            <CadastroAluno />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Cursos */}
-      <Route path="/cursos" element={<ListaCursos />} />
-      <Route path="/cursos/novo" element={<CadastroCurso />} />
-      <Route path="/cursos/:id" element={<DetalheCurso />} />
-      <Route path="/cursos/:id/editar" element={<CadastroCurso />} />
+      <Route
+        path="/cursos"
+        element={
+          <ProtectedRoute>
+            <ListaCursos />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cursos/novo"
+        element={
+          <ProtectedRoute>
+            <CadastroCurso />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cursos/:id"
+        element={
+          <ProtectedRoute>
+            <DetalheCurso />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cursos/:id/editar"
+        element={
+          <ProtectedRoute>
+            <CadastroCurso />
+          </ProtectedRoute>
+        }
+      />
 
-      {/* Rota inicial sempre vai para login */}
+      {/* Rota inicial */}
       <Route path="/" element={<Navigate to="/login" replace />} />
 
       {/* Rota fallback */}

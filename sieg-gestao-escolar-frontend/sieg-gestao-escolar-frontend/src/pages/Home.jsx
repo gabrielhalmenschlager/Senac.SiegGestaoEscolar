@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserGraduate, FaChalkboardTeacher, FaBook } from 'react-icons/fa';
 
 import { getTotalProfessores, getTotalAlunos, getTotalCursos } from '../services/dashboard';
+import { logout } from '../services/login';
 
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
-import logo from '../assets/logo.png';
 import somAguia from '../assets/aguia.mp3';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import styled from 'styled-components';
 import { GlobalStyle } from '../components/GlobalStyle';
 import { BtnPrimary } from '../components/ui/Buttons';
+import { BiLogOut } from 'react-icons/bi';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -57,8 +58,8 @@ export default function Home() {
               <WelcomeTitle>Painel de Controle</WelcomeTitle>
               <WelcomeSubtitle>Gerencie sua plataforma educacional de forma eficiente</WelcomeSubtitle>
             </WelcomeSection>
-            <BtnPrimary onClick={tocarSom}>
-              <i className="bi bi-box-arrow-right"></i>
+            <BtnPrimary onClick={() => logout(navigate)}>
+              <BiLogOut size={20} />
               Sair
             </BtnPrimary>
           </HeaderSection>
@@ -239,20 +240,8 @@ const HeaderSection = styled.div`
   box-shadow: 0 4px 20px rgba(21, 34, 89, 0.15);
 `;
 
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Logo = styled.img`
-  width: 80px;
-  cursor: pointer;
-  filter: brightness(0) invert(1);
-`;
-
 const WelcomeSection = styled.div`
   flex: 1;
-  text-align: center;
   margin: 0 40px;
 `;
 

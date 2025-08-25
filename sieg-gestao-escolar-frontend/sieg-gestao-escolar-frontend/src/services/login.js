@@ -17,3 +17,8 @@ export async function login(username, password) {
     throw error;
   }
 }
+
+export function logout(navigate) {
+  localStorage.removeItem('token'); // Remove o token
+  navigate('/login', { replace: true }); // Redireciona para login
+}

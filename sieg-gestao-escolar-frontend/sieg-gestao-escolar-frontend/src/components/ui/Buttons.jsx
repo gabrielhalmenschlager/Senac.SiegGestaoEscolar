@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const BtnPrimary = styled.button`
+  display: flex;         
+  align-items: center;    
+  gap: 10px;            
   background-color: #509CDB;
   color: white;
   border: none;
@@ -17,6 +20,7 @@ export const BtnPrimary = styled.button`
     transform: translateY(-2px);
   }
 `;
+
 
 export const BtnSecundary = styled.button`
   display: block;
