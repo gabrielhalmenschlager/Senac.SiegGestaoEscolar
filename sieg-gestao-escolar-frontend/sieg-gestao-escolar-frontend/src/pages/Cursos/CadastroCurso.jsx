@@ -136,13 +136,13 @@ export default function CadastroCurso() {
 
               <FormGroup>
                 <label htmlFor="descricao">Descrição:</label>
-                <textarea
+                <input
                   id="descricao"
                   name="descricao"
                   value={form.descricao}
                   onChange={handleChange}
                   rows={4}
-                  style={{ width: '400px', height: '100px', resize: 'none' }}
+                  style={{ width: '600px', height: '50px', resize: 'none' }}
                   required
                 />
               </FormGroup>
