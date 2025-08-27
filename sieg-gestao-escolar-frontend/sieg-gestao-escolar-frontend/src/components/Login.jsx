@@ -18,17 +18,16 @@ export const LeftSide = styled.div`
   position: relative;
   color: #fff;
 
-  /* Adiciona a silhueta no canto esquerdo */
   &::before {
     content: '';
     position: absolute;
     bottom: 20px;
-    left: 10px;
+    right: 10px;
     width: 1000px;
-    height: 800px;
+    height: 1000px;
     background: url(${props => props.$silhueta}) no-repeat center;
     background-size: contain;
-    opacity: 0.15; /* Bem sutil */
+    opacity: 0.10;
     pointer-events: none;
   }
 `;
