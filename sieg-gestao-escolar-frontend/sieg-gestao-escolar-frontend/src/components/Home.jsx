@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeSlideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const DashboardContainer = styled.div`
   display: flex;
@@ -14,6 +25,7 @@ export const MainContent = styled.main`
   padding: 0;
   margin-left: 320px;
   background: #F5F5F5;
+  animation: ${fadeSlideIn} 0.7s ease forwards;
 `;
 
 export const HeaderSection = styled.div`
@@ -24,6 +36,7 @@ export const HeaderSection = styled.div`
   justify-content: space-between;
   position: relative;
   box-shadow: 0 4px 20px rgba(21, 34, 89, 0.15);
+  animation: ${fadeSlideIn} 0.9s ease forwards;
 `;
 
 export const WelcomeSection = styled.div`
@@ -49,6 +62,7 @@ export const WelcomeSubtitle = styled.p`
 export const QuickActionsSection = styled.div`
   padding: 50px;
   background: #FFFFFF;
+  animation: ${fadeSlideIn} 1s ease forwards;
 `;
 
 export const SectionTitle = styled.h2`
@@ -77,6 +91,7 @@ export const QuickActionCard = styled.div`
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  animation: ${fadeSlideIn} 1.1s ease forwards;
 
   &::before {
     content: '';
@@ -117,6 +132,7 @@ export const DashboardGrid = styled.div`
   gap: 30px;
   padding: 50px;
   background: #F5F5F5;
+  animation: ${fadeSlideIn} 1.2s ease forwards;
 `;
 
 export const DashboardSection = styled.div`
@@ -131,6 +147,7 @@ export const StatsCard = styled.div`
   padding: 30px;
   box-shadow: 0 8px 30px rgba(21, 34, 89, 0.08);
   border: 1px solid rgba(21, 34, 89, 0.05);
+  animation: ${fadeSlideIn} 1.3s ease forwards;
 `;
 
 export const StatsHeader = styled.div`
@@ -197,6 +214,7 @@ export const ManagementCard = styled.div`
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  animation: ${fadeSlideIn} 1.4s ease forwards;
 
   &::before {
     content: '';

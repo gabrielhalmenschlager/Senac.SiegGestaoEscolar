@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeSlideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Card = styled.div`
   max-width: 650px;
@@ -9,6 +20,7 @@ export const Card = styled.div`
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: ${fadeSlideIn} 0.6s ease forwards;
 
   &:hover {
     transform: translateY(-5px);
@@ -37,6 +49,7 @@ export const FormCard = styled.div`
   border-radius: 18px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: ${fadeSlideIn} 0.7s ease forwards;
 
   &:hover {
     transform: translateY(-3px);
@@ -54,6 +67,7 @@ export const FormCard = styled.div`
 
 export const FormGroup = styled.div`
   margin-bottom: 20px;
+  animation: ${fadeSlideIn} 0.8s ease forwards;
 
   label {
     display: block;
@@ -92,6 +106,7 @@ export const CheckboxGroup = styled.div`
   background-color: #f5f5f5;
   margin-bottom: 20px;
   transition: background-color 0.3s ease;
+  animation: ${fadeSlideIn} 0.9s ease forwards;
 
   &:hover {
     background-color: #ffffff;
@@ -120,6 +135,7 @@ export const InfoList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  animation: ${fadeSlideIn} 1s ease forwards;
 `;
 
 export const InfoItem = styled.p`
@@ -153,6 +169,7 @@ export const FormWrapper = styled.form`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  animation: ${fadeSlideIn} 1.1s ease forwards;
 
   h2 {
     grid-column: span 2;

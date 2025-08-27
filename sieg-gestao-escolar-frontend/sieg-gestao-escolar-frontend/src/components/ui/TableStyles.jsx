@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeSlideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const PageHeader = styled.div`
   display: flex;
@@ -7,9 +18,10 @@ export const PageHeader = styled.div`
   margin-bottom: 30px;
   padding: 20px 20px;
   border-radius: 15px;
-  background: #FFF;
+  background: #fff;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: ${fadeSlideIn} 0.6s ease forwards;
 
   h1 {
     margin: 0;
@@ -26,6 +38,10 @@ export const PageHeader = styled.div`
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #3b7cb5;
+    }
   }
 `;
 
@@ -35,6 +51,7 @@ export const TableContainer = styled.div`
   background-color: #F5F5F5;
   border-radius: 15px;
   padding: 20px;
+  animation: ${fadeSlideIn} 0.8s ease forwards;
 `;
 
 export const TableGlobal = styled.table`
@@ -42,6 +59,7 @@ export const TableGlobal = styled.table`
   border-collapse: separate;
   border-spacing: 0;
   font-family: 'Segoe UI', sans-serif;
+  animation: ${fadeSlideIn} 1s ease forwards;
 
   th, td {
     text-align: left;
