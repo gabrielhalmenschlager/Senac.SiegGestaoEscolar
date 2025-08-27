@@ -17,6 +17,7 @@ import {
 
 // Assets
 import Logo from '../../assets/logo.png';
+import Silhueta from '../../assets/silhueta.png';
 
 // Importando ícones
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -51,7 +52,7 @@ export default function Login() {
     <>
       <GlobalStyle />
       <PageContainer>
-        <LeftSide>
+        <LeftSide $silhueta={Silhueta}>
           <LogoTop src={Logo} alt="Logo" />
           <WelcomeText>
             <h1>Olá!</h1>

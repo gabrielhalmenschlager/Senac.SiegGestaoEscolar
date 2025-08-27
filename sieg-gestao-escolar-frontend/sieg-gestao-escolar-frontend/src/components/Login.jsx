@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Silhueta from '../assets/silhueta.png';
 
 export const PageContainer = styled.div`
   display: flex;
@@ -16,6 +17,20 @@ export const LeftSide = styled.div`
   padding: 80px;
   position: relative;
   color: #fff;
+
+  /* Adiciona a silhueta no canto esquerdo */
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    width: 1000px;
+    height: 800px;
+    background: url(${props => props.$silhueta}) no-repeat center;
+    background-size: contain;
+    opacity: 0.15; /* Bem sutil */
+    pointer-events: none;
+  }
 `;
 
 export const WelcomeText = styled.div`
