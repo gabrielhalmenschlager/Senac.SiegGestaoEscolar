@@ -22,7 +22,6 @@ import Logo from "../../assets/logo.png";
 
 // Importando ícones
 import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle } from "react-icons/bi";
-import { MdSchool } from "react-icons/md";
 
 export default function DetalheAluno() {
   const { id } = useParams();
@@ -65,7 +64,6 @@ export default function DetalheAluno() {
                 <InfoItem><BiUser /> <strong>Nome:</strong> {aluno.nome} {aluno.sobrenome}</InfoItem>
                 <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(aluno.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
                 <InfoItem><BiEnvelope /> <strong>Email:</strong> {aluno.email}</InfoItem>
-                <InfoItem><MdSchool /> <strong>Curso:</strong> {aluno.curso}</InfoItem>
                 <InfoItem><BiPhone /> <strong>Telefone:</strong> {aluno.telefone}</InfoItem>
                 <InfoItem>
                   {aluno.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}

@@ -13,6 +13,10 @@ import { GlobalStyle } from '../../components/GlobalStyle';
 
 // Layout e UI reutilizáveis
 import { BtnPrimary } from '../../components/ui/Buttons';
+import { MainLogo } from "../../components/ui/Logo";
+
+// Assets
+import Logo from '../../assets/logo.png';
 
 // Componentes de layout e estilização do Dashboard
 import {
@@ -104,6 +108,7 @@ export default function Home() {
           </HeaderSection>
 
           <QuickActionsSection>
+            <MainLogo src={Logo} alt="Logo" onClick={tocarSom} />
             <SectionTitle>Ações Rápidas</SectionTitle>
             <QuickActions>
               <QuickActionCard onClick={() => navigate('/alunos/novo')}>

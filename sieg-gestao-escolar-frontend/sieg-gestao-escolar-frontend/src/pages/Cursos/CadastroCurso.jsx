@@ -1,5 +1,8 @@
+// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+// Serviços / API
 import { adicionarCurso, atualizarCurso, obterCursoDetalhado } from '../../services/cursos';
 import { obterTodosProfessores } from '../../services/professores';
 
