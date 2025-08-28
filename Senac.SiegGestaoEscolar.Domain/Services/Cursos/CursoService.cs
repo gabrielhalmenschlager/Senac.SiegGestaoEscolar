@@ -70,10 +70,7 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
                 CategoriaCurso = categoria,
                 Valor = adicionarCursoRequest.Valor,
                 CargaHoraria = adicionarCursoRequest.CargaHoraria,
-                Professor = new Professor
-                {
-                    Id = adicionarCursoRequest.ProfessorId
-                },
+                Professor = new Professor { Id = adicionarCursoRequest.ProfessorId },
                 Ativo = true
             };
 
@@ -98,8 +95,10 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
             curso.CategoriaCurso = categoria;
             curso.Valor = atualizarCursoRequest.Valor;
             curso.CargaHoraria = atualizarCursoRequest.CargaHoraria;
-            curso.ProfessorId = atualizarCursoRequest.ProfessorId;
-            curso.Ativo = atualizarCursoRequest.Ativo;
+            curso.Professor = new Professor
+            {
+                Id = atualizarCursoRequest.ProfessorId ?? 0
+            }; curso.Ativo = atualizarCursoRequest.Ativo;
 
             await _cursoRepository.AtualizarCurso(id, curso);
         }
@@ -127,6 +126,18 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
         public async Task<int> ObterTotalCursos()
         {
             return await _cursoRepository.ObterTotalCursos();
+        }
+
+        public async Task<IEnumerable<AlunoResponse>> ObterAlunosPorCurso(long cursoId)
+        {
+            var alunos = await _cursoRepository.ObterAlunosPorCurso(cursoId);
+
+            return alunos.Select(a => new AlunoResponse
+            {
+                Id = a.Id,
+                Nome = a.Nome,
+                Sobrenome = a.Sobrenome
+            });
         }
     }
 }

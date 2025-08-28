@@ -16,4 +16,6 @@ public interface ICursoService
     Task DeletarCurso(long id);
 
     Task<int> ObterTotalCursos();
+
+    Task<IEnumerable<AlunoResponse>> ObterAlunosPorCurso(long cursoId);
 }

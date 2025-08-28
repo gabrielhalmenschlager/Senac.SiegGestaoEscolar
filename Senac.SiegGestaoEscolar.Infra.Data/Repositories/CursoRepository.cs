@@ -38,33 +38,32 @@ public class CursoRepository : ICursoRepository
         using var connection = _connectionFactory.CreateConnection();
 
         var cursos = await connection.QueryAsync<Curso, Professor, Curso>(
-            @"  
+            @"
         SELECT
-              c.id
-            , c.professorId
-            , c.nome
-            , c.descricao
-            , c.dataCriacao
-            , cc.Nome AS CategoriaCurso
-            , c.valor
-            , c.cargaHoraria
-            , c.ativo
-        FROM 
-            curso c
-        INNER JOIN 
-            CategoriaCurso cc ON cc.id = c.CategoriaCursoId
-        INNER JOIN
-            Professor p ON p.id = c.professorId
-        WHERE
-            c.Id = @Id
+              c.id,
+              c.nome,
+              c.descricao,
+              c.dataCriacao,
+              cc.Nome AS CategoriaCurso,
+              c.valor,
+              c.cargaHoraria,
+              c.ativo,
+              p.id AS ProfessorId,
+              p.nome AS Nome,
+              p.sobrenome AS Sobrenome,
+              p.ativo AS Ativo
+        FROM curso c
+        INNER JOIN CategoriaCurso cc ON cc.id = c.CategoriaCursoId
+        INNER JOIN Professor p ON p.id = c.professorId
+        WHERE c.Id = @Id
         ",
-        (curso, professor) =>
-        {
-            curso.Professor = professor;
-            return curso;
-        },
+            (curso, professor) =>
+            {
+                curso.Professor = professor;
+                return curso;
+            },
             new { Id = id },
-            splitOn: "Id"
+            splitOn: "ProfessorId"
         );
 
         var curso = cursos.FirstOrDefault();
@@ -162,5 +161,22 @@ public class CursoRepository : ICursoRepository
             @"SELECT COUNT(*) FROM curso"
         );
         return total;
+    }
+
+    public async Task<IEnumerable<Aluno>> ObterAlunosPorCurso(long cursoId)
+    {
+        using var connection = _connectionFactory.CreateConnection();
+
+        var sql = @"
+        SELECT 
+            a.id,
+            a.nome,
+            a.sobrenome
+        FROM aluno a
+        INNER JOIN CursoAluno ca ON ca.AlunoId = a.id
+        WHERE ca.CursoId = @CursoId
+    ";
+
+        return await connection.QueryAsync<Aluno>(sql, new { CursoId = cursoId });
     }
 }

@@ -118,5 +118,23 @@ public class CursoController : Controller
             });
         }
     }
+
+    [HttpGet("{cursoId}/alunos")]
+    public async Task<IActionResult> ObterAlunosPorCurso(long cursoId)
+    {
+        try
+        {
+            var alunos = await _cursoService.ObterAlunosPorCurso(cursoId);
+
+            if (!alunos.Any())
+                return NotFound(new { mensagem = "Nenhum aluno encontrado para este curso." });
+
+            return Ok(alunos);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+        }
+    }
 }
 

@@ -13,4 +13,6 @@ public interface ICursoRepository
     Task DeletarCurso(long id);
 
     Task<int> ObterTotalCursos();
+
+    Task<IEnumerable<Aluno>> ObterAlunosPorCurso(long cursoId);
 }
