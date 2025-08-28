@@ -7,10 +7,12 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Professores;
 public class ProfessorService : IProfessorService
 {
     private readonly IProfessorRepository _professorRepository;
+    private readonly ICursoRepository _cursoRepository;
 
-    public ProfessorService(IProfessorRepository professorRepository)
+    public ProfessorService(IProfessorRepository professorRepository, ICursoRepository cursoRepository)
     {
         _professorRepository = professorRepository;
+        _cursoRepository = cursoRepository;
     }
 
     public async Task<IEnumerable<ObterTodosProfessoresResponse>> ObterTodosProfessores()
@@ -117,5 +119,24 @@ public class ProfessorService : IProfessorService
     public async Task<int> ObterTotalProfessores()
     {
         return await _professorRepository.ObterTotalProfessores();
+    }
+
+    public async Task VincularProfessorCurso(VincularProfessorRequest vincularProfessorRequest)
+    {
+        var professor = await _professorRepository.ObterProfessorDetalhado(vincularProfessorRequest.IdProfessor);
+        if (professor == null)
+            throw new Exception($"Professor com ID {vincularProfessorRequest.IdProfessor} não encontrado.");
+
+        if (!professor.Ativo)
+            throw new Exception($"Professor com ID {vincularProfessorRequest.IdProfessor} está inativo e não pode ser vinculado a um curso.");
+
+        var curso = await _cursoRepository.ObterCursoDetalhado(vincularProfessorRequest.IdCurso);
+        if (curso == null)
+            throw new Exception($"Curso com ID {vincularProfessorRequest.IdCurso} não encontrado.");
+
+        if (!curso.Ativo)
+            throw new Exception($"Curso com ID {vincularProfessorRequest.IdCurso} está inativo e não pode receber professor.");
+
+        await _professorRepository.VincularProfessorCurso(vincularProfessorRequest.IdProfessor, vincularProfessorRequest.IdCurso);
     }
 }

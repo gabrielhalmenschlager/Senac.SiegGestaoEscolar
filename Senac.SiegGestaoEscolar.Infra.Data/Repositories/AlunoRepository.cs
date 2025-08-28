@@ -122,4 +122,15 @@ public class AlunoRepository : IAlunoRepository
         );
         return total;
     }
+
+    public async Task VincularAlunoCurso(long idAluno, long idCurso)
+    {
+        const string sql = @"
+        INSERT INTO CursoAluno (CursoId, AlunoId, DataVinculo)
+        VALUES (@IdCurso, @IdAluno, GETDATE());
+    ";
+
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.ExecuteAsync(sql, new { IdAluno = idAluno, IdCurso = idCurso });
+    }
 }

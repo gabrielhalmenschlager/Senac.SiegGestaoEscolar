@@ -4,7 +4,7 @@ public class ObterCursoDetalhadoResponse
 {
     public long Id { get; set; }
 
-    public long? ProfessorId { get; set; }
+    public ProfessorResponse Professor { get; set; }
 
     public string Nome { get; set; }
 
@@ -19,4 +19,20 @@ public class ObterCursoDetalhadoResponse
     public int CargaHoraria { get; set; }
 
     public bool Ativo { get; set; }
+
+    public IEnumerable<AlunoResponse>? Alunos { get; set; }
+}
+
+public class AlunoResponse
+{
+    public long Id { get; set; }
+    public string Nome { get; set; }
+    public string Sobrenome { get; set; }
+}
+
+public class ProfessorResponse
+{
+    public long Id { get; set; }
+    public string Nome { get; set; }
+    public string Sobrenome { get; set; }
 }

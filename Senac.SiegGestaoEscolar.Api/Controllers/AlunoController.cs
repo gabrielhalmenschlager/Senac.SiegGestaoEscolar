@@ -118,4 +118,22 @@ public class AlunoController : Controller
             });
         }
     }
+
+    [HttpPost("vincular")]
+    public async Task<IActionResult> VincularAlunoCurso([FromBody] VincularAlunoRequest request)
+    {
+        try
+        {
+            await _alunoService.VincularAlunoCurso(request);
+            return Ok(new { mensagem = "Aluno vinculado ao curso com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErroResponse
+            {
+                Mensagem = ex.Message
+            });
+        }
+    }
+
 }

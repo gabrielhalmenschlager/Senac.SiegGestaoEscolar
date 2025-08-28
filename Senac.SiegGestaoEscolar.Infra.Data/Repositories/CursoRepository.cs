@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Cursos;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 using Senac.SiegGestaoEscolar.Infra.Data.DataBaseConfiguration;
 
@@ -34,29 +35,58 @@ public class CursoRepository : ICursoRepository
 
     public async Task<Curso> ObterCursoDetalhado(long id)
     {
-        return await _connectionFactory.CreateConnection()
-             .QueryFirstOrDefaultAsync<Curso>(
+        using var connection = _connectionFactory.CreateConnection();
+
+        var cursos = await connection.QueryAsync<Curso, Professor, Curso>(
             @"  
-            SELECT
-                  c.id
-                , c.professorId
-                , c.nome
-                , c.descricao
-                , c.dataCriacao
-                , cc.Id AS categoriaCurso
-                , c.valor
-                , c.cargaHoraria
-                , c.ativo
-            FROM 
-                curso c
-            INNER JOIN 
-                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
-            WHERE
-                c.Id = @Id
+        SELECT
+              c.id
+            , c.professorId
+            , c.nome
+            , c.descricao
+            , c.dataCriacao
+            , cc.Nome AS CategoriaCurso
+            , c.valor
+            , c.cargaHoraria
+            , c.ativo
+        FROM 
+            curso c
+        INNER JOIN 
+            CategoriaCurso cc ON cc.id = c.CategoriaCursoId
+        INNER JOIN
+            Professor p ON p.id = c.professorId
+        WHERE
+            c.Id = @Id
+        ",
+        (curso, professor) =>
+        {
+            curso.Professor = professor;
+            return curso;
+        },
+            new { Id = id },
+            splitOn: "Id"
+        );
+
+        var curso = cursos.FirstOrDefault();
+
+        if (curso != null)
+        {
+            var alunos = await connection.QueryAsync<Aluno>(
+                @"
+            SELECT a.id, a.nome, a.sobrenome
+            FROM Aluno a
+            INNER JOIN CursoAluno ca ON ca.AlunoId = a.Id
+            WHERE ca.CursoId = @CursoId
             ",
-            new { Id = id }
+                new { CursoId = id }
             );
+
+            curso.Alunos = alunos.ToList();
+        }
+
+        return curso;
     }
+
 
     public async Task<long> AdicionarCurso(Curso curso)
     {

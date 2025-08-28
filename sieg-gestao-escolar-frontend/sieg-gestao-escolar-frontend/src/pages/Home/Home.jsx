@@ -1,6 +1,7 @@
 // React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Serviços / API
 import { getTotalProfessores, getTotalAlunos, getTotalCursos } from '../../services/dashboard';
@@ -64,6 +65,12 @@ export default function Home() {
   const [totalAlunos, setTotalAlunos] = useState(0);
   const [totalProfessores, setTotalProfessores] = useState(0);
   const [totalCursos, setTotalCursos] = useState(0);
+
+  const chartData = [
+    { name: 'Alunos', total: totalAlunos },
+    { name: 'Professores', total: totalProfessores },
+    { name: 'Cursos', total: totalCursos },
+  ];
 
   const tocarSom = () => {
     const audio = new Audio(somAguia);

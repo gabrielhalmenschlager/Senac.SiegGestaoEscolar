@@ -41,8 +41,19 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
                 CategoriaCurso = curso.CategoriaCurso.ToString(),
                 Valor = curso.Valor,
                 CargaHoraria = curso.CargaHoraria,
-                ProfessorId = curso.ProfessorId,
-                Ativo = curso.Ativo
+                Ativo = curso.Ativo,
+                Professor = new ProfessorResponse
+                {
+                    Id = curso.Professor.Id,
+                    Nome = curso.Professor.Nome,
+                    Sobrenome = curso.Professor.Sobrenome
+                },
+                Alunos = curso.Alunos.Select(a => new AlunoResponse
+                {
+                    Id = a.Id,
+                    Nome = a.Nome,
+                    Sobrenome = a.Sobrenome
+                })
             };
         }
 
@@ -59,7 +70,10 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Cursos
                 CategoriaCurso = categoria,
                 Valor = adicionarCursoRequest.Valor,
                 CargaHoraria = adicionarCursoRequest.CargaHoraria,
-                ProfessorId = adicionarCursoRequest.ProfessorId,
+                Professor = new Professor
+                {
+                    Id = adicionarCursoRequest.ProfessorId
+                },
                 Ativo = true
             };
 

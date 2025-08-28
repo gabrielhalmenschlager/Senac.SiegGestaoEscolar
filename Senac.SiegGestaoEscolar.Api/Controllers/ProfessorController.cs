@@ -118,4 +118,19 @@ public class ProfessorController : Controller
             });
         }
     }
+
+    [HttpPost("vincular")]
+    public async Task<IActionResult> VincularProfessorCurso([FromBody] VincularProfessorRequest request)
+    {
+        try
+        {
+            await _professorService.VincularProfessorCurso(request);
+            return Ok(new { mensagem = "Professor vinculado ao curso com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { mensagem = ex.Message });
+        }
+    }
+
 }

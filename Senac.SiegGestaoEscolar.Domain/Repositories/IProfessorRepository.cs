@@ -13,4 +13,6 @@ public interface IProfessorRepository
     Task DeletarProfessor(long id);
 
     Task<int> ObterTotalProfessores();
+
+    Task VincularProfessorCurso(long idProfessor, long idCurso);
 }

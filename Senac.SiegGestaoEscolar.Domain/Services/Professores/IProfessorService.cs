@@ -1,4 +1,5 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Professores;
+﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Professores;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Professores;
 
 namespace Senac.SiegGestaoEscolar.Domain.Services.Professores;
@@ -16,4 +17,6 @@ public interface IProfessorService
     Task DeletarProfessor(long id);
 
     Task<int> ObterTotalProfessores();
+
+    Task VincularProfessorCurso(VincularProfessorRequest vincularProfessorRequest);
 }

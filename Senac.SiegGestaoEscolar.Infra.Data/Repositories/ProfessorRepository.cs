@@ -129,4 +129,15 @@ public class ProfessorRepository : IProfessorRepository
         );
         return total;
     }
+
+    public async Task VincularProfessorCurso(long idProfessor, long idCurso)
+    {
+        const string sql = @"
+        INSERT INTO CursoProfessor (CursoId, ProfessorId, DataVinculo)
+        VALUES (@IdCurso, @IdProfessor, GETDATE());
+    ";
+
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.ExecuteAsync(sql, new { IdProfessor = idProfessor, IdCurso = idCurso });
+    }
 }

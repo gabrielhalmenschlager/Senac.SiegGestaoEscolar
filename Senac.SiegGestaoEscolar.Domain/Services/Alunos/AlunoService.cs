@@ -7,10 +7,12 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
     public class AlunoService : IAlunoService
     {
         private readonly IAlunoRepository _alunoRepository;
+        private readonly ICursoRepository _cursoRepository;
 
-        public AlunoService(IAlunoRepository alunoRepository)
+        public AlunoService(IAlunoRepository alunoRepository, ICursoRepository cursoRepository)
         {
             _alunoRepository = alunoRepository;
+            _cursoRepository = cursoRepository;
         }
 
         public async Task<IEnumerable<ObterTodosAlunosResponse>> ObterTodosAlunos()
@@ -96,6 +98,25 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
         public async Task<int> ObterTotalAlunos()
         {
             return await _alunoRepository.ObterTotalAlunos();
+        }
+
+        public async Task VincularAlunoCurso(VincularAlunoRequest vincularAlunoRequest)
+        {
+            var aluno = await _alunoRepository.ObterAlunoDetalhado(vincularAlunoRequest.IdAluno);
+            if (aluno == null)
+                throw new Exception($"Aluno com ID {vincularAlunoRequest.IdAluno} não encontrado.");
+
+            if (!aluno.Ativo)
+                throw new Exception($"Aluno com ID {vincularAlunoRequest.IdAluno} está inativo e não pode ser vinculado a um curso.");
+
+            var curso = await _cursoRepository.ObterCursoDetalhado(vincularAlunoRequest.IdCurso);
+            if (curso == null)
+                throw new Exception($"Curso com ID {vincularAlunoRequest.IdCurso} não encontrado.");
+
+            if (!curso.Ativo)
+                throw new Exception($"Curso com ID {vincularAlunoRequest.IdCurso} está inativo e não pode receber novos alunos.");
+
+            await _alunoRepository.VincularAlunoCurso(vincularAlunoRequest.IdAluno, vincularAlunoRequest.IdCurso);
         }
     }
 }

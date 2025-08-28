@@ -16,4 +16,6 @@ public interface IAlunoService
     Task DeletarAluno(long id);
 
     Task<int> ObterTotalAlunos();
+
+    Task VincularAlunoCurso(VincularAlunoRequest vincularAlunoRequest);
 }

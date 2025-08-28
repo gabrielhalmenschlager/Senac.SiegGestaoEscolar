@@ -102,3 +102,23 @@ CREATE TABLE CursoAluno (
     CONSTRAINT FK_CursoAluno_Aluno FOREIGN KEY (AlunoId)
         REFERENCES Aluno(Id) ON DELETE CASCADE
 );
+
+ALTER TABLE CursoAluno
+ADD DataVinculo DATETIME NOT NULL DEFAULT GETDATE();
+
+-- ==========================
+-- Tabela de Associação: CursoProfessor (N:N)
+-- ==========================
+CREATE TABLE CursoProfessor (
+    CursoId BIGINT NOT NULL,
+    ProfessorId BIGINT NOT NULL,
+    DataVinculo DATETIME NOT NULL DEFAULT GETDATE(),
+
+    PRIMARY KEY (CursoId, ProfessorId),
+
+    CONSTRAINT FK_CursoProfessor_Curso FOREIGN KEY (CursoId)
+        REFERENCES Curso(Id) ON DELETE CASCADE,
+
+    CONSTRAINT FK_CursoProfessor_Professor FOREIGN KEY (ProfessorId)
+        REFERENCES Professor(Id) ON DELETE CASCADE
+);

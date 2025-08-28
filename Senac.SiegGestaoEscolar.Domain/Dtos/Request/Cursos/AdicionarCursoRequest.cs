@@ -15,6 +15,6 @@ public class AdicionarCursoRequest
     public int CargaHoraria { get; set; }
 
     public bool Ativo { get; set; }
-    public long? ProfessorId { get; set; }
 
+    public long ProfessorId { get; set; }
 }
