@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Dtos\Request\Cursos\VincularCursoRequest.cs" />
+    <Compile Remove="Dtos\Response\Cursos\CursoResponse.cs" />
   </ItemGroup>
 
   <ItemGroup>

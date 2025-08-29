@@ -34,3 +34,8 @@ export async function vincularAlunoCurso(dados) {
   const response = await api.post('/aluno/vincular', dados, { headers: getAuthHeader() });
   return response.data;
 }
+
+export async function desvincularAlunoCurso(dados) {
+  const response = await api.delete('/aluno/desvincular', dados, { headers: getAuthHeader() });
+  return response.data;
+}

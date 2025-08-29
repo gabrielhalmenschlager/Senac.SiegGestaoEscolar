@@ -15,4 +15,6 @@ public interface IAlunoRepository
     Task<int> ObterTotalAlunos();
 
     Task VincularAlunoCurso(long idAluno, long idCurso);
+
+    Task DesvincularAlunoCurso(long idAluno, long idCurso);
 }

@@ -108,4 +108,18 @@ public class AlunoController : Controller
             return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
         }
     }
+
+    [HttpDelete("desvincular")]
+    public async Task<IActionResult> DesvincularAlunoCurso([FromBody] VincularAlunoRequest request)
+    {
+        try
+        {
+            await _alunoService.DesvincularAlunoCurso(request.IdAluno, request.IdCurso);
+            return Ok(new { mensagem = "Aluno desvinculado com sucesso!" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { erro = ex.Message });
+        }
+    }
 }

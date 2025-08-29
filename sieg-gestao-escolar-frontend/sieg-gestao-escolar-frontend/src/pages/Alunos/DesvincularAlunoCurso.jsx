@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { obterTodosCursos } from "../../services/cursos";
-import { vincularAlunoCurso } from "../../services/alunos";
+import { obterAlunoDetalhado, desvincularAlunoCurso } from "../../services/alunos";
 import Footer from "../../components/Footer";
 import { GlobalStyle } from '../../components/GlobalStyle';
 import { PageContainer, MainContent } from "../../components/ui/Layout";
@@ -12,57 +11,50 @@ import Navbar from "../../components/NavBar";
 import { MainLogo } from "../../components/ui/Logo";
 import Logo from '../../assets/logo.png';
 
-export default function VincularAlunoCurso() {
-  const { id } = useParams();
+export default function DesvincularAlunoCurso() {
+  const { id } = useParams(); // id do aluno
   const navigate = useNavigate();
 
   const [cursos, setCursos] = useState([]);
-  const [cursoSelecionado, setCursoSelecionado] = useState("");
   const [erro, setErro] = useState("");
   const [mensagemSucesso, setMensagemSucesso] = useState("");
   const [carregando, setCarregando] = useState(false);
 
+  // Carrega os cursos vinculados ao aluno
   useEffect(() => {
     async function carregarCursos() {
       setCarregando(true);
       setErro("");
       try {
-        const dados = await obterTodosCursos();
-        setCursos(dados);
+        const dados = await obterAlunoDetalhado(id);
+        setCursos(dados.cursos || []); // supondo que o backend retorne os cursos vinculados
       } catch (e) {
-        setErro("Erro ao carregar cursos");
+        setErro("Erro ao carregar cursos do aluno");
         console.error(e);
       }
       setCarregando(false);
     }
     carregarCursos();
-  }, []);
+  }, [id]);
 
-  async function handleVincular() {
-    if (!cursoSelecionado) {
-      setErro("Selecione um curso antes de vincular");
-      setMensagemSucesso("");
-      return;
-    }
-
+  // Função para desvincular
+  const handleDesvincular = async (idCurso) => {
     setCarregando(true);
     setErro("");
     setMensagemSucesso("");
 
     try {
-      await vincularAlunoCurso({
-        idAluno: id,           
-        idCurso: cursoSelecionado
-      });
-      setMensagemSucesso("Aluno vinculado ao curso com sucesso!");
-      setCursoSelecionado("");
+      await desvincularAlunoCurso(id, idCurso);
+      setMensagemSucesso("Aluno desvinculado do curso com sucesso!");
+      // Atualiza a lista de cursos após desvincular
+      setCursos(cursos.filter(c => c.id !== idCurso));
     } catch (e) {
       console.error(e);
-      setErro("Erro ao vincular o aluno ao curso");
+      setErro("Erro ao desvincular o aluno do curso");
     }
 
     setCarregando(false);
-  }
+  };
 
   return (
     <>
@@ -72,35 +64,29 @@ export default function VincularAlunoCurso() {
         <MainContent>
           <Card>
             <MainLogo src={Logo} alt="Logo" />
-            <h2>Vincular Aluno a Curso</h2>
+            <h2>Desvincular Aluno de Curso</h2>
 
             {carregando && <p>Carregando...</p>}
             {erro && <ErrorText>{erro}</ErrorText>}
             {mensagemSucesso && <p style={{ color: 'green' }}>{mensagemSucesso}</p>}
 
             <InfoList>
-              <InfoItem>
-                <label htmlFor="curso">Selecione um curso:</label>
-                <select
-                  id="curso"
-                  value={cursoSelecionado}
-                  onChange={e => setCursoSelecionado(e.target.value)}
-                  style={{ width: '100%', padding: '5px', marginTop: '5px' }}
-                >
-                  <option value="">-- Selecione --</option>
-                  {cursos.map(curso => (
-                    <option key={curso.id} value={curso.id}>
-                      {curso.nome} ({curso.categoriaCurso})
-                    </option>
-                  ))}
-                </select>
-              </InfoItem>
+              {cursos.length === 0 && <p>Aluno não está vinculado a nenhum curso.</p>}
+              {cursos.map((curso) => (
+                <InfoItem key={curso.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span>{curso.nome} ({curso.categoriaCurso})</span>
+                  <BtnPrimary
+                    onClick={() => handleDesvincular(curso.id)}
+                    disabled={carregando}
+                    style={{ backgroundColor: "#dc3545" }}
+                  >
+                    Desvincular
+                  </BtnPrimary>
+                </InfoItem>
+              ))}
             </InfoList>
 
             <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
-              <BtnPrimary onClick={handleVincular} disabled={carregando}>
-                {carregando ? "Processando..." : "Vincular"}
-              </BtnPrimary>
               <BtnPrimary onClick={() => navigate("/alunos")}>Voltar</BtnPrimary>
             </div>
           </Card>

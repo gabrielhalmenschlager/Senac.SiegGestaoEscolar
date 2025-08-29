@@ -118,5 +118,18 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
 
             await _alunoRepository.VincularAlunoCurso(vincularAlunoRequest.IdAluno, vincularAlunoRequest.IdCurso);
         }
+
+        public async Task DesvincularAlunoCurso(long idAluno, long idCurso)
+        {
+            var aluno = await _alunoRepository.ObterAlunoDetalhado(idAluno);
+            if (aluno == null)
+                throw new Exception($"Aluno com ID {idAluno} não encontrado.");
+
+            var curso = await _cursoRepository.ObterCursoDetalhado(idCurso);
+            if (curso == null)
+                throw new Exception($"Curso com ID {idCurso} não encontrado.");
+
+            await _alunoRepository.DesvincularAlunoCurso(idAluno, idCurso);
+        }
     }
 }

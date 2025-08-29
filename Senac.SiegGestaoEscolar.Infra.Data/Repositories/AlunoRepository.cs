@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 using Senac.SiegGestaoEscolar.Infra.Data.DataBaseConfiguration;
 
@@ -128,6 +129,17 @@ public class AlunoRepository : IAlunoRepository
         var sql = @"
         INSERT INTO CursoAluno (CursoId, AlunoId, DataVinculo)
         VALUES (@IdCurso, @IdAluno, GETDATE());
+    ";
+
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.ExecuteAsync(sql, new { IdAluno = idAluno, IdCurso = idCurso });
+    }
+
+    public async Task DesvincularAlunoCurso(long idAluno, long idCurso)
+    {
+        var sql = @"
+        DELETE FROM CursoAluno
+        WHERE AlunoId = @IdAluno AND CursoId = @IdCurso;
     ";
 
         using var connection = _connectionFactory.CreateConnection();

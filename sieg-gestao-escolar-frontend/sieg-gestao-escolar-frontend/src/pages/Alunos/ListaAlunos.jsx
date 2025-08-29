@@ -142,6 +142,13 @@ export default function ListaAlunos() {
                           onClick={() => navigate(`/alunos/${aluno.id}/vincular`)}
                           title="Vincular a Curso"
                         />
+                        <BiLink
+                          size={20}
+                          color="#dc3545"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/alunos/${aluno.id}/desvincular`)}
+                          title="Desvincular de Curso"
+                        />
                       </td>
                     </tr>
                   ))}

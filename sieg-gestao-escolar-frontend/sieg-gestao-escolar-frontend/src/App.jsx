@@ -17,6 +17,7 @@ import ListaAlunos from './pages/Alunos/ListaAlunos';
 import CadastroAluno from './pages/Alunos/CadastroAluno';
 import DetalheAluno from './pages/Alunos/DetalheAluno';
 import VincularAlunoCurso from './pages/Alunos/VincularAlunoCurso';
+import DesvincularAlunoCurso from './pages/Alunos/DesvincularAlunoCurso';
 
 // Cursos
 import ListaCursos from './pages/Cursos/ListaCursos';
@@ -108,7 +109,23 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/alunos/:id/vincular" element={<VincularAlunoCurso />} />
+      <Route
+       path="/alunos/:id/vincular" 
+       element={
+          <ProtectedRoute>
+            <VincularAlunoCurso />
+          </ProtectedRoute>
+       } 
+       />
+
+      <Route
+        path="/alunos/:id/desvincular"
+        element={
+          <ProtectedRoute>
+            <DesvincularAlunoCurso />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Cursos */}
       <Route
