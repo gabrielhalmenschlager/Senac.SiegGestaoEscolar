@@ -22,7 +22,6 @@ public class ProfessorController : Controller
     public async Task<IActionResult> ObterTodosProfessores()
     {
         var professoresResponse = await _professorService.ObterTodosProfessores();
-     
         return Ok(professoresResponse);
     }
 
@@ -32,73 +31,11 @@ public class ProfessorController : Controller
         try
         {
             var professorResponse = await _professorService.ObterProfessorDetalhado(id);
-            
             return Ok(professorResponse);
         }
         catch (Exception ex)
         {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
-        }
-    }
-
-    [HttpPost("/adicionar/professor")]
-    public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
-    {
-        try
-        {
-            var adicionarProfessorResponse = await _professorService.AdicionarProfessor(adicionarProfessorRequest);
-
-            return Ok(adicionarProfessorResponse);
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
-        }
-    }
-
-    [HttpPut("/{id}/atualizar/")]
-    public async Task<IActionResult> AtualizarProfessor([FromRoute] long id, [FromBody] AtualizarProfessorRequest atualizarProfessorRequest)
-    {
-        try
-        {
-            await _professorService.AtualizarProfessor(id, atualizarProfessorRequest);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
-        }
-    }
-
-    [HttpDelete("/{id}/deletar/")]
-    public async Task<IActionResult> DeletarProfessor([FromRoute] long id)
-    {
-        try
-        {
-            await _professorService.DeletarProfessor(id);
-     
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -112,10 +49,49 @@ public class ProfessorController : Controller
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse
-            {
-                Mensagem = ex.Message
-            });
+            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpPost("/adicionar/professor")]
+    public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
+    {
+        try
+        {
+            var adicionarProfessorResponse = await _professorService.AdicionarProfessor(adicionarProfessorRequest);
+            return Ok(adicionarProfessorResponse);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpPut("/{id}/atualizar/")]
+    public async Task<IActionResult> AtualizarProfessor([FromRoute] long id, [FromBody] AtualizarProfessorRequest atualizarProfessorRequest)
+    {
+        try
+        {
+            await _professorService.AtualizarProfessor(id, atualizarProfessorRequest);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpDelete("/{id}/deletar/")]
+    public async Task<IActionResult> DeletarProfessor([FromRoute] long id)
+    {
+        try
+        {
+            await _professorService.DeletarProfessor(id);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -132,5 +108,4 @@ public class ProfessorController : Controller
             return StatusCode(500, new { mensagem = ex.Message });
         }
     }
-
 }

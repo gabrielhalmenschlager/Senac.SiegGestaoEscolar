@@ -22,83 +22,20 @@ public class AlunoController : Controller
     public async Task<IActionResult> ObterTodosAlunos()
     {
         var alunosResponse = await _alunoService.ObterTodosAlunos();
-     
         return Ok(alunosResponse);
     }
 
-    [HttpGet("/{id}/aluno")]
+    [HttpGet("{id}/aluno")]
     public async Task<IActionResult> ObterAlunoDetalhado(long id)
     {
         try
         {
             var alunoResponse = await _alunoService.ObterAlunoDetalhado(id);
-
             return Ok(alunoResponse);
         }
         catch (Exception ex)
         {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
-        }
-    }
-
-    [HttpPost("/adicionar/aluno")]
-    public async Task<IActionResult> AdicionarAluno([FromBody] AdicionarAlunoRequest adicionarAlunoRequest)
-    {
-        try
-        {
-            var adicionarAlunoResponse = await _alunoService.AdicionarAluno(adicionarAlunoRequest);
-            
-            return Ok(adicionarAlunoResponse);
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return BadRequest(erroResponse);
-        }
-    }
-
-    [HttpPut("/aluno/{id}/atualizar")]
-    public async Task<IActionResult> AtualizarAluno(long id, [FromBody] AtualizarAlunoRequest atualizarAlunoRequest)
-    {
-        try
-        {
-            await _alunoService.AtualizarAluno(id, atualizarAlunoRequest);
-            
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return BadRequest(erroResponse);
-        }
-    }
-
-    [HttpDelete("/aluno/{id}/deletar")]
-    public async Task<IActionResult> DeletarAluno([FromRoute] long id)
-    {
-        try
-        {
-            await _alunoService.DeletarAluno(id);
-            
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -112,10 +49,49 @@ public class AlunoController : Controller
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse
-            {
-                Mensagem = ex.Message
-            });
+            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpPost("adicionar")]
+    public async Task<IActionResult> AdicionarAluno([FromBody] AdicionarAlunoRequest adicionarAlunoRequest)
+    {
+        try
+        {
+            var response = await _alunoService.AdicionarAluno(adicionarAlunoRequest);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpPut("{id}/atualizar")]
+    public async Task<IActionResult> AtualizarAluno(long id, [FromBody] AtualizarAlunoRequest atualizarAlunoRequest)
+    {
+        try
+        {
+            await _alunoService.AtualizarAluno(id, atualizarAlunoRequest);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id}/deletar")]
+    public async Task<IActionResult> DeletarAluno(long id)
+    {
+        try
+        {
+            await _alunoService.DeletarAluno(id);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -129,10 +105,7 @@ public class AlunoController : Controller
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse
-            {
-                Mensagem = ex.Message
-            });
+            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
         }
     }
 }

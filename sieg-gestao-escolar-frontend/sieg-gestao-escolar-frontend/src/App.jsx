@@ -16,6 +16,7 @@ import DetalheProfessor from './pages/Professores/DetalheProfessor';
 import ListaAlunos from './pages/Alunos/ListaAlunos';
 import CadastroAluno from './pages/Alunos/CadastroAluno';
 import DetalheAluno from './pages/Alunos/DetalheAluno';
+import VincularAlunoCurso from './pages/Alunos/VincularAlunoCurso';
 
 // Cursos
 import ListaCursos from './pages/Cursos/ListaCursos';
@@ -107,6 +108,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/alunos/:id/vincular" element={<VincularAlunoCurso />} />
 
       {/* Cursos */}
       <Route

@@ -18,7 +18,7 @@ import { BtnPrimary } from "../../components/ui/Buttons";
 import ErrorMessage from '../../components/ui/ErrorMessage';
 
 // Importando ícones
-import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
+import { BiDetail, BiEdit, BiTrash, BiLink } from 'react-icons/bi';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 export default function ListaAlunos() {
@@ -134,6 +134,13 @@ export default function ListaAlunos() {
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleExcluir(aluno.id)}
                           title="Excluir"
+                        />
+                        <BiLink
+                          size={20}
+                          color="#28a745"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => navigate(`/alunos/${aluno.id}/vincular`)}
+                          title="Vincular a Curso"
                         />
                       </td>
                     </tr>

@@ -11,7 +11,7 @@ export async function obterTodosAlunos() {
 }
 
 export async function obterAlunoDetalhado(id) {
-  const response = await api.get(`/${id}/aluno`, { headers: getAuthHeader() });
+  const response = await api.get(`aluno/${id}/aluno`, { headers: getAuthHeader() });
   return response.data;
 }
 
@@ -27,5 +27,10 @@ export async function atualizarAluno(id, aluno) {
 
 export async function deletarAluno(id) {
   const response = await api.delete(`/aluno/${id}/deletar`, { headers: getAuthHeader() });
+  return response.data;
+}
+
+export async function vincularAlunoCurso(dados) {
+  const response = await api.post('/aluno/vincular', dados, { headers: getAuthHeader() });
   return response.data;
 }

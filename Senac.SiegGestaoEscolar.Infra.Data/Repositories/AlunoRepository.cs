@@ -125,7 +125,7 @@ public class AlunoRepository : IAlunoRepository
 
     public async Task VincularAlunoCurso(long idAluno, long idCurso)
     {
-        const string sql = @"
+        var sql = @"
         INSERT INTO CursoAluno (CursoId, AlunoId, DataVinculo)
         VALUES (@IdCurso, @IdAluno, GETDATE());
     ";

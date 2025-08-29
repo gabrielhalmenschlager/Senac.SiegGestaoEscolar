@@ -22,7 +22,6 @@ public class CursoController : Controller
     public async Task<IActionResult> ObterTodosCursos()
     {
         var cursosResponse = await _cursoService.ObterTodosCursos();
-
         return Ok(cursosResponse);
     }
 
@@ -32,73 +31,11 @@ public class CursoController : Controller
         try
         {
             var cursoResponse = await _cursoService.ObterCursoDetalhado(id);
-            
             return Ok(cursoResponse);
         }
         catch (Exception ex)
         {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return NotFound(erroResponse);
-        }
-    }
-
-    [HttpPost("/adicionar/curso")]
-    public async Task<IActionResult> AdicionarCurso([FromBody] AdicionarCursoRequest adicionarCursoRequest)
-    {
-        try
-        {
-            var adicionarCursoResponse = await _cursoService.AdicionarCurso(adicionarCursoRequest);
-            
-            return Ok(adicionarCursoResponse);
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return BadRequest(erroResponse);
-        }
-    }
-
-    [HttpPut("{id}/atualizar/")]
-    public async Task<IActionResult> AtualizarCurso([FromRoute] long id, [FromBody] AtualizarCursoRequest atualizarCursoRequest)
-    {
-        try
-        {
-            await _cursoService.AtualizarCurso(id, atualizarCursoRequest);
-            
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return BadRequest(erroResponse);
-        }
-    }
-
-    [HttpDelete("{id}/deletar")]
-    public async Task<IActionResult> DeletarCurso([FromRoute] long id)
-    {
-        try
-        {
-            await _cursoService.DeletarCurso(id);
-            
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            var erroResponse = new ErroResponse
-            {
-                Mensagem = ex.Message,
-            };
-            return BadRequest(erroResponse);
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -112,10 +49,7 @@ public class CursoController : Controller
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse
-            {
-                Mensagem = ex.Message
-            });
+            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -136,5 +70,46 @@ public class CursoController : Controller
             return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
         }
     }
-}
 
+    [HttpPost("/adicionar/curso")]
+    public async Task<IActionResult> AdicionarCurso([FromBody] AdicionarCursoRequest adicionarCursoRequest)
+    {
+        try
+        {
+            var adicionarCursoResponse = await _cursoService.AdicionarCurso(adicionarCursoRequest);
+            return Ok(adicionarCursoResponse);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpPut("{id}/atualizar/")]
+    public async Task<IActionResult> AtualizarCurso([FromRoute] long id, [FromBody] AtualizarCursoRequest atualizarCursoRequest)
+    {
+        try
+        {
+            await _cursoService.AtualizarCurso(id, atualizarCursoRequest);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id}/deletar")]
+    public async Task<IActionResult> DeletarCurso([FromRoute] long id)
+    {
+        try
+        {
+            await _cursoService.DeletarCurso(id);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
+        }
+    }
+}
