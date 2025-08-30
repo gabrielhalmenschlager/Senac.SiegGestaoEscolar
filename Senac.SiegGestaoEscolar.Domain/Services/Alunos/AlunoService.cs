@@ -1,4 +1,5 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
+﻿using System.Collections.Generic;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 
@@ -35,6 +36,8 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
             var aluno = await _alunoRepository.ObterAlunoDetalhado(id);
             ValidarSeAlunoExiste(aluno, id);
 
+            var cursos = await _alunoRepository.ObterCursosPorAluno(id);
+
             return new ObterAlunoDetalhadoResponse
             {
                 Id = aluno.Id,
@@ -44,7 +47,13 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
                 Email = aluno.Email,
                 Telefone = aluno.Telefone,
                 DataMatricula = aluno.DataMatricula,
-                Ativo = aluno.Ativo
+                Ativo = aluno.Ativo,
+                Cursos = cursos.Select(c => new CursoResponse
+                {
+                    Id = c.Id,
+                    Nome = c.Nome,
+                    CategoriaCurso = c.CategoriaCurso.ToString()
+                })
             };
         }
 
@@ -130,6 +139,17 @@ namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos
                 throw new Exception($"Curso com ID {idCurso} não encontrado.");
 
             await _alunoRepository.DesvincularAlunoCurso(idAluno, idCurso);
+        }
+
+        public async Task<IEnumerable<CursoResponse>> ObterCursosPorAluno(long id)
+        {
+            var cursos = await _alunoRepository.ObterCursosPorAluno(id);
+            return cursos.Select(c => new CursoResponse
+            {
+                Id = c.Id,
+                Nome = c.Nome,
+                CategoriaCurso = c.CategoriaCurso.ToString()
+            });
         }
     }
 }

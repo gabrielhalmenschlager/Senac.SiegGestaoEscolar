@@ -17,4 +17,6 @@ public interface IAlunoRepository
     Task VincularAlunoCurso(long idAluno, long idCurso);
 
     Task DesvincularAlunoCurso(long idAluno, long idCurso);
+
+    Task<IEnumerable<Curso>> ObterCursosPorAluno(long id);
 }

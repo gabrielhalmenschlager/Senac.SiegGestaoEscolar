@@ -17,4 +17,15 @@ public class ObterAlunoDetalhadoResponse
     public DateTime DataMatricula { get; set; }
 
     public bool Ativo { get; set; }
+
+    public IEnumerable<CursoResponse> Cursos { get; set; } 
+}
+
+public class CursoResponse
+{
+    public long Id { get; set; }
+
+    public string Nome { get; set; }
+
+    public string CategoriaCurso { get; set; }
 }

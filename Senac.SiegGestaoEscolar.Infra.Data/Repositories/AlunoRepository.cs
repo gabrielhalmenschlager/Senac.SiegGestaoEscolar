@@ -145,4 +145,22 @@ public class AlunoRepository : IAlunoRepository
         using var connection = _connectionFactory.CreateConnection();
         await connection.ExecuteAsync(sql, new { IdAluno = idAluno, IdCurso = idCurso });
     }
+
+    public async Task<IEnumerable<Curso>> ObterCursosPorAluno(long idAluno)
+    {
+        var sql = @"
+        SELECT 
+            c.id,
+            c.nome,
+            cc.nome AS CategoriaCurso
+        FROM CursoAluno ca
+        INNER JOIN Curso c ON ca.CursoId = c.id
+        INNER JOIN CategoriaCurso cc ON cc.id = c.CategoriaCursoId
+        WHERE ca.AlunoId = @IdAluno
+    ";
+
+        using var connection = _connectionFactory.CreateConnection();
+        return await connection.QueryAsync<Curso>(sql, new { IdAluno = idAluno });
+    }
+
 }

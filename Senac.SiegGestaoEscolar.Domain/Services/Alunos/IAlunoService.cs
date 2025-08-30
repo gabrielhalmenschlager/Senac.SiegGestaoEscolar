@@ -1,4 +1,5 @@
-﻿using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
+﻿using System.Collections;
+using Senac.SiegGestaoEscolar.Domain.Dtos.Request.Alunos;
 using Senac.SiegGestaoEscolar.Domain.Dtos.Response.Alunos;
 
 namespace Senac.SiegGestaoEscolar.Domain.Services.Alunos;
@@ -20,4 +21,6 @@ public interface IAlunoService
     Task VincularAlunoCurso(VincularAlunoRequest vincularAlunoRequest);
 
     Task DesvincularAlunoCurso(long idAluno, long idCurso);
+
+    Task<IEnumerable<CursoResponse>> ObterCursosPorAluno(long id);
 }
