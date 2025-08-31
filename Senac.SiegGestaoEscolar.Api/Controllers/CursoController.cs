@@ -23,13 +23,12 @@ public class CursoController : Controller
     {
         try
         {
-            await _cursoService.ObterTodosCursos();
-            return Ok(new { Mensagem = "Cursos obtidos com sucesso." });
+            var cursos = await _cursoService.ObterTodosCursos();
+            return Ok(cursos);
         }
         catch (Exception ex)
         {
             return NotFound(new ErroResponse { Mensagem = ex.Message });
-
         }
     }
 
@@ -38,8 +37,8 @@ public class CursoController : Controller
     {
         try
         {
-            await _cursoService.ObterCursoDetalhado(id);
-            return Ok(new { Mensagem = "Curso obtido com sucesso." });
+            var curso = await _cursoService.ObterCursoDetalhado(id);
+            return Ok(curso);
         }
         catch (Exception ex)
         {
@@ -52,8 +51,8 @@ public class CursoController : Controller
     {
         try
         {
-            await _cursoService.ObterTotalCursos();
-            return Ok(new { Mensagem = "Total de cursos obtidos com sucesso." });
+            var total = await _cursoService.ObterTotalCursos();
+            return Ok(total);
         }
         catch (Exception ex)
         {
@@ -69,8 +68,9 @@ public class CursoController : Controller
             var alunos = await _cursoService.ObterAlunosPorCurso(cursoId);
 
             if (!alunos.Any())
-                return NotFound(new { Mensagem = "Nenhum aluno encontrado para este curso." });
-            return Ok(new { Mensagem = "Aluno obtido por curso com sucesso." });
+                return NotFound(new { mensagem = "Nenhum aluno encontrado para este curso." });
+
+            return Ok(alunos);
         }
         catch (Exception ex)
         {
@@ -83,8 +83,8 @@ public class CursoController : Controller
     {
         try
         {
-            await _cursoService.AdicionarCurso(adicionarCursoRequest);
-            return Ok(new { Mensagem = "Curso adicionado com sucesso." });
+            var curso = await _cursoService.AdicionarCurso(adicionarCursoRequest);
+            return Ok(curso);
         }
         catch (Exception ex)
         {
@@ -98,7 +98,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.AtualizarCurso(id, atualizarCursoRequest);
-            return Ok(new { Mensagem = "Curso atualizado com sucesso." });
+            return Ok(atualizarCursoRequest);
         }
         catch (Exception ex)
         {
@@ -112,7 +112,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.DeletarCurso(id);
-            return Ok(new { Mensagem = "Curso deletado com sucesso." });
+            return Ok(id);
         }
         catch (Exception ex)
         {

@@ -23,14 +23,13 @@ public class ProfessorController : Controller
     {
         try
         {
-            await _professorService.ObterTodosProfessores();
-            return Ok(new { Mensagem = "Professores obtidos com sucesso." });
+            var professores = await _professorService.ObterTodosProfessores();
+            return Ok(professores);
         }
         catch (Exception ex)
         {
             return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
-
     }
 
     [HttpGet("/{id}/professor")]
@@ -38,8 +37,8 @@ public class ProfessorController : Controller
     {
         try
         {
-            await _professorService.ObterProfessorDetalhado(id);
-            return Ok(new { Mensagem = "Professor obtido com sucesso." });
+            var professor = await _professorService.ObterProfessorDetalhado(id);
+            return Ok(professor);
         }
         catch (Exception ex)
         {
@@ -52,8 +51,8 @@ public class ProfessorController : Controller
     {
         try
         {
-            await _professorService.ObterTotalProfessores();
-            return Ok(new { Mensagem = "Total de professores obtidos com sucesso." });
+            var total = await _professorService.ObterTotalProfessores();
+            return Ok(total);
         }
         catch (Exception ex)
         {
@@ -66,8 +65,8 @@ public class ProfessorController : Controller
     {
         try
         {
-            await _professorService.AdicionarProfessor(adicionarProfessorRequest);
-            return Ok(new { Mensagem = "Professor adicionado com sucesso." });
+            var professor = await _professorService.AdicionarProfessor(adicionarProfessorRequest);
+            return Ok(professor);
         }
         catch (Exception ex)
         {
@@ -81,7 +80,7 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.AtualizarProfessor(id, atualizarProfessorRequest);
-            return Ok(new { Mensagem = "Professor atualizado com sucesso." });
+            return Ok(atualizarProfessorRequest);
         }
         catch (Exception ex)
         {
@@ -95,7 +94,7 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.DeletarProfessor(id);
-            return Ok(new { Mensagem = "Professor deletado com sucesso." });
+            return Ok(id);
         }
         catch (Exception ex)
         {
@@ -109,7 +108,7 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.VincularProfessorCurso(request);
-            return Ok(new { mensagem = "Professor vinculado ao curso com sucesso." });
+            return Ok(request);
         }
         catch (Exception ex)
         {
