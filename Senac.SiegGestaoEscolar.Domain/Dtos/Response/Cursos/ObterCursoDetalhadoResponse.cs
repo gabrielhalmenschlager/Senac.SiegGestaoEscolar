@@ -26,13 +26,18 @@ public class ObterCursoDetalhadoResponse
 public class AlunoResponse
 {
     public long Id { get; set; }
+
     public string Nome { get; set; }
+
     public string Sobrenome { get; set; }
+
 }
 
 public class ProfessorResponse
 {
     public long Id { get; set; }
+
     public string Nome { get; set; }
+
     public string Sobrenome { get; set; }
 }
