@@ -182,7 +182,7 @@ public class CursoRepository : ICursoRepository
             .QueryAsync<Aluno>(
             @"
             SELECT 
-               , a.id
+                 a.id
                , a.nome
                , a.sobrenome
             FROM 
