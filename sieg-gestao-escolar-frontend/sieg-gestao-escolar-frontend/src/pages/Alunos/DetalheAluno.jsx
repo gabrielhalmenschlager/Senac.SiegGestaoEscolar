@@ -1,4 +1,3 @@
-// React e hooks
 import { useEffect, useState } from "react"; 
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -20,8 +19,16 @@ import { ErrorText } from "../../components/ui/Text";
 // Assets
 import Logo from "../../assets/logo.png";
 
-// Importando ícones
-import { BiUser, BiCalendar, BiEnvelope, BiPhone, BiCheckCircle, BiXCircle } from "react-icons/bi";
+// Ícones
+import { 
+  BiUser, 
+  BiCalendar, 
+  BiEnvelope, 
+  BiPhone, 
+  BiCheckCircle, 
+  BiXCircle, 
+  BiBook 
+} from "react-icons/bi";
 
 export default function DetalheAluno() {
   const { id } = useParams();
@@ -48,7 +55,7 @@ export default function DetalheAluno() {
 
   return (
     <>
-    <GlobalStyle />
+      <GlobalStyle />
       <PageContainer>
         <Navbar />
         <MainContent>
@@ -60,16 +67,32 @@ export default function DetalheAluno() {
             {erro && <ErrorText>{erro}</ErrorText>}
 
             {aluno && (
-              <InfoList>
-                <InfoItem><BiUser /> <strong>Nome:</strong> {aluno.nome} {aluno.sobrenome}</InfoItem>
-                <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(aluno.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
-                <InfoItem><BiEnvelope /> <strong>Email:</strong> {aluno.email}</InfoItem>
-                <InfoItem><BiPhone /> <strong>Telefone:</strong> {aluno.telefone}</InfoItem>
-                <InfoItem>
-                  {aluno.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}
-                  <strong>Status:</strong> {aluno.ativo ? "Ativo" : "Inativo"}
-                </InfoItem>
-              </InfoList>
+              <>
+                <InfoList>
+                  <InfoItem><BiUser /> <strong>Nome:</strong> {aluno.nome} {aluno.sobrenome}</InfoItem>
+                  <InfoItem><BiCalendar /> <strong>Data de Nascimento:</strong> {new Date(aluno.dataDeNascimento).toLocaleDateString("pt-BR")}</InfoItem>
+                  <InfoItem><BiEnvelope /> <strong>Email:</strong> {aluno.email}</InfoItem>
+                  <InfoItem><BiPhone /> <strong>Telefone:</strong> {aluno.telefone}</InfoItem>
+                  <InfoItem>
+                    {aluno.ativo ? <BiCheckCircle color="#28a745" /> : <BiXCircle color="#dc3545" />}
+                    <strong>Status:</strong> {aluno.ativo ? "Ativo" : "Inativo"}
+                  </InfoItem>
+                </InfoList>
+
+                {/* Listagem de cursos vinculados */}
+                <h3 style={{ marginTop: "15px" }}>Cursos Vinculados</h3>
+                {aluno.cursos && aluno.cursos.length > 0 ? (
+                  <InfoList>
+                    {aluno.cursos.map((curso) => (
+                      <InfoItem key={curso.id}>
+                        <BiBook />{curso.nome} — {curso.categoriaCurso}
+                      </InfoItem>
+                    ))}
+                  </InfoList>
+                ) : (
+                  <p>Nenhum curso vinculado a este aluno.</p>
+                )}
+              </>
             )}
 
             <BtnVoltar onClick={() => navigate("/alunos")}>

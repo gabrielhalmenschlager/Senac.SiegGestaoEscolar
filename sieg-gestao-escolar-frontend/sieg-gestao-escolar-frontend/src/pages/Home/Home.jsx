@@ -149,7 +149,7 @@ export default function Home() {
                   </StatsIcon>
                   <StatsContent>
                     <StatsNumber>{totalAlunos}</StatsNumber>
-                    <StatsLabel>Alunos Ativos</StatsLabel>
+                    <StatsLabel>Total de alunos</StatsLabel>
                   </StatsContent>
                 </StatsHeader>
                 <StatsFooter>
@@ -188,7 +188,7 @@ export default function Home() {
                   </StatsIcon>
                   <StatsContent>
                     <StatsNumber>{totalProfessores}</StatsNumber>
-                    <StatsLabel>Professores</StatsLabel>
+                    <StatsLabel>Total de professores</StatsLabel>
                   </StatsContent>
                 </StatsHeader>
                 <StatsFooter>
@@ -227,7 +227,7 @@ export default function Home() {
                   </StatsIcon>
                   <StatsContent>
                     <StatsNumber>{totalCursos}</StatsNumber>
-                    <StatsLabel>Cursos Ativos</StatsLabel>
+                    <StatsLabel>Total de cursos</StatsLabel>
                   </StatsContent>
                 </StatsHeader>
                 <StatsFooter>
