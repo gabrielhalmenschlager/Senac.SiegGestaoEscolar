@@ -1,6 +1,6 @@
 # Sieg Gestão Escolar
 
-![Logo do Projeto](sieg-gestao-escolar-frontend/sieg-gestao-escolar-frontend/src/assets/logo.png)
+<img src="sieg-gestao-escolar-frontend/sieg-gestao-escolar-frontend/src/assets/logo.png" alt="Logo do Projeto" width="200" height="auto"/>
 
 ## 📌 Descrição do Projeto
 O **Sieg Gestão Escolar** é um sistema de gestão escolar desenvolvido no contexto do **Projeto Integrador do curso Técnico em Informática**, com o objetivo de controlar professores, alunos e cursos, permitindo operações de cadastro, edição, exclusão, vinculação e listagem com filtros avançados.  
