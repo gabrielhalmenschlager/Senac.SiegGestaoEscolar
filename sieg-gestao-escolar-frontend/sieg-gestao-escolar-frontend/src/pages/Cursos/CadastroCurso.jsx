@@ -116,19 +116,20 @@ export default function CadastroCurso() {
                   name="nome"
                   value={form.nome}
                   onChange={handleChange}
+                  style={{ width: '570px', resize: 'none' }}
                   required
                 />
               </FormGroup>
 
               <FormGroup>
                 <label htmlFor="descricao">Descrição:</label>
-                <textarea
+                <input
                   id="descricao"
                   name="descricao"
                   value={form.descricao}
                   onChange={handleChange}
                   rows={4}
-                  style={{ width: '600px', resize: 'none' }}
+                  style={{ width: '570px', resize: 'none' }}
                   required
                 />
               </FormGroup>
@@ -157,6 +158,7 @@ export default function CadastroCurso() {
                   name="valor"
                   value={form.valor}
                   onChange={handleChange}
+                  style={{ width: '570px', resize: 'none' }}
                   required
                 />
               </FormGroup>
@@ -169,6 +171,7 @@ export default function CadastroCurso() {
                   name="cargaHoraria"
                   value={form.cargaHoraria}
                   onChange={handleChange}
+                  style={{ width: '570px', resize: 'none' }}
                   required
                 />
               </FormGroup>
