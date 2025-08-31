@@ -21,8 +21,16 @@ public class ProfessorController : Controller
     [HttpGet]
     public async Task<IActionResult> ObterTodosProfessores()
     {
-        var professoresResponse = await _professorService.ObterTodosProfessores();
-        return Ok(professoresResponse);
+        try
+        {
+            await _professorService.ObterTodosProfessores();
+            return Ok(new { Mensagem = "Professores obtidos com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
+        }
+
     }
 
     [HttpGet("/{id}/professor")]
@@ -30,8 +38,8 @@ public class ProfessorController : Controller
     {
         try
         {
-            var professorResponse = await _professorService.ObterProfessorDetalhado(id);
-            return Ok(professorResponse);
+            await _professorService.ObterProfessorDetalhado(id);
+            return Ok(new { Mensagem = "Professor obtido com sucesso." });
         }
         catch (Exception ex)
         {
@@ -44,12 +52,12 @@ public class ProfessorController : Controller
     {
         try
         {
-            var total = await _professorService.ObterTotalProfessores();
-            return Ok(new { total });
+            await _professorService.ObterTotalProfessores();
+            return Ok(new { Mensagem = "Total de professores obtidos com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -58,12 +66,12 @@ public class ProfessorController : Controller
     {
         try
         {
-            var adicionarProfessorResponse = await _professorService.AdicionarProfessor(adicionarProfessorRequest);
-            return Ok(adicionarProfessorResponse);
+            await _professorService.AdicionarProfessor(adicionarProfessorRequest);
+            return Ok(new { Mensagem = "Professor adicionado com sucesso." });
         }
         catch (Exception ex)
         {
-            return NotFound(new ErroResponse { Mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -73,11 +81,11 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.AtualizarProfessor(id, atualizarProfessorRequest);
-            return Ok();
+            return Ok(new { Mensagem = "Professor atualizado com sucesso." });
         }
         catch (Exception ex)
         {
-            return NotFound(new ErroResponse { Mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -87,11 +95,11 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.DeletarProfessor(id);
-            return Ok();
+            return Ok(new { Mensagem = "Professor deletado com sucesso." });
         }
         catch (Exception ex)
         {
-            return NotFound(new ErroResponse { Mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -105,7 +113,7 @@ public class ProfessorController : Controller
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 }

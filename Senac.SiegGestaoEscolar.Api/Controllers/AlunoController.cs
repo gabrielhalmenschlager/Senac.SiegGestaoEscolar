@@ -21,8 +21,15 @@ public class AlunoController : Controller
     [HttpGet]
     public async Task<IActionResult> ObterTodosAlunos()
     {
-        var alunosResponse = await _alunoService.ObterTodosAlunos();
-        return Ok(alunosResponse);
+        try
+        {
+            await _alunoService.ObterTodosAlunos();
+            return Ok(new { Mensagem = "Alunos obtidos com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
+        }
     }
 
     [HttpGet("{id}/aluno")]
@@ -30,8 +37,8 @@ public class AlunoController : Controller
     {
         try
         {
-            var alunoResponse = await _alunoService.ObterAlunoDetalhado(id);
-            return Ok(alunoResponse);
+            await _alunoService.ObterAlunoDetalhado(id);
+            return Ok(new { Mensagem = "Aluno obtido com sucesso." });
         }
         catch (Exception ex)
         {
@@ -44,12 +51,12 @@ public class AlunoController : Controller
     {
         try
         {
-            var total = await _alunoService.ObterTotalAlunos();
-            return Ok(new { total });
+            await _alunoService.ObterTotalAlunos();
+            return Ok(new { Mensagem = "Total de alunos obtidos com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -58,8 +65,8 @@ public class AlunoController : Controller
     {
         try
         {
-            var response = await _alunoService.AdicionarAluno(adicionarAlunoRequest);
-            return Ok(response);
+            await _alunoService.AdicionarAluno(adicionarAlunoRequest);
+            return Ok(new { Mensagem = "Aluno adicionado com sucesso." });
         }
         catch (Exception ex)
         {
@@ -73,7 +80,7 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.AtualizarAluno(id, atualizarAlunoRequest);
-            return Ok();
+            return Ok(new { Mensagem = "Aluno atualizado com sucesso." });
         }
         catch (Exception ex)
         {
@@ -87,11 +94,11 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.DeletarAluno(id);
-            return Ok();
+            return Ok(new { Mensagem = "Aluno deletado com sucesso." });
         }
         catch (Exception ex)
         {
-            return NotFound(new ErroResponse { Mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -101,11 +108,11 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.VincularAlunoCurso(request);
-            return Ok(new { mensagem = "Aluno vinculado ao curso com sucesso." });
+            return Ok(new { Mensagem = "Aluno vinculado ao curso com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -115,11 +122,11 @@ public class AlunoController : Controller
         try
         {
             await _alunoService.DesvincularAlunoCurso(request.IdAluno, request.IdCurso);
-            return Ok(new { mensagem = "Aluno desvinculado com sucesso!" });
+            return Ok(new { Mensagem = "Aluno desvinculado ao curso com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { erro = ex.Message });
+            return BadRequest(new ErroResponse { Mensagem = ex.Message });
         }
     }
 }

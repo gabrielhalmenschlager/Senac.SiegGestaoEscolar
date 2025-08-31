@@ -21,8 +21,16 @@ public class CursoController : Controller
     [HttpGet]
     public async Task<IActionResult> ObterTodosCursos()
     {
-        var cursosResponse = await _cursoService.ObterTodosCursos();
-        return Ok(cursosResponse);
+        try
+        {
+            await _cursoService.ObterTodosCursos();
+            return Ok(new { Mensagem = "Cursos obtidos com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
+
+        }
     }
 
     [HttpGet("/{id}/curso")]
@@ -30,8 +38,8 @@ public class CursoController : Controller
     {
         try
         {
-            var cursoResponse = await _cursoService.ObterCursoDetalhado(id);
-            return Ok(cursoResponse);
+            await _cursoService.ObterCursoDetalhado(id);
+            return Ok(new { Mensagem = "Curso obtido com sucesso." });
         }
         catch (Exception ex)
         {
@@ -44,12 +52,12 @@ public class CursoController : Controller
     {
         try
         {
-            var total = await _cursoService.ObterTotalCursos();
-            return Ok(new { total });
+            await _cursoService.ObterTotalCursos();
+            return Ok(new { Mensagem = "Total de cursos obtidos com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -61,13 +69,12 @@ public class CursoController : Controller
             var alunos = await _cursoService.ObterAlunosPorCurso(cursoId);
 
             if (!alunos.Any())
-                return NotFound(new { mensagem = "Nenhum aluno encontrado para este curso." });
-
-            return Ok(alunos);
+                return NotFound(new { Mensagem = "Nenhum aluno encontrado para este curso." });
+            return Ok(new { Mensagem = "Aluno obtido por curso com sucesso." });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErroResponse { Mensagem = ex.Message });
+            return NotFound(new ErroResponse { Mensagem = ex.Message });
         }
     }
 
@@ -76,8 +83,8 @@ public class CursoController : Controller
     {
         try
         {
-            var adicionarCursoResponse = await _cursoService.AdicionarCurso(adicionarCursoRequest);
-            return Ok(adicionarCursoResponse);
+            await _cursoService.AdicionarCurso(adicionarCursoRequest);
+            return Ok(new { Mensagem = "Curso adicionado com sucesso." });
         }
         catch (Exception ex)
         {
@@ -91,7 +98,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.AtualizarCurso(id, atualizarCursoRequest);
-            return Ok();
+            return Ok(new { Mensagem = "Curso atualizado com sucesso." });
         }
         catch (Exception ex)
         {
@@ -105,7 +112,7 @@ public class CursoController : Controller
         try
         {
             await _cursoService.DeletarCurso(id);
-            return Ok();
+            return Ok(new { Mensagem = "Curso deletado com sucesso." });
         }
         catch (Exception ex)
         {
