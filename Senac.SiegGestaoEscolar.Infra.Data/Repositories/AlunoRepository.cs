@@ -29,7 +29,7 @@ public class AlunoRepository : IAlunoRepository
             FROM
                 aluno
             "
-            );
+        );
     }
 
     public async Task<Aluno> ObterAlunoDetalhado(long id)
@@ -50,8 +50,11 @@ public class AlunoRepository : IAlunoRepository
                 aluno
             WHERE id = @Id
             ",
-            new { Id = id }
-            );
+            new 
+            { 
+                Id = id 
+            }
+        );
     }
 
     public async Task<long> AdicionarAluno(Aluno aluno)
@@ -82,7 +85,7 @@ public class AlunoRepository : IAlunoRepository
                 )
             ",
             aluno
-            );
+        );
     }
 
     public async Task AtualizarAluno(Aluno aluno)
@@ -96,11 +99,11 @@ public class AlunoRepository : IAlunoRepository
                   email = @Email
                 , telefone = @Telefone
                 , ativo = @Ativo
-            WHERE 
+            WHERE
                 id = @Id
             ",
             aluno
-            );
+        );
     }
 
     public async Task DeletarAluno(long id)
@@ -111,56 +114,87 @@ public class AlunoRepository : IAlunoRepository
             DELETE FROM aluno
             WHERE id = @Id
             ",
-            new { Id = id }
-            );
+            new 
+            { 
+                Id = id 
+            }
+        );
     }
 
     public async Task<int> ObterTotalAlunos()
     {
-        using var connection = _connectionFactory.CreateConnection();
-        var total = await connection.ExecuteScalarAsync<int>(
-            @"SELECT COUNT(*) FROM aluno"
+        return await _connectionFactory.CreateConnection()
+            .ExecuteScalarAsync<int>(
+            @"
+            SELECT COUNT(*) FROM aluno
+            "
         );
-        return total;
     }
 
     public async Task VincularAlunoCurso(long idAluno, long idCurso)
     {
-        var sql = @"
-        INSERT INTO CursoAluno (CursoId, AlunoId, DataVinculo)
-        VALUES (@IdCurso, @IdAluno, GETDATE());
-    ";
-
-        using var connection = _connectionFactory.CreateConnection();
-        await connection.ExecuteAsync(sql, new { IdAluno = idAluno, IdCurso = idCurso });
+        await _connectionFactory.CreateConnection()
+            .ExecuteAsync(
+            @"
+            INSERT INTO CursoAluno 
+                (
+                  CursoId
+                , AlunoId
+                , DataVinculo
+                )
+            VALUES 
+                (
+                @IdCurso
+                , @IdAluno
+                , GETDATE()
+                )
+            ", 
+            new 
+            { 
+                IdAluno = idAluno,
+                IdCurso = idCurso 
+            }
+        );
     }
 
     public async Task DesvincularAlunoCurso(long idAluno, long idCurso)
     {
-        var sql = @"
-        DELETE FROM CursoAluno
-        WHERE AlunoId = @IdAluno AND CursoId = @IdCurso;
-    ";
-
-        using var connection = _connectionFactory.CreateConnection();
-        await connection.ExecuteAsync(sql, new { IdAluno = idAluno, IdCurso = idCurso });
+        await _connectionFactory.CreateConnection()
+            .ExecuteAsync(
+            @"
+            DELETE FROM CursoAluno
+            WHERE AlunoId = @IdAluno AND CursoId = @IdCurso;
+            ", 
+            new
+            { 
+                IdAluno = idAluno,
+                IdCurso = idCurso 
+            }
+        );
     }
 
     public async Task<IEnumerable<Curso>> ObterCursosPorAluno(long idAluno)
     {
-        var sql = @"
-        SELECT 
-            c.id,
-            c.nome,
-            cc.nome AS CategoriaCurso
-        FROM CursoAluno ca
-        INNER JOIN Curso c ON ca.CursoId = c.id
-        INNER JOIN CategoriaCurso cc ON cc.id = c.CategoriaCursoId
-        WHERE ca.AlunoId = @IdAluno
-    ";
-
-        using var connection = _connectionFactory.CreateConnection();
-        return await connection.QueryAsync<Curso>(sql, new { IdAluno = idAluno });
+        return await _connectionFactory.CreateConnection()
+            .QueryAsync<Curso>(
+            @"
+            SELECT 
+                  c.id
+                , c.nome
+                , cc.nome AS CategoriaCurso
+            FROM 
+                CursoAluno ca
+            INNER JOIN
+                Curso c ON ca.CursoId = c.id
+            INNER JOIN
+                CategoriaCurso cc ON cc.id = c.CategoriaCursoId
+            WHERE 
+                ca.AlunoId = @IdAluno
+            ", 
+            new
+            {
+                IdAluno = idAluno 
+            }
+        );
     }
-
 }

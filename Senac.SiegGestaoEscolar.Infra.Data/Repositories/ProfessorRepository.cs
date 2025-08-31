@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using Senac.SiegGestaoEscolar.Domain.Repositories;
 using Senac.SiegGestaoEscolar.Infra.Data.DataBaseConfiguration;
 
@@ -28,7 +29,7 @@ public class ProfessorRepository : IProfessorRepository
             FROM
                 professor
             "
-            );
+        );
     }
 
     public async Task<Professor> ObterProfessorDetalhado(long id)
@@ -53,8 +54,11 @@ public class ProfessorRepository : IProfessorRepository
             WHERE 
                 p.Id = @Id
             ",
-            new { Id = id }
-            );
+            new 
+            { 
+                Id = id
+            }
+        );
     }
 
     public async Task<long> AdicionarProfessor(Professor professor)
@@ -87,7 +91,7 @@ public class ProfessorRepository : IProfessorRepository
                 )
             ",
             professor
-            );
+        );
     }
 
     public async Task AtualizarProfessor(long id, Professor professor)
@@ -106,7 +110,7 @@ public class ProfessorRepository : IProfessorRepository
                 id = @Id
             ",
             professor
-            );
+        );
     }
 
     public async Task DeletarProfessor(long id)
@@ -117,27 +121,46 @@ public class ProfessorRepository : IProfessorRepository
             DELETE FROM professor
             WHERE id = @Id
             ",
-            new { Id = id }
-            );
+            new 
+            { 
+                Id = id 
+            }
+        );
     }
 
     public async Task<int> ObterTotalProfessores()
     {
-        using var connection = _connectionFactory.CreateConnection();
-        var total = await connection.ExecuteScalarAsync<int>(
-            @"SELECT COUNT(*) FROM professor"
+        return await _connectionFactory.CreateConnection()
+            .ExecuteScalarAsync<int>(
+            @"
+            SELECT COUNT(*) FROM professor
+            "
         );
-        return total;
     }
 
     public async Task VincularProfessorCurso(long idProfessor, long idCurso)
     {
-        const string sql = @"
-        INSERT INTO CursoProfessor (CursoId, ProfessorId, DataVinculo)
-        VALUES (@IdCurso, @IdProfessor, GETDATE());
-    ";
-
-        using var connection = _connectionFactory.CreateConnection();
-        await connection.ExecuteAsync(sql, new { IdProfessor = idProfessor, IdCurso = idCurso });
+        await _connectionFactory.CreateConnection()
+            .ExecuteAsync(
+            @"
+            INSERT INTO CursoProfessor 
+                (
+                  CursoId
+                , ProfessorId 
+                , DataVinculo
+                )
+            VALUES 
+                (
+                  @IdCurso    
+                , @IdProfessor    
+                , GETDATE()
+                )
+            ", 
+            new 
+            {        
+                IdProfessor = idProfessor,
+                IdCurso = idCurso 
+            }
+        );
     }
 }
