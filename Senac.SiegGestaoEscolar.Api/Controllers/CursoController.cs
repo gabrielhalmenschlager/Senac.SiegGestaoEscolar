@@ -18,7 +18,7 @@ public class CursoController : Controller
         _cursoService = cursoService;
     }
 
-    [HttpGet]
+    [HttpGet("listar")]
     public async Task<IActionResult> ObterTodosCursos()
     {
         try
@@ -32,7 +32,7 @@ public class CursoController : Controller
         }
     }
 
-    [HttpGet("/{id}/curso")]
+    [HttpGet("{id}/detalhar")]
     public async Task<IActionResult> ObterCursoDetalhado([FromRoute] long id)
     {
         try
@@ -78,7 +78,7 @@ public class CursoController : Controller
         }
     }
 
-    [HttpPost("/adicionar/curso")]
+    [HttpPost("adicionar")]
     public async Task<IActionResult> AdicionarCurso([FromBody] AdicionarCursoRequest adicionarCursoRequest)
     {
         try

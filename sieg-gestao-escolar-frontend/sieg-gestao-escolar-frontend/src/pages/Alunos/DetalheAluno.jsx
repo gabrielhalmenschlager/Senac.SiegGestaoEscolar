@@ -79,7 +79,6 @@ export default function DetalheAluno() {
                   </InfoItem>
                 </InfoList>
 
-                {/* Listagem de cursos vinculados */}
                 <h3 style={{ marginTop: "15px" }}>Cursos Vinculados</h3>
                 {aluno.cursos && aluno.cursos.length > 0 ? (
                   <InfoList>

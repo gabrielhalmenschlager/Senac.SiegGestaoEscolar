@@ -18,7 +18,7 @@ public class AlunoController : Controller
         _alunoService = alunoService;
     }
 
-    [HttpGet]
+    [HttpGet("listar")]
     public async Task<IActionResult> ObterTodosAlunos()
     {
         try
@@ -32,7 +32,7 @@ public class AlunoController : Controller
         }
     }
 
-    [HttpGet("{id}/aluno")]
+    [HttpGet("{id}/detalhar")]
     public async Task<IActionResult> ObterAlunoDetalhado(long id)
     {
         try

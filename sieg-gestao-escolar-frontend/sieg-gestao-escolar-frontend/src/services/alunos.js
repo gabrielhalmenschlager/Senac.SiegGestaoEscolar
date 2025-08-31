@@ -6,17 +6,17 @@ function getAuthHeader() {
 }
 
 export async function obterTodosAlunos() {
-  const response = await api.get('/aluno', { headers: getAuthHeader() })
+  const response = await api.get('/aluno/listar', { headers: getAuthHeader() })
   return response.data;
 }
 
 export async function obterAlunoDetalhado(id) {
-  const response = await api.get(`aluno/${id}/aluno`, { headers: getAuthHeader() });
+  const response = await api.get(`aluno/${id}/detalhar`, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function adicionarAluno(aluno) {
-  const response = await api.post('/adicionar/aluno', aluno, { headers: getAuthHeader() });
+  const response = await api.post('/aluno/adicionar', aluno, { headers: getAuthHeader() });
   return response.data;
 }
 
@@ -35,7 +35,10 @@ export async function vincularAlunoCurso(dados) {
   return response.data;
 }
 
-export async function desvincularAlunoCurso(dados) {
-  const response = await api.delete('/aluno/desvincular', dados, { headers: getAuthHeader() });
+export async function desvincularAlunoCurso({ idAluno, idCurso }) {
+  const response = await api.delete('/aluno/desvincular', {
+    headers: getAuthHeader(),
+    data: { idAluno, idCurso }
+  });
   return response.data;
 }

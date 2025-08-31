@@ -101,55 +101,78 @@ public class CursoRepository : ICursoRepository
         return await _connectionFactory.CreateConnection()
             .QueryFirstOrDefaultAsync<long>(
             @"
-            INSERT INTO curso 
-                (   
-                  nome    
-                , descricao
-                , dataCriacao
-                , CategoriaCursoId
-                , valor
-                , cargaHoraria
-                , professorId
-                , ativo
-                )
-            OUTPUT INSERTED.id
-            VALUES
-                (  
-                  @Nome 
-                , @Descricao
-                , @DataCriacao
-                , @CategoriaCurso
-                , @Valor
-                , @CargaHoraria
-                , @ProfessorId                
-                , @Ativo
-                )
-            ",
-            curso
+        INSERT INTO curso 
+            (   
+              nome    
+            , descricao
+            , dataCriacao
+            , CategoriaCursoId
+            , valor
+            , cargaHoraria
+            , professorId
+            , ativo
+            )
+        OUTPUT INSERTED.id
+        VALUES
+            (  
+              @Nome 
+            , @Descricao
+            , @DataCriacao
+            , @CategoriaCursoId
+            , @Valor
+            , @CargaHoraria
+            , @ProfessorId                
+            , @Ativo
+            )
+        ",
+            new
+            {
+                Nome = curso.Nome,
+                Descricao = curso.Descricao,
+                DataCriacao = curso.DataCriacao,
+                CategoriaCursoId = (int)curso.CategoriaCurso,
+                Valor = curso.Valor,
+                CargaHoraria = curso.CargaHoraria,
+                ProfessorId = curso.Professor.Id,
+                Ativo = curso.Ativo
+            }
         );
     }
 
+
     public async Task AtualizarCurso(long id, Curso curso)
     {
-        await _connectionFactory.CreateConnection()
-            .QueryFirstOrDefaultAsync(
+        using var connection = _connectionFactory.CreateConnection();
+
+        await connection.ExecuteAsync(
             @"
-            UPDATE 
-                curso
-            SET 
-                  nome = @Nome  
-                , descricao = @Descricao
-                , categoriaCursoId = @CategoriaCurso
-                , valor = @Valor
-                , cargaHoraria = @CargaHoraria
-                , professorId = @ProfessorId
-                , ativo = @Ativo
-            WHERE
-                id = @Id
-            ",
+        UPDATE 
             curso
+        SET 
+              nome = @Nome  
+            , descricao = @Descricao
+            , categoriaCursoId = @CategoriaCurso
+            , valor = @Valor
+            , cargaHoraria = @CargaHoraria
+            , professorId = @ProfessorId
+            , ativo = @Ativo
+        WHERE
+            id = @Id
+        ",
+            new
+            {
+                Id = id,
+                Nome = curso.Nome,
+                Descricao = curso.Descricao,
+                CategoriaCurso = (int)curso.CategoriaCurso,
+                Valor = curso.Valor,
+                CargaHoraria = curso.CargaHoraria,
+                ProfessorId = curso.Professor?.Id ?? 0,
+                Ativo = curso.Ativo
+            }
         );
     }
+
 
     public async Task DeletarCurso(long id)
     {

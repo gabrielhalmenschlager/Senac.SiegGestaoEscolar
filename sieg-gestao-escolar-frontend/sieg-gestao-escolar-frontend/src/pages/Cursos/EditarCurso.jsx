@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Serviços / API
-import { adicionarCurso } from '../../services/cursos';
+import { adicionarCurso, atualizarCurso, obterCursoDetalhado } from '../../services/cursos';
 import { obterTodosProfessores } from '../../services/professores';
 
 // Componentes globais
@@ -20,14 +20,15 @@ import { ErrorText } from "../../components/ui/Text";
 // Assets
 import Logo from '../../assets/logo.png';
 
-export default function CadastroCurso() {
+export default function EditarCurso() {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [professores, setProfessores] = useState([]);
   const [form, setForm] = useState({
     nome: '',
     descricao: '',
-    categoriaCurso: '', // valor enviado deve bater com enum
+    categoriaCurso: '',
     valor: 0,
     cargaHoraria: 0,
     ativo: true,
@@ -35,6 +36,7 @@ export default function CadastroCurso() {
   });
   const [erro, setErro] = useState('');
 
+  // Carregar professores
   useEffect(() => {
     async function carregarProfessores() {
       try {
@@ -47,6 +49,33 @@ export default function CadastroCurso() {
     carregarProfessores();
   }, []);
 
+  // Carregar curso para edição
+  useEffect(() => {
+    if (!id) return;
+
+    async function carregarCurso() {
+      try {
+        const dados = await obterCursoDetalhado(id);
+        if (!dados) throw new Error('Curso não encontrado');
+        setForm({
+          nome: dados.nome || '',
+          descricao: dados.descricao || '',
+          categoriaCurso: dados.categoriaCurso || '',
+          valor: Number(dados.valor) || 0,
+          cargaHoraria: Number(dados.cargaHoraria) || 0,
+          ativo: Boolean(dados.ativo),
+          professorId: Number(dados.professorId) || 0,
+        });
+      } catch (e) {
+        setErro('Erro ao carregar curso para edição');
+        console.error(e);
+      }
+    }
+
+    carregarCurso();
+  }, [id]);
+
+  // Alterações nos inputs
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
@@ -55,43 +84,40 @@ export default function CadastroCurso() {
         type === 'checkbox'
           ? checked
           : type === 'number'
-          ? Number(value)
+          ? Number(value) || 0
           : value,
     }));
   }
 
+  // Submit
   async function handleSubmit(e) {
     e.preventDefault();
     setErro('');
 
-    // Validações
     if (!form.professorId || form.professorId === 0) {
-      setErro('Selecione um professor válido.');
+      setErro('Selecione um professor válido');
       return;
     }
-
-    if (!form.categoriaCurso) {
-      setErro('Selecione uma categoria válida.');
-      return;
-    }
-
-    const payload = {
-      ...form,
-      valor: Number(form.valor),
-      cargaHoraria: Number(form.cargaHoraria),
-      professorId: Number(form.professorId),
-      dataCriacao: new Date(),
-      // categoriaCurso já é string e deve bater com enum: "Basico", "Medio", "Avancado"
-    };
-
-    console.log('Payload enviado:', payload); // Verifique no console antes de enviar
 
     try {
-      await adicionarCurso(payload);
+      const payload = {
+        ...form,
+        valor: Number(form.valor) || 0,
+        cargaHoraria: Number(form.cargaHoraria) || 0,
+        professorId: Number(form.professorId),
+      };
+
+      if (id) {
+        await atualizarCurso(id, payload);
+      } else {
+        payload.dataCriacao = new Date().toISOString();
+        await adicionarCurso(payload);
+      }
+
       navigate('/cursos');
     } catch (e) {
       console.error('Erro detalhado:', e.response?.data || e);
-      setErro('Erro ao cadastrar curso. Verifique os dados.');
+      setErro('Erro ao salvar curso. Verifique os dados.');
     }
   }
 
@@ -103,7 +129,7 @@ export default function CadastroCurso() {
         <MainContent>
           <FormCard>
             <MainLogo src={Logo} alt="Logo" />
-            <h2>Cadastrar Curso</h2>
+            <h2>{id ? 'Editar Curso' : 'Cadastrar Curso'}</h2>
 
             {erro && <ErrorText>{erro}</ErrorText>}
 
@@ -122,31 +148,27 @@ export default function CadastroCurso() {
 
               <FormGroup>
                 <label htmlFor="descricao">Descrição:</label>
-                <textarea
+                <input
                   id="descricao"
                   name="descricao"
                   value={form.descricao}
                   onChange={handleChange}
                   rows={4}
-                  style={{ width: '600px', resize: 'none' }}
+                  style={{ width: '600px', height: '50px', resize: 'none' }}
                   required
                 />
               </FormGroup>
 
               <FormGroup>
                 <label htmlFor="categoriaCurso">Categoria:</label>
-                <select
+                <input
+                  type="text"
                   id="categoriaCurso"
                   name="categoriaCurso"
                   value={form.categoriaCurso}
                   onChange={handleChange}
                   required
-                >
-                  <option value="">Selecione a categoria</option>
-                  <option value="Basico">Básico</option>
-                  <option value="Medio">Médio</option>
-                  <option value="Avancado">Avançado</option>
-                </select>
+                />
               </FormGroup>
 
               <FormGroup>
@@ -202,7 +224,9 @@ export default function CadastroCurso() {
                 </label>
               </CheckboxGroup>
 
-              <BtnSecundary type="submit">Cadastrar</BtnSecundary>
+              <BtnSecundary type="submit">
+                {id ? 'Salvar' : 'Cadastrar'}
+              </BtnSecundary>
             </form>
           </FormCard>
         </MainContent>

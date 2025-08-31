@@ -6,16 +6,16 @@ function getAuthHeader() {
 }
 
 export const getTotalProfessores = async () => {
-    const response = await api.get('/professor/total', { headers: getAuthHeader() });
-    return response.data.total;
-  };
+  const response = await api.get('/professor/total', { headers: getAuthHeader() });
+  return response.data ;
+};
 
 export const getTotalAlunos = async () => {
-const response = await api.get('/aluno/total', { headers: getAuthHeader() });
-return response.data.total;
+  const response = await api.get('/aluno/total', { headers: getAuthHeader() });
+  return response.data; 
 };
 
 export const getTotalCursos = async () => {
-const response = await api.get('/curso/total', { headers: getAuthHeader() });
-return response.data.total;
+  const response = await api.get('/curso/total', { headers: getAuthHeader() });
+  return response.data; 
 };

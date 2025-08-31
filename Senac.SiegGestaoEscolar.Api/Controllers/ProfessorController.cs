@@ -18,8 +18,8 @@ public class ProfessorController : Controller
         _professorService = professorService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> ObterTodosProfessores()
+    [HttpGet("listar")]
+    public async Task<IActionResult> ListarProfessores()
     {
         try
         {
@@ -32,8 +32,8 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpGet("/{id}/professor")]
-    public async Task<IActionResult> ObterProfessorDetalhado([FromRoute] long id)
+    [HttpGet("{id}/detalhar")]
+    public async Task<IActionResult> DetalharProfessor([FromRoute] long id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPost("/adicionar/professor")]
+    [HttpPost("adicionar")]
     public async Task<IActionResult> AdicionarProfessor([FromBody] AdicionarProfessorRequest adicionarProfessorRequest)
     {
         try
@@ -74,7 +74,7 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpPut("/{id}/atualizar/")]
+    [HttpPut("{id}/atualizar")]
     public async Task<IActionResult> AtualizarProfessor([FromRoute] long id, [FromBody] AtualizarProfessorRequest atualizarProfessorRequest)
     {
         try
@@ -88,13 +88,13 @@ public class ProfessorController : Controller
         }
     }
 
-    [HttpDelete("/{id}/deletar/")]
+    [HttpDelete("{id}/deletar")]
     public async Task<IActionResult> DeletarProfessor([FromRoute] long id)
     {
         try
         {
             await _professorService.DeletarProfessor(id);
-            return Ok(id);
+            return Ok(new { Mensagem = $"Professor {id} deletado com sucesso" });
         }
         catch (Exception ex)
         {
@@ -108,7 +108,7 @@ public class ProfessorController : Controller
         try
         {
             await _professorService.VincularProfessorCurso(request);
-            return Ok(request);
+            return Ok(new { Mensagem = "Professor vinculado ao curso com sucesso", request });
         }
         catch (Exception ex)
         {

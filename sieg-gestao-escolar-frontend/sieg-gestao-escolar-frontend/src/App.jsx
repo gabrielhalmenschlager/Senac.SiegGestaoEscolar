@@ -10,6 +10,7 @@ import Home from './pages/Home/Home';
 // Professores
 import ListaProfessores from './pages/Professores/ListaProfessores';
 import CadastroProfessor from './pages/Professores/CadastroProfessor';
+import EditarProfessor from './pages/Professores/EditarProfessor';
 import DetalheProfessor from './pages/Professores/DetalheProfessor';
 
 // Alunos
@@ -22,6 +23,7 @@ import DesvincularAlunoCurso from './pages/Alunos/DesvincularAlunoCurso';
 // Cursos
 import ListaCursos from './pages/Cursos/ListaCursos';
 import CadastroCurso from './pages/Cursos/CadastroCurso';
+import EditarCurso from './pages/Cursos/EditarCurso';
 import DetalheCurso from './pages/Cursos/DetalheCurso';
 
 import Login from './pages/Login/Login';
@@ -71,7 +73,7 @@ function App() {
         path="/professores/:id/editar"
         element={
           <ProtectedRoute>
-            <CadastroProfessor />
+            <EditarProfessor />
           </ProtectedRoute>
         }
       />
@@ -156,7 +158,7 @@ function App() {
         path="/cursos/:id/editar"
         element={
           <ProtectedRoute>
-            <CadastroCurso />
+            <EditarCurso />
           </ProtectedRoute>
         }
       />

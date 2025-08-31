@@ -1,9 +1,8 @@
-// React e hooks
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Serviços / API
-import { adicionarProfessor, atualizarProfessor, obterProfessorDetalhado } from '../../services/professores';
+import { adicionarProfessor } from '../../services/professores';
 
 // Componentes globais
 import Navbar from '../../components/NavBar';
@@ -28,7 +27,6 @@ const formacaoOptions = [
 ];
 
 export default function CadastroProfessor() {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -44,23 +42,6 @@ export default function CadastroProfessor() {
 
   const [erro, setErro] = useState('');
 
-  useEffect(() => {
-    if (id) {
-      obterProfessorDetalhado(id)
-        .then(data => {
-          if (!data) throw new Error('Professor não encontrado');
-          setForm({
-            ...data,
-            dataDeNascimento: data.dataDeNascimento?.slice(0, 10) || '',
-            dataContratacao: data.dataContratacao?.slice(0, 10) || '',
-            formacao: data.formacao,
-            ativo: Boolean(data.ativo),
-          });
-        })
-        .catch(() => setErro('Erro ao carregar professor'));
-    }
-  }, [id]);
-
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
@@ -74,20 +55,11 @@ export default function CadastroProfessor() {
     setErro('');
 
     try {
-      if (id) {
-        const dadosParaAtualizar = {
-          email: form.email,
-          telefone: form.telefone,
-          formacao: form.formacao,
-          ativo: form.ativo,
-        };
-        await atualizarProfessor(id, dadosParaAtualizar);
-      } else {
-        await adicionarProfessor(form);
-      }
+      await adicionarProfessor(form);
       navigate('/professores');
-    } catch {
-      setErro('Erro ao salvar professor');
+    } catch (err) {
+      console.error('Erro ao salvar professor:', err.response?.data || err);
+      setErro('Erro ao cadastrar professor. Verifique os dados.');
     }
   }
 
@@ -99,24 +71,24 @@ export default function CadastroProfessor() {
         <MainContent>
           <FormCard>
             <MainLogo src={Logo} alt="Logo" />
-            <h2>{id ? 'Editar Professor' : 'Cadastrar Professor'}</h2>
+            <h2>Cadastrar Professor</h2>
 
             {erro && <ErrorText>{erro}</ErrorText>}
 
             <form onSubmit={handleSubmit}>
               <FormGroup>
                 <label htmlFor="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required disabled={!!id} />
+                <input type="text" id="nome" name="nome" value={form.nome} onChange={handleChange} required />
               </FormGroup>
 
               <FormGroup>
                 <label htmlFor="sobrenome">Sobrenome:</label>
-                <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required disabled={!!id} />
+                <input type="text" id="sobrenome" name="sobrenome" value={form.sobrenome} onChange={handleChange} required />
               </FormGroup>
 
               <FormGroup>
                 <label htmlFor="dataDeNascimento">Data de Nascimento:</label>
-                <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required disabled={!!id} />
+                <input type="date" id="dataDeNascimento" name="dataDeNascimento" value={form.dataDeNascimento} onChange={handleChange} required />
               </FormGroup>
 
               <FormGroup>
@@ -131,13 +103,7 @@ export default function CadastroProfessor() {
 
               <FormGroup>
                 <label htmlFor="formacao">Formação:</label>
-                <select
-                  id="formacao"
-                  name="formacao"
-                  value={form.formacao}
-                  onChange={handleChange}
-                  required
-                >
+                <select id="formacao" name="formacao" value={form.formacao} onChange={handleChange} required>
                   {formacaoOptions.map(opt => (
                     <option key={opt.id} value={opt.nome}>{opt.nome}</option>
                   ))}
@@ -146,7 +112,7 @@ export default function CadastroProfessor() {
 
               <FormGroup>
                 <label htmlFor="dataContratacao">Data de Contratação:</label>
-                <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required disabled={!!id} />
+                <input type="date" id="dataContratacao" name="dataContratacao" value={form.dataContratacao} onChange={handleChange} required />
               </FormGroup>
 
               <CheckboxGroup>
@@ -156,7 +122,7 @@ export default function CadastroProfessor() {
                 </label>
               </CheckboxGroup>
 
-              <BtnSecundary type="submit">{id ? 'Salvar' : 'Cadastrar'}</BtnSecundary>
+              <BtnSecundary type="submit">Cadastrar</BtnSecundary>
             </form>
           </FormCard>
         </MainContent>

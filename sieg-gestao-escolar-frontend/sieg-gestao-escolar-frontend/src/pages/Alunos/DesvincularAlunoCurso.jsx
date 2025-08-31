@@ -37,24 +37,23 @@ export default function DesvincularAlunoCurso() {
     carregarCursos();
   }, [id]);
 
-  // Função para desvincular
   const handleDesvincular = async (idCurso) => {
     setCarregando(true);
     setErro("");
     setMensagemSucesso("");
-
+  
     try {
-      await desvincularAlunoCurso(id, idCurso);
+      await desvincularAlunoCurso({ idAluno: id, idCurso });
       setMensagemSucesso("Aluno desvinculado do curso com sucesso!");
-      // Atualiza a lista de cursos após desvincular
       setCursos(cursos.filter(c => c.id !== idCurso));
     } catch (e) {
       console.error(e);
       setErro("Erro ao desvincular o aluno do curso");
     }
-
+  
     setCarregando(false);
   };
+  
 
   return (
     <>

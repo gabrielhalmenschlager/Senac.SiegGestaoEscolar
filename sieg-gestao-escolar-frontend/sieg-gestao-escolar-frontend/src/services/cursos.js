@@ -6,22 +6,22 @@ function getAuthHeader() {
 }
 
 export async function obterTodosCursos() {
-  const response = await api.get('/curso', { headers: getAuthHeader() });
+  const response = await api.get('/curso/listar', { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function obterCursoDetalhado(id) {
-  const response = await api.get(`/${id}/curso`, { headers: getAuthHeader() });
+  const response = await api.get(`/curso/${id}/detalhar`, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function adicionarCurso(curso) {
-  const response = await api.post('/adicionar/curso', curso, { headers: getAuthHeader() });
+  const response = await api.post('/curso/adicionar', curso, { headers: getAuthHeader() });
   return response.data;
 }
 
 export async function atualizarCurso(id, curso) {
-  const response = await api.put(`/curso/${id}/atualizar`, curso, { headers: getAuthHeader() });
+  const response = await api.put(`/curso/${id}/atualizar/`, curso, { headers: getAuthHeader() });
   return response.data;
 }
 
