@@ -23,10 +23,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IDbConnectionFactory>(_ =>
@@ -92,10 +89,8 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Usa a política CORS que criamos
 app.UseCors("PermitirLocalhost5173");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
