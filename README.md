@@ -1,6 +1,6 @@
 # Sieg Gestão Escolar
 
-![Logo do Projeto](../docs/logo.png)
+![Logo do Projeto](docs/logo.png)
 
 ## 📌 Descrição do Projeto
 O **Sieg Gestão Escolar** é um sistema de gestão escolar desenvolvido no contexto do **Projeto Integrador do curso Técnico em Informática**, com o objetivo de controlar professores, alunos e cursos, permitindo operações de cadastro, edição, exclusão, vinculação e listagem com filtros avançados.  
