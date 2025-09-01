@@ -47,7 +47,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ### Arquitetura de Pastas
 | Backend | Frontend |
 |:-------:|:--------:|
-| <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="250"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="275"/> |
 
 ### Funcionalidades
 - 🔐 Login com autenticação e proteção de rotas  
