@@ -47,7 +47,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ### Arquitetura de Pastas
 <div align="center">
   <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/>
-  <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="300"/>
+  <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="270"/>
 </div>
 
 ---
@@ -65,7 +65,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ### 🔹 Nav Bar e Footer
 <div align="center">
-  <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="300"/>
+  <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="150"/>
   <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="600"/>
 </div>
 
