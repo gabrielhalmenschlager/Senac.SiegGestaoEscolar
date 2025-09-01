@@ -62,7 +62,7 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 ## 🖼 Imagens do Sistema
 
 **Nav Bar e Footer**  
-<img src="Senac.SiegGestaoEscolar.Images/side.png" alt="Nav Bar" width="600"/>  
+<img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="600"/>  
 <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="600"/>  
 
 ### Login e Painel de Controle
