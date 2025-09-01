@@ -67,9 +67,13 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## 🖼 Capturas de Tela
 
 ### 🔹 Nav Bar
+| Nav Bar |
+|:-------:|
 <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="250"/>
 
 ### 🔹 Footer
+| Footer |
+|:------:|
 <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="400"/>
 
 ### 🔹 Login e Painel de Controle
