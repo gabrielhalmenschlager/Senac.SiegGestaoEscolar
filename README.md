@@ -24,21 +24,21 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## 🛠 Tecnologias e Ferramentas
 
 **Backend:**  
-<img src="Senac.SiegGestaoEscolar.Images/csharp.png" alt="C#" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/dotnet.png" alt=".NET" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/sqlserver.png" alt="SQL Server" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/dapper.png" alt="Dapper" width="40"/> 
+![C#](https://upload.wikimedia.org/wikipedia/commons/7/7c/C_Sharp_wordmark.svg)  
+![.NET](https://upload.wikimedia.org/wikipedia/commons/1/1b/Microsoft_.NET_logo.svg)  
+![SQL Server](https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_SQL_Server_Logo.png)  
+![Dapper](https://upload.wikimedia.org/wikipedia/commons/4/4f/Dapper_Logo.png)  
 
 **Frontend:**  
-<img src="Senac.SiegGestaoEscolar.Images/react.png" alt="React" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/axios.png" alt="Axios" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/reactrouter.png" alt="React Router" width="40"/> 
+![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)  
+![Axios](https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_Axios.svg)  
+![React Router](https://reactrouter.com/img/logo.svg)  
 
 **Ferramentas de Projeto:**  
-<img src="Senac.SiegGestaoEscolar.Images/github.png" alt="GitHub" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/trello.png" alt="Trello" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/dbdiagram.png" alt="dbdiagram.io" width="40"/> 
-<img src="Senac.SiegGestaoEscolar.Images/figma.png" alt="Figma" width="40"/> 
+![GitHub](https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg)  
+![Trello](https://upload.wikimedia.org/wikipedia/commons/6/6d/Trello_logo.svg)  
+![dbdiagram.io](https://dbdiagram.io/favicon.ico)  
+![Figma](https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg)  
 
 ---
 
