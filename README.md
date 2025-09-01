@@ -63,7 +63,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## Diagrama do Banco de Dados
 
 <div align="center">
-  <img src="Senac.SiegGestaoEscolar.Images/diagrama-bd.png" alt="Arquitetura Frontend" width="300"/>
+  <img src="Senac.SiegGestaoEscolar.Images/diagrama-bd.png" alt="Arquitetura Frontend" width="800"/>
 </div>
 
 ---
