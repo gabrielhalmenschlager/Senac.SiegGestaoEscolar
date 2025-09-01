@@ -86,7 +86,7 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 
 **🔹 Módulo Professores**  
 - **Listagem de Professores**  
-<img src="Senac.SiegGestaoEscolar.Images/lista-professor.png" alt="Professores Listagem" width="600"/>  
+<img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Professores Listagem" width="600"/>  
 - **Detalhes do Professor**  
 <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Professores Detalhes" width="600"/>  
 - **Cadastro de Professor**  
