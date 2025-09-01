@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 O **Sieg Gestão Escolar** é um sistema completo de gestão escolar, desenvolvido como parte do **Projeto Integrador do curso Técnico em Informática**.  
 Permite gerenciar **professores, alunos e cursos**, oferecendo cadastro, edição, exclusão, vinculação e filtros avançados.  
 
@@ -12,7 +12,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-## 🎯 Objetivos
+## Objetivos
 - Gerenciar informações escolares de forma simples e organizada.  
 - Implementar **CRUD completo** para professores, alunos e cursos.  
 - Garantir que apenas entidades **ativas** possam ser vinculadas.  
@@ -21,7 +21,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-## 🛠 Tecnologias e Ferramentas
+## Tecnologias e Ferramentas
 
 **Backend:**  
 [![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)  
@@ -42,7 +42,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-## 🗂 Estrutura do Sistema
+## Estrutura do Sistema
 
 ### Arquitetura de Pastas
 | Backend | Frontend |
@@ -50,11 +50,11 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 | <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="275"/> |
 
 ### Funcionalidades
-- 🔐 Login com autenticação e proteção de rotas  
-- 📝 CRUD completo de **Professores, Alunos e Cursos**  
-- 🔗 Vinculação de professores e alunos a cursos ativos  
-- 🔍 Filtros avançados de pesquisa (case-insensitive)  
-- ✅ Validações de campos obrigatórios e e-mails  
+-  Login com autenticação e proteção de rotas  
+-  CRUD completo de **Professores, Alunos e Cursos**  
+-  Vinculação de professores e alunos a cursos ativos  
+-  Filtros avançados de pesquisa (case-insensitive)  
+-  Validações de campos obrigatórios e e-mails  
 
 ---
 
@@ -96,7 +96,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-## 👥 Equipe
+## Equipe
 - Gabriel Halmenschlager Spall  
 - Pedro Henrique Konradt  
 - Everton Luiz Henrich Schneiders  
