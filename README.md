@@ -58,7 +58,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-## 🖼 Capturas de Tela
+## Capturas de Tela
 
 ### 🔹 Nav Bar
 | Nav Bar |
