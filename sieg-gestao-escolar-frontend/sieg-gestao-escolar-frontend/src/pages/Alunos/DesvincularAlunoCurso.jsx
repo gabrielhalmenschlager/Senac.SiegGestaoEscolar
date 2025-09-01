@@ -12,7 +12,7 @@ import { MainLogo } from "../../components/ui/Logo";
 import Logo from '../../assets/logo.png';
 
 export default function DesvincularAlunoCurso() {
-  const { id } = useParams(); // id do aluno
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [cursos, setCursos] = useState([]);
@@ -20,14 +20,13 @@ export default function DesvincularAlunoCurso() {
   const [mensagemSucesso, setMensagemSucesso] = useState("");
   const [carregando, setCarregando] = useState(false);
 
-  // Carrega os cursos vinculados ao aluno
   useEffect(() => {
     async function carregarCursos() {
       setCarregando(true);
       setErro("");
       try {
         const dados = await obterAlunoDetalhado(id);
-        setCursos(dados.cursos || []); // supondo que o backend retorne os cursos vinculados
+        setCursos(dados.cursos || []);
       } catch (e) {
         setErro("Erro ao carregar cursos do aluno");
         console.error(e);

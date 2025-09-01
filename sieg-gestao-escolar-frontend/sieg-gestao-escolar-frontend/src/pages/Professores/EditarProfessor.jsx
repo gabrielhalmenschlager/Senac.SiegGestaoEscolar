@@ -1,3 +1,4 @@
+// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ export default function EditarProfessor() {
   const [form, setForm] = useState({
     email: '',
     telefone: '',
-    formacao: 'Graduacao', // default
+    formacao: 'Graduacao',
     ativo: true,
   });
 
@@ -49,7 +50,7 @@ export default function EditarProfessor() {
         setForm({
           email: data.email || '',
           telefone: data.telefone || '',
-          formacao: data.formacao || 'Graduacao', // deve coincidir com enum
+          formacao: data.formacao || 'Graduacao',
           ativo: Boolean(data.ativo),
         });
       })
@@ -69,10 +70,9 @@ export default function EditarProfessor() {
     setErro('');
 
     try {
-      // envia o valor compatível com o enum
       await atualizarProfessor(id, {
         ...form,
-        formacao: form.formacao, // já está compatível
+        formacao: form.formacao,
       });
       navigate('/professores');
     } catch (err) {

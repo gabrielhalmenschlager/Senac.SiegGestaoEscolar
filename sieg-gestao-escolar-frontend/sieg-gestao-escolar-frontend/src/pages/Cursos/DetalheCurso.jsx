@@ -1,15 +1,22 @@
+// React e hooks
 import { useEffect, useState } from "react"; 
 import { useParams, useNavigate } from "react-router-dom";
+
+// Serviços / API
 import { obterCursoDetalhado } from "../../services/cursos";
 
+// Componentes globais
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { GlobalStyle } from '../../components/GlobalStyle';
+
+// Layout e UI reutilizáveis
 import { PageContainer, MainContent } from "../../components/ui/Layout";
 import { Card, InfoList, InfoItem } from "../../components/ui/CardStyles";
 import { BtnVoltar } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
 
+// Importando ícones
 import { 
   BiBookOpen, BiInfoCircle, BiTag, 
   BiCheckCircle, BiXCircle, BiUser, BiChalkboard, BiCreditCard

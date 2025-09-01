@@ -1,3 +1,4 @@
+// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ export default function CadastroCurso() {
   const [form, setForm] = useState({
     nome: '',
     descricao: '',
-    categoriaCurso: '', // valor enviado deve bater com enum
+    categoriaCurso: '',
     valor: 0,
     cargaHoraria: 0,
     ativo: true,
@@ -64,7 +65,6 @@ export default function CadastroCurso() {
     e.preventDefault();
     setErro('');
 
-    // Validações
     if (!form.professorId || form.professorId === 0) {
       setErro('Selecione um professor válido.');
       return;
@@ -81,10 +81,9 @@ export default function CadastroCurso() {
       cargaHoraria: Number(form.cargaHoraria),
       professorId: Number(form.professorId),
       dataCriacao: new Date(),
-      // categoriaCurso já é string e deve bater com enum: "Basico", "Medio", "Avancado"
     };
 
-    console.log('Payload enviado:', payload); // Verifique no console antes de enviar
+    console.log('Payload enviado:', payload);
 
     try {
       await adicionarCurso(payload);

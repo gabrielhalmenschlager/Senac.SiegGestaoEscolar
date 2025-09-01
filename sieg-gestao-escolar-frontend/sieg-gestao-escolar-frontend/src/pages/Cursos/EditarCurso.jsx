@@ -1,3 +1,4 @@
+// React e hooks
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -49,7 +50,6 @@ export default function EditarCurso() {
     carregarProfessores();
   }, []);
 
-  // Carregar curso para edição
   useEffect(() => {
     if (!id) return;
 
@@ -75,7 +75,6 @@ export default function EditarCurso() {
     carregarCurso();
   }, [id]);
 
-  // Alterações nos inputs
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
@@ -89,7 +88,6 @@ export default function EditarCurso() {
     }));
   }
 
-  // Submit
   async function handleSubmit(e) {
     e.preventDefault();
     setErro('');
