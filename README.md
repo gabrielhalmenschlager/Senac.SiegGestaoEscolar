@@ -53,11 +53,11 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ---
 
 ## Funcionalidades
-- 🔐 Login com autenticação e proteção de rotas  
-- 📝 CRUD completo de **Professores, Alunos e Cursos**  
-- 🔗 Vinculação de professores e alunos a cursos ativos  
-- 🔍 Filtros avançados de pesquisa (case-insensitive)  
-- ✅ Validações de campos obrigatórios e e-mails  
+- Login com autenticação e proteção de rotas  
+- CRUD completo de **Professores, Alunos e Cursos**  
+- Vinculação de professores e alunos a cursos ativos  
+- Filtros avançados de pesquisa (case-insensitive)  
+- Validações de campos obrigatórios e e-mails  
 
 ---
 
@@ -79,7 +79,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-### 🔹 Módulo Alunos
+### 🔹 Alunos
 <div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes" width="300"/>
@@ -94,7 +94,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
-### 🔹 Módulo Professores
+### 🔹 Professores
 <div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="300"/>
@@ -104,7 +104,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
   
 ---
 
-### 🔹 Módulo Cursos
+### 🔹 Cursos
 <div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="300"/>
