@@ -21,6 +21,15 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ---
 
+## Funcionalidades
+- Login com autenticação e proteção de rotas  
+- CRUD completo de **Professores, Alunos e Cursos**  
+- Vinculação de professores e alunos a cursos ativos  
+- Filtros avançados de pesquisa (case-insensitive)  
+- Validações de campos obrigatórios e e-mails  
+
+---
+
 ## Tecnologias e Ferramentas
 
 **Backend:**  
@@ -49,15 +58,6 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
   <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="273"/>
 </div>
-
----
-
-## Funcionalidades
-- Login com autenticação e proteção de rotas  
-- CRUD completo de **Professores, Alunos e Cursos**  
-- Vinculação de professores e alunos a cursos ativos  
-- Filtros avançados de pesquisa (case-insensitive)  
-- Validações de campos obrigatórios e e-mails  
 
 ---
 
