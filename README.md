@@ -24,21 +24,21 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## 🛠 Tecnologias e Ferramentas
 
 **Backend:**  
-![C#](https://upload.wikimedia.org/wikipedia/commons/7/7c/C_Sharp_wordmark.svg)  
-![.NET](https://upload.wikimedia.org/wikipedia/commons/1/1b/Microsoft_.NET_logo.svg)  
-![SQL Server](https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_SQL_Server_Logo.png)  
-![Dapper](https://upload.wikimedia.org/wikipedia/commons/4/4f/Dapper_Logo.png)  
+[![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)  
+[![.NET](https://img.shields.io/badge/.NET-512BD4?style=flat&logo=.net&logoColor=white)](https://dotnet.microsoft.com/)  
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)  
+[![Dapper](https://img.shields.io/badge/Dapper-0298C3?style=flat)](https://dapper-tutorial.net/)
 
 **Frontend:**  
-![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)  
-![Axios](https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_Axios.svg)  
-![React Router](https://reactrouter.com/img/logo.svg)  
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)  
+[![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat)](https://axios-http.com/)  
+[![React Router](https://img.shields.io/badge/React%20Router-CA4245?style=flat)](https://reactrouter.com/)
 
 **Ferramentas de Projeto:**  
-![GitHub](https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg)  
-![Trello](https://upload.wikimedia.org/wikipedia/commons/6/6d/Trello_logo.svg)  
-![dbdiagram.io](https://dbdiagram.io/favicon.ico)  
-![Figma](https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg)  
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/)  
+[![Trello](https://img.shields.io/badge/Trello-0052CC?style=flat&logo=trello&logoColor=white)](https://trello.com/)  
+[![dbdiagram.io](https://img.shields.io/badge/dbdiagram.io-FF7C00?style=flat)](https://dbdiagram.io/)  
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white)](https://www.figma.com/)
 
 ---
 
