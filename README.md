@@ -39,7 +39,8 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 **Frontend:**  
 [![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)  
 [![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat)](https://axios-http.com/)  
-[![React Router](https://img.shields.io/badge/React%20Router-CA4245?style=flat)](https://reactrouter.com/)
+[![React Router](https://img.shields.io/badge/React%20Router-CA4245?style=flat)](https://reactrouter.com/)  
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 
 **Ferramentas de Projeto:**  
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/)  
