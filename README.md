@@ -80,13 +80,13 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ---
 
 ### 🔹 Módulo Alunos
-<div align="center">
+<div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Cadastro" width="300"/>
 </div>
 
-<div align="center">
+<div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Editar" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Vincular" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Desvincular" width="300"/>
@@ -95,21 +95,23 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ---
 
 ### 🔹 Módulo Professores
-<div align="center">
+<div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro" width="300"/>
-</div>
   <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="300"/>  
+</div>
+  
 ---
 
 ### 🔹 Módulo Cursos
-<div align="center">
+<div align="left">
   <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro" width="300"/>
-</div>
   <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="300"/>
+</div>
+  
 ---
 
 ## Equipe
