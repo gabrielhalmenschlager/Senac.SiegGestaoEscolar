@@ -16,7 +16,7 @@ import { Card, InfoList, InfoItem } from "../../components/ui/CardStyles";
 import { BtnVoltar } from "../../components/ui/Buttons";
 import { ErrorText } from "../../components/ui/Text";
 
-// Importando ícones
+// ícones
 import { 
   BiBookOpen, BiInfoCircle, BiTag, 
   BiCheckCircle, BiXCircle, BiUser, BiChalkboard, BiCreditCard
