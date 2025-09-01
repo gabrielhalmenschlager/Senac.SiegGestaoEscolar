@@ -68,7 +68,7 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 **🔹 Login e Painel de Controle**  
 - **Login**  
 <img src="Senac.SiegGestaoEscolar.Images/login.png" alt="Login" width="600"/>  
-- **Painel de controle**  
+- ***Painel de controle***  
 <img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de controle" width="600"/>  
 
 **🔹 Módulo Alunos**  
