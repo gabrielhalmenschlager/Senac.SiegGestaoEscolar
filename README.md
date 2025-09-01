@@ -44,10 +44,10 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ## 🗂 Estrutura do Sistema
 
-### Modelos
-**Professor:** ID, Nome, Sobrenome, Data de Nascimento, Email, Telefone, Formação, Data de Contratação, Ativo  
-**Aluno:** ID, Nome, Sobrenome, Data de Nascimento, Email, Telefone, Data de Matrícula, Ativo  
-**Curso:** ID, Nome, Descrição, Data de Criação, Categoria, Valor, Carga Horária, ProfessorID, Ativo  
+### Arquitetura de Pastas
+| Backend | Frontend |
+|:-------:|:--------:|
+| <img src="Senac.SiegGestaoEscolar.Images/back.png" alt="Arquitetura Backend" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/front.png" alt="Arquitetura Frontend" width="300"/> |
 
 ### Funcionalidades
 - 🔐 Login com autenticação e proteção de rotas  
@@ -63,12 +63,12 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ### 🔹 Nav Bar
 | Nav Bar |
 |:-------:|
-| <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="150"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="300"/> |
 
 ### 🔹 Footer
 | Footer |
 |:------:|
-| <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="600"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="300"/> |
 
 ### 🔹 Login e Painel de Controle
 | Login | Painel de Controle |
@@ -78,21 +78,21 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ### 🔹 Módulo Alunos
 | Listagem | Detalhes | Cadastro |
 |:--------:|:--------:|:-------:|
-| <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Cadastro" width="200"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Cadastro" width="300"/> |
 
 | Editar | Vincular | Desvincular |
 |:------:|:--------:|:-----------:|
-| <img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Editar" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Vincular" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Desvincular" width="200"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Editar" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Vincular" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Desvincular" width="300"/> |
 
 ### 🔹 Módulo Professores
 | Listagem | Detalhes | Cadastro | Editar |
 |:--------:|:--------:|:-------:|:-----:|
-| <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="200"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="300"/> |
 
 ### 🔹 Módulo Cursos
 | Listagem | Detalhes | Cadastro | Editar |
 |:--------:|:--------:|:-------:|:-----:|
-| <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="200"/> |
+| <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="300"/> |
 
 ---
 
