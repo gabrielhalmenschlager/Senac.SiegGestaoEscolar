@@ -61,47 +61,47 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 
 ## 🖼 Imagens do Sistema
 
-**Nav Bar e Footer**  
+**🔹 Nav Bar e Footer**  
 <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="150"/>  
 <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="600"/>  
 
-### Login e Painel de Controle
+**🔹 Login e Painel de Controle**  
 - **Login**  
 <img src="Senac.SiegGestaoEscolar.Images/login.png" alt="Login" width="600"/>  
 - **Painel de Controle**  
 <img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de Controle" width="600"/>  
 
-### Alunos
-- **Listagem**  
+**🔹 Módulo Alunos**  
+- **Listagem de Alunos**  
 <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Alunos Listagem" width="600"/>  
-- **Detalhes**  
+- **Detalhes do Aluno**  
 <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Alunos Detalhes" width="600"/>  
-- **Cadastro**  
+- **Cadastro de Aluno**  
 <img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Alunos Cadastro" width="600"/>  
-- **Editar**  
+- **Editar Aluno**  
 <img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Alunos Editar" width="600"/>  
-- **Vincular / Desvincular**  
+- **Vincular / Desvincular Aluno**  
 <img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Alunos Vincular" width="600"/>  
 <img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Alunos Desvincular" width="600"/>  
 
-### Professores
-- **Listagem**  
+**🔹 Módulo Professores**  
+- **Listagem de Professores**  
 <img src="Senac.SiegGestaoEscolar.Images/lista-professor.png" alt="Professores Listagem" width="600"/>  
-- **Detalhes**  
+- **Detalhes do Professor**  
 <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Professores Detalhes" width="600"/>  
-- **Cadastro**  
+- **Cadastro de Professor**  
 <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Professores Cadastro" width="600"/>  
-- **Editar**  
+- **Editar Professor**  
 <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Professores Editar" width="600"/>  
 
-### Cursos
-- **Listagem**  
+**🔹 Módulo Cursos**  
+- **Listagem de Cursos**  
 <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Cursos Listagem" width="600"/>  
-- **Detalhes**  
+- **Detalhes do Curso**  
 <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Cursos Detalhes" width="600"/>  
-- **Cadastro**  
+- **Cadastro de Curso**  
 <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cursos Cadastro" width="600"/>  
-- **Editar**  
+- **Editar Curso**  
 <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Cursos Editar" width="600"/>  
 
 ---
