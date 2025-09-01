@@ -66,17 +66,18 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 
 ## 🖼 Capturas de Tela
 
-### Navegação e Layout
-| Nav Bar | Footer |
-|:-------:|:------:|
-| <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="300"/> |
+### 🔹 Nav Bar
+<img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="250"/>
 
-### Login e Painel de Controle
+### 🔹 Footer
+<img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="400"/>
+
+### 🔹 Login e Painel de Controle
 | Login | Painel de Controle |
 |:-----:|:----------------:|
 | <img src="Senac.SiegGestaoEscolar.Images/login.png" alt="Login" width="300"/> | <img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de controle" width="300"/> |
 
-### Módulo Alunos
+### 🔹 Módulo Alunos
 | Listagem | Detalhes | Cadastro |
 |:--------:|:--------:|:-------:|
 | <img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Cadastro" width="200"/> |
@@ -85,12 +86,12 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 |:------:|:--------:|:-----------:|
 | <img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Editar" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Vincular" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Desvincular" width="200"/> |
 
-### Módulo Professores
+### 🔹 Módulo Professores
 | Listagem | Detalhes | Cadastro | Editar |
 |:--------:|:--------:|:-------:|:-----:|
 | <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="200"/> |
 
-### Módulo Cursos
+### 🔹 Módulo Cursos
 | Listagem | Detalhes | Cadastro | Editar |
 |:--------:|:--------:|:-------:|:-----:|
 | <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro" width="200"/> | <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="200"/> |
@@ -98,8 +99,6 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ---
 
 ## 👥 Equipe
-[![Gabriel](https://img.shields.io/badge/Gabriel%20Halmenschlager-Spall-007ACC?style=flat)]()  
-[![Pedro](https://img.shields.io/badge/Pedro%20Henrique-Konradt-FFB400?style=flat)]()  
-[![Everton](https://img.shields.io/badge/Everton%20Luiz-Henrich%20Schneiders-FF5733?style=flat)]()  
-
----
+- Gabriel Halmenschlager Spall  
+- Pedro Henrique Konradt  
+- Everton Luiz Henrich Schneiders
