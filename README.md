@@ -99,9 +99,8 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
   <img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro" width="300"/>
-  <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="300"/>
 </div>
-
+  <img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar" width="300"/>  
 ---
 
 ### 🔹 Módulo Cursos
@@ -109,9 +108,8 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
   <img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes" width="300"/>
   <img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro" width="300"/>
-  <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="300"/>
 </div>
-
+  <img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar" width="300"/>
 ---
 
 ## Equipe
