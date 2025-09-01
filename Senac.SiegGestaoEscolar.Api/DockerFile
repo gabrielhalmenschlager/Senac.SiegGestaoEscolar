@@ -1,0 +1,28 @@
+# =============================
+# Etapa 1: Build
+# =============================
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /app
+
+# Copia os arquivos de projeto e restaura dependências
+COPY *.sln ./
+COPY ./src ./src
+RUN dotnet restore
+
+# Publica a aplicação
+RUN dotnet publish ./src/Senac.SiegGestaoEscolar.Api.csproj -c Release -o /app/out
+
+# =============================
+# Etapa 2: Runtime
+# =============================
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+WORKDIR /app
+
+# Copia a aplicação publicada da etapa de build
+COPY --from=build /app/out ./
+
+# Expõe a porta padrão da aplicação
+EXPOSE 8080
+
+# Comando de inicialização
+ENTRYPOINT ["dotnet", "Senac.SiegGestaoEscolar.Api.dll"]
