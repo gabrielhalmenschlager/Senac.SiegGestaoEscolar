@@ -68,41 +68,42 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 **🔹 Login e Painel de Controle**  
 - **Login**  
 <img src="Senac.SiegGestaoEscolar.Images/login.png" alt="Login" width="600"/>  
-- **Painel de Controle**  
-<img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de Controle" width="600"/>  
+- **Painel de controle**  
+<img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de controle" width="600"/>  
 
 **🔹 Módulo Alunos**  
-- **Listagem de Alunos**  
-<img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Alunos Listagem" width="600"/>  
-- **Detalhes do Aluno**  
-<img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Alunos Detalhes" width="600"/>  
-- **Cadastro de Aluno**  
-<img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Alunos Cadastro" width="600"/>  
-- **Editar Aluno**  
-<img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Alunos Editar" width="600"/>  
-- **Vincular / Desvincular Aluno**  
-<img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Alunos Vincular" width="600"/>  
-<img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Alunos Desvincular" width="600"/>  
+- **Listagem de alunos**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Listagem de alunos" width="600"/>  
+- **Detalhes de aluno**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Detalhes de aluno" width="600"/>  
+- **Cadastro de aluno**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Cadastro de aluno" width="600"/>  
+- **Editar aluno**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Editar aluno" width="600"/>  
+- **Vincular / desvincular aluno**  
+<img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Vincular aluno" width="600"/>  
+<img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Desvincular aluno" width="600"/>  
 
 **🔹 Módulo Professores**  
-- **Listagem de Professores**  
-<img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Professores Listagem" width="600"/>  
-- **Detalhes do Professor**  
-<img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Professores Detalhes" width="600"/>  
-- **Cadastro de Professor**  
-<img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Professores Cadastro" width="600"/>  
-- **Editar Professor**  
-<img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Professores Editar" width="600"/>  
+- **Listagem de professores**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-professores.png" alt="Listagem de professores" width="600"/>  
+- **Detalhes de professor**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Detalhes de professor" width="600"/>  
+- **Cadastro de professor**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Cadastro de professor" width="600"/>  
+- **Editar professor**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Editar professor" width="600"/>  
 
 **🔹 Módulo Cursos**  
-- **Listagem de Cursos**  
-<img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Cursos Listagem" width="600"/>  
-- **Detalhes do Curso**  
-<img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Cursos Detalhes" width="600"/>  
-- **Cadastro de Curso**  
-<img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cursos Cadastro" width="600"/>  
-- **Editar Curso**  
-<img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Cursos Editar" width="600"/>  
+- **Listagem de cursos**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Listagem de cursos" width="600"/>  
+- **Detalhes de curso**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Detalhes de curso" width="600"/>  
+- **Cadastro de curso**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cadastro de curso" width="600"/>  
+- **Editar curso**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Editar curso" width="600"/>  
+
 
 ---
 
