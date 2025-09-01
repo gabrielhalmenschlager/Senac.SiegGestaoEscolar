@@ -1,6 +1,6 @@
 # Sieg Gestão Escolar
 
-<img src="Senac.SiegGestaoEscolar.Images/logo.png" alt="Logo do Projeto" width="200" />
+<img src="Senac.SiegGestaoEscolar.Images/logo.png" alt="Logo do Projeto" width="200"/>
 
 ## 📌 Descrição do Projeto
 O **Sieg Gestão Escolar** é um sistema de gestão escolar desenvolvido no contexto do **Projeto Integrador do curso Técnico em Informática**, com o objetivo de controlar professores, alunos e cursos, permitindo operações de cadastro, edição, exclusão, vinculação e listagem com filtros avançados.  
@@ -59,41 +59,54 @@ O sistema foi desenvolvido com **backend em C# / .NET** usando **Dapper** e **fr
 
 ---
 
-## 📊 Diagrama do Banco de Dados (DER)
-![Diagrama do Banco](link-da-imagem-do-diagrama)
+## 🖼 Imagens do Sistema
 
----
+**Nav Bar e Footer**  
+<img src="Senac.SiegGestaoEscolar.Images/side.png" alt="Nav Bar" width="600"/>  
+<img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="600"/>  
 
-## 🖼 Wireframes das Telas
-**Tela de Login**  
-![Login](link-da-imagem-login)  
+### Login e Painel de Controle
+- **Login**  
+<img src="Senac.SiegGestaoEscolar.Images/login.png" alt="Login" width="600"/>  
+- **Painel de Controle**  
+<img src="Senac.SiegGestaoEscolar.Images/home.png" alt="Painel de Controle" width="600"/>  
 
-**Dashboard**  
-![Dashboard](link-da-imagem-dashboard)  
+### Alunos
+- **Listagem**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-aluno.png" alt="Alunos Listagem" width="600"/>  
+- **Detalhes**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-aluno.png" alt="Alunos Detalhes" width="600"/>  
+- **Cadastro**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-aluno.png" alt="Alunos Cadastro" width="600"/>  
+- **Editar**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-aluno.png" alt="Alunos Editar" width="600"/>  
+- **Vincular / Desvincular**  
+<img src="Senac.SiegGestaoEscolar.Images/vincular-aluno.png" alt="Alunos Vincular" width="600"/>  
+<img src="Senac.SiegGestaoEscolar.Images/desvincular-aluno.png" alt="Alunos Desvincular" width="600"/>  
 
-**Cadastro de Professores**  
-![Cadastro Professor](link-da-imagem-cadastro-professor)  
+### Professores
+- **Listagem**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-professor.png" alt="Professores Listagem" width="600"/>  
+- **Detalhes**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-professor.png" alt="Professores Detalhes" width="600"/>  
+- **Cadastro**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-professor.png" alt="Professores Cadastro" width="600"/>  
+- **Editar**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-professor.png" alt="Professores Editar" width="600"/>  
 
-**Cadastro de Alunos**  
-![Cadastro Aluno](link-da-imagem-cadastro-aluno)  
-
-**Cadastro de Cursos**  
-![Cadastro Curso](link-da-imagem-cadastro-curso)  
-
-**Listagens com filtros**  
-![Listagem](link-da-imagem-listagem)  
-
-**Detalhes e Vinculações**  
-![Detalhes](link-da-imagem-detalhes)  
-
----
-
-## 🏗 Estrutura de Pastas
-> Aqui você pode adicionar fotos ou capturas do backend e frontend do projeto.  
+### Cursos
+- **Listagem**  
+<img src="Senac.SiegGestaoEscolar.Images/lista-curso.png" alt="Cursos Listagem" width="600"/>  
+- **Detalhes**  
+<img src="Senac.SiegGestaoEscolar.Images/detalhe-curso.png" alt="Cursos Detalhes" width="600"/>  
+- **Cadastro**  
+<img src="Senac.SiegGestaoEscolar.Images/cadastro-curso.png" alt="Cursos Cadastro" width="600"/>  
+- **Editar**  
+<img src="Senac.SiegGestaoEscolar.Images/editar-curso.png" alt="Cursos Editar" width="600"/>  
 
 ---
 
 ## 👥 Participantes
-- Gabriel Halmenschlager  
-- Pedro Henrique  
-- Everton  
+- Gabriel Halmenschlager Spall  
+-	Pedro Henrique Konradt
+- Everton Luiz Henrich Schneiders 
