@@ -2,12 +2,6 @@
 
 <img src="Senac.SiegGestaoEscolar.Images/logo.png" alt="Logo do Projeto" width="200"/>
 
-[![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)  
-[![.NET](https://img.shields.io/badge/.NET-512BD4?style=flat&logo=.net&logoColor=white)](https://dotnet.microsoft.com/)  
-[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)  
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)  
-[![Dapper](https://img.shields.io/badge/Dapper-0298C3?style=flat)](https://dapper-tutorial.net/)  
-
 ---
 
 ## 📌 Sobre o Projeto
@@ -30,21 +24,21 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## 🛠 Tecnologias e Ferramentas
 
 **Backend:**  
-[![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)  
-[![.NET](https://img.shields.io/badge/.NET-512BD4?style=flat&logo=.net&logoColor=white)](https://dotnet.microsoft.com/)  
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)  
-[![Dapper](https://img.shields.io/badge/Dapper-0298C3?style=flat)](https://dapper-tutorial.net/)
+<img src="Senac.SiegGestaoEscolar.Images/csharp.png" alt="C#" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/dotnet.png" alt=".NET" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/sqlserver.png" alt="SQL Server" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/dapper.png" alt="Dapper" width="40"/> 
 
 **Frontend:**  
-[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)  
-[![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat)](https://axios-http.com/)  
-[![React Router](https://img.shields.io/badge/React%20Router-CA4245?style=flat)](https://reactrouter.com/)
+<img src="Senac.SiegGestaoEscolar.Images/react.png" alt="React" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/axios.png" alt="Axios" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/reactrouter.png" alt="React Router" width="40"/> 
 
 **Ferramentas de Projeto:**  
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/)  
-[![Trello](https://img.shields.io/badge/Trello-0052CC?style=flat&logo=trello&logoColor=white)](https://trello.com/)  
-[![dbdiagram.io](https://img.shields.io/badge/dbdiagram.io-FF7C00?style=flat)](https://dbdiagram.io/)  
-[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white)](https://www.figma.com/)
+<img src="Senac.SiegGestaoEscolar.Images/github.png" alt="GitHub" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/trello.png" alt="Trello" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/dbdiagram.png" alt="dbdiagram.io" width="40"/> 
+<img src="Senac.SiegGestaoEscolar.Images/figma.png" alt="Figma" width="40"/> 
 
 ---
 
@@ -69,12 +63,12 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ### 🔹 Nav Bar
 | Nav Bar |
 |:-------:|
-<img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="250"/>
+| <img src="Senac.SiegGestaoEscolar.Images/sidebar.png" alt="Nav Bar" width="300"/> |
 
 ### 🔹 Footer
 | Footer |
 |:------:|
-<img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="400"/>
+| <img src="Senac.SiegGestaoEscolar.Images/footer.png" alt="Footer" width="400"/> |
 
 ### 🔹 Login e Painel de Controle
 | Login | Painel de Controle |
@@ -105,4 +99,4 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## 👥 Equipe
 - Gabriel Halmenschlager Spall  
 - Pedro Henrique Konradt  
-- Everton Luiz Henrich Schneiders
+- Everton Luiz Henrich Schneiders  
