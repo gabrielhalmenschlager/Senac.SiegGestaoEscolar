@@ -71,7 +71,7 @@ O sistema possui **backend em C# / .NET usando Dapper** e **frontend em React**,
 ## Swagger
 
 <div align="center">
-  <img src="Senac.SiegGestaoEscolar.Images/swagger.png" alt="Arquitetura Frontend" width="800"/>
+  <img src="Senac.SiegGestaoEscolar.Images/swagger.png" alt="Swagger" width="800"/>
 </div>
 
 ---
