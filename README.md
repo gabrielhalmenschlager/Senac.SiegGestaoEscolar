@@ -1,6 +1,4 @@
-# Sieg Gestão Escolar
-
-<img src="Senac.SiegGestaoEscolar.Images/logo.png" alt="Logo do Projeto" width="200"/>
+# Sieg Gestão Escolar <img src="Senac.SiegGestaoEscolar.Images/logo.png" alt="Logo" width="50" style="vertical-align: middle;"/>
 
 ---
 
